@@ -19,7 +19,7 @@ SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/edit/master/README.md]
 **Link to all slides at the end of the document!**
 
 
-# Part 1 - ![image alt text](image_0.png)
+# Part 1 - ![image alt text](resources/image_0.png)
 
 ## Install docker
 
@@ -109,11 +109,11 @@ docker rmi		- Remove one or more images
 
 ## Get docker images and run docker infrastructure
 
-![image alt text](image_1.png)
+![image alt text](resources/image_1.png)
 
 ### Spatial Database 
 
-![image alt text](image_2.png) ![image alt text](image_3.png)
+![image alt text](resources/image_2.png) ![image alt text](resources/image_3.png)
 
 Docker Hub: [https://hub.docker.com/r/mdillon/postgis/](https://hub.docker.com/r/mdillon/postgis/)
 
@@ -129,7 +129,7 @@ To run the Docker container execute:
 
 docker run -d --name postgis -p 5432:5432 mdillon/postgis
 
-![image alt text](image_4.png)
+![image alt text](resources/image_4.png)
 
 Docker Hub: [https://hub.docker.com/r/zfil/pgadmin3/](https://hub.docker.com/r/zfil/pgadmin3/)
 
@@ -185,7 +185,7 @@ COMMENT ON ROLE deegree IS 'technical user for deegree FeatureStore config';
 
 Use persistent [data volume container](https://docs.docker.com/engine/tutorials/dockervolumes/) for productive systems, otherwise you may lose your data when removing the container!
 
-## ![image alt text](image_5.png)eegree Webservices 
+## ![image alt text](resources/image_5.png)eegree Webservices 
 
 Docker Hub: [https://hub.docker.com/r/tfr42/deegree/](https://hub.docker.com/r/tfr42/deegree/)
 
@@ -269,7 +269,7 @@ docker stats deegree 	- This will present the CPU utilization for the container,
 
 docker network inspect bridge 	- see the IP for each container
 
-# Part 2 - configure WFS 2.0 ![image alt text](image_6.png)
+# Part 2 - configure WFS 2.0 ![image alt text](resources/image_6.png)
 
 ## Start deegree docker container with local deegree workspace directory
 
@@ -427,7 +427,7 @@ Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
 
 * [deegree CLI utility tool](https://github.com/lat-lon/deegree-cli-utility/tree/deegree-3.4) 
 
-# Part 3 - Import test data  ![image alt text](image_7.png) 
+# Part 3 - Import test data  ![image alt text](resources/image_7.png) 
 
 Docker hub: [https://hub.docker.com/r/tfr42/docker-soapui/](https://hub.docker.com/r/tfr42/docker-soapui/)
 
@@ -445,7 +445,7 @@ docker run --name soapui --rm -t -i -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-
 
 Open the file /var/opt/test/wfs200-soapui-project.xml with SoapUI and select the project root node. 
 
-![image alt text](image_8.png)
+![image alt text](resources/image_8.png)
 
 Switch to "Custom Properties" tab and set for property “wfsEndpoint”:
 
@@ -459,7 +459,7 @@ Switch to "Custom Properties" tab and set for property “wfsEndpoint”:
 
 To send a WFS-T Insert action submit the test step "INSPIRE ProtectedSite > Transaction > INSERT-POST-FeatureCollection":
 
-![image alt text](image_9.png)
+![image alt text](resources/image_9.png)
 
 Switch the wfsEndpoint property to the other endpoint and re-submit the WFS-T Insert request to insert the data also in the other database.
 
@@ -473,7 +473,7 @@ Switch the wfsEndpoint property to the other endpoint and re-submit the WFS-T In
 
 4. Start the "Export transformed data" function and select “WFS-T” as destination using one of the WFS endpoints
 
-# Part 4 - Retrieve data ![image alt text](image_10.png)
+# Part 4 - Retrieve data ![image alt text](resources/image_10.png)
 
 Docker hub: [https://hub.docker.com/r/kartoza/qgis-desktop/](https://hub.docker.com/r/kartoza/qgis-desktop/)
 
@@ -499,7 +499,7 @@ WMS Endpoint for PS: [http://localhost:8080/deegree-webservices/services/wms_ps]
 
 WMS Capabilities: [http://localhost:8080/deegree-webservices/services/wms_ps?service=WMS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/wms_ps?service=WMS&request=GetCapabilities) 
 
-# Part 5 - Validate deegree Webservice ![image alt text](image_11.png)
+# Part 5 - Validate deegree Webservice ![image alt text](resources/image_11.png)
 
 Docker hub: [https://hub.docker.com/r/tfr42/teamengine/](https://hub.docker.com/r/tfr42/teamengine/)
 
