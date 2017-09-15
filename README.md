@@ -14,7 +14,7 @@
 
 ## Online Document
 
-SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/edit/master/README.md](https://github.com/lat-lon/deegree-workshop/edit/master/README.md)**  
+SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/master/README.md](https://github.com/lat-lon/deegree-workshop/master/README.md)**  
 
 **Link to all slides at the end of the document!**
 
