@@ -133,31 +133,26 @@ To run the Docker container execute:
 
 Docker Hub: [https://hub.docker.com/r/zfil/pgadmin3/](https://hub.docker.com/r/zfil/pgadmin3/)
 
-Hint: This docker container requires X windows running on the host (LINUX or macOS are required!)
+_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!)_
 
     docker pull zfil/pgadmin3
-
     xhost +
-
     docker run -d -t -v /tmp/.X11-unix:/tmp/.X11-unix -v  ~/.pgadmin:/home/pgadmin -e DISPLAY=unix:0 --name pgadmin3 --link postgis:postgres zfil/pgadmin3
 
-pgAdmin4 web console
+#### pgAdmin4 web console
 
 Docker Hub: [https://hub.docker.com/r/fenglc/pgadmin4/](https://hub.docker.com/r/fenglc/pgadmin4/)
 
     docker pull fenglc/pgadmin4
-
     docker run -d --name pgadmin4 -p 5050:5050 --link postgis:postgres fenglc/pgadmin4
 
 Open in browser: [http://localhost:5050/browser/](http://localhost:5050/browser/)
 
 Use the following credential to login:
-
 user: 		pgadmin4@pgadmin.org
-
 password: 	admin
 
-Hint: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as 192.168.99.100 as the container IP instead of localhost!
+_**Hint**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as 192.168.99.100 as the  container IP instead of localhost!_
 
 #### Connection parameters for DBA
 
@@ -201,9 +196,9 @@ Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:80
 
 Navigate to "connections > databases" and create a new connection of type “DataSource” with config template “PostgreSQL (minimal)”.
 
-Change the JDBC URL to jdbc:postgresql://**db**:5432/postgres
+Change the JDBC URL to `jdbc:postgresql://**db**:5432/postgres`
 
-Complete configuration file (saved inside the container in directory /root/.deegree/):
+Complete configuration file (saved inside the container in directory `/root/.deegree/`):
 
     <DataSourceConnectionProvider configVersion="3.4.0"
             xmlns="http://www.deegree.org/connectionprovider/datasource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -263,7 +258,7 @@ Download one of the deegree workspace bundle for INSPIRE data themes
 
 * Cadastral Parcels: 	[deegree3-workspace-cp](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-cp)
 
-Create a new directory `.deegree` in the user home directory and unzip all files into the ~/.deegree directory. 
+Create a new directory `.deegree` in the user home directory and unzip all files into the `~/.deegree` directory. 
 
 Stop and delete the docker container deegree before you continue with:
 
@@ -330,25 +325,25 @@ The deegree workspace bundle contains all required files. Follow the step-by-ste
 
 1. Create the database
 
-    1. As user postgres - ~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql
+    1. As user postgres - `~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql`
 
-    2. As user deegree connected to ps_canonical database - ~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql
+    2. As user deegree connected to ps_canonical database - `~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql`
 
 2. Add the GML application schema to workspace ([source of XSD](http://inspire.ec.europa.eu/schemas/ps/4.0/ProtectedSites.xsd))
 
-    3. ~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd
+    3. `~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd`
 
 3. Create the database connection configuration file
 
-    4. ~/.deegree/workspace-ps/jdbc/postgresDS_canonical.xml
+    4. `~/.deegree/workspace-ps/jdbc/postgresDS_canonical.xml`
 
 4. Create the SQLFeatureStore configuration file
 
-    5. ~/.deegree/workspace-ps/datasources/feature/ps_canonical.xml
+    5. `~/.deegree/workspace-ps/datasources/feature/ps_canonical.xml`
 
 5. Create the WFS service configuration file
 
-    6. ~/.deegree/workspace-ps/services/wfs_ps_canonical.xml
+    6. `~/.deegree/workspace-ps/services/wfs_ps_canonical.xml`
 
 6. Reload the workspace to activate the changes!
 
@@ -416,7 +411,7 @@ Docker hub: [https://hub.docker.com/r/tfr42/docker-soapui/](https://hub.docker.c
 
 Dockerfile: -
 
-Hint: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html) 
+_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_
 
     docker pull tfr42/docker-soapui
     xhost +
@@ -460,9 +455,9 @@ Docker hub: [https://hub.docker.com/r/kartoza/qgis-desktop/](https://hub.docker.
 
 Dockerfile: [https://github.com/kartoza/docker-qgis-desktop](https://github.com/kartoza/docker-qgis-desktop)
 
-Hint: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download QGIS here: [http://download.qgis.org](http://download.qgis.org)  
+_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download QGIS here: [http://download.qgis.org](http://download.qgis.org)_ 
 
-docker pull kartoza/qgis-desktop
+    docker pull kartoza/qgis-desktop
 
 QGIS 2.18:
 
@@ -523,7 +518,7 @@ Online Resources:
 
 Open in browser: [http://localhost:8188/etf-webapp](http://localhost:8088/etf-webapp)
 
-To allow access to the local Docker Container running deegree you need to change the configuration file ~/etf/config/etf-config.properties and set the property:
+To allow access to the local Docker Container running deegree you need to change the configuration file `~/etf/config/etf-config.properties and set the property:
 
     etf.testobject.allow.privatenet.access = true
 
@@ -533,7 +528,7 @@ More information how to configure the etf-web application under [http://docs.etf
 
 * Can’t access docker from the command line - 
 
-    * check if the docker daemon is running and use sudo
+    * check if the docker daemon is running and use `sudo`
 
 * Error while starting docker container - 
 
@@ -549,15 +544,15 @@ More information how to configure the etf-web application under [http://docs.etf
 
 * Can’t access the Docker container within Docker network then try the following
 
-    * docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 inspirenet
+    * `docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 inspirenet`
 
-    * docker network connect inspirenet deegree
+    * `docker network connect inspirenet deegree`
 
-    * docker network connect inspirenet etf
+    * `docker network connect inspirenet etf`
 
-    * docker network connect inspirenet postgis
+    * `docker network connect inspirenet postgis`
 
-    * docker network connect inspirenet teamengine
+    * `docker network connect inspirenet teamengine`
 
     * And retry to access the Docker container
 
@@ -567,11 +562,11 @@ More information how to configure the etf-web application under [http://docs.etf
 
     * Grant user deegree all privileges with:
 
-        * GRANT ALL ON SCHEMA public TO deegree;
+        * `GRANT ALL ON SCHEMA public TO deegree;`
 
-        * GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO deegree;
+        * `GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO deegree;`
 
-        * GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to deegree;
+        * `GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to deegree;`
 
 # Links for further reading
 
