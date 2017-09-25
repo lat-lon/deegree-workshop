@@ -1,0 +1,1216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SQLFeatureStore configVersion="3.4.0" xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:au="http://inspire.ec.europa.eu/schemas/au/4.0"
+  xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3" xmlns:cp="http://inspire.ec.europa.eu/schemas/cp/4.0"
+  xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml/3.2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.4.0/sql.xsd">
+  <JDBCConnId>postgresDB_canonical</JDBCConnId>
+  <StorageCRS srid="0" dim="2D">EPSG:4326</StorageCRS>
+  <GMLSchema>../../appschemas/CadastralParcels.xsd</GMLSchema>
+  <!-- To use a different schema add the schema name to the table attribute, e.g. cp_canonical.namedplace, default is public -->
+  <FeatureTypeMapping name="au:AdministrativeBoundary" table="administrativeboundary">
+    <FIDMapping prefix="AU_ADMINISTRATIVEBOUNDARY_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="au:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="au:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:country">
+      <Primitive path="@gco:nilReason" mapping="country_attr_nilreason" />
+      <Complex path="gmd:Country">
+        <Primitive path="text()" mapping="country_country" />
+        <Primitive path="@codeList" mapping="country_country_attr_codelist" />
+        <Primitive path="@codeListValue" mapping="country_country_attr_codelistvalue" />
+        <Primitive path="@codeSpace" mapping="country_country_attr_codespace" />
+      </Complex>
+    </Complex>
+    <Complex path="au:nationalLevel">
+      <Join table="administrativeboundary_nationallevel" fromColumns="gid" toColumns="parentfk"
+        orderColumns="num" numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:legalStatus">
+      <Primitive path="text()" mapping="legalstatus" />
+      <Primitive path="@nilReason" mapping="legalstatus_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="legalstatus_attr_nil" />
+    </Complex>
+    <Complex path="au:technicalStatus">
+      <Primitive path="text()" mapping="technicalstatus" />
+      <Primitive path="@nilReason" mapping="technicalstatus_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="technicalstatus_attr_nil" />
+    </Complex>
+    <Complex path="au:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:admUnit">
+      <Join table="administrativeboundary_admunit" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="au:AdministrativeUnit" table="administrativeunit">
+    <FIDMapping prefix="AU_ADMINISTRATIVEUNIT_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="au:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Primitive path="au:nationalCode" mapping="nationalcode" />
+    <Complex path="au:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:nationalLevel">
+      <Primitive path="@owns" mapping="nationallevel_attr_owns" />
+      <Primitive path="@nilReason" mapping="nationallevel_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="nationallevel_attr_remoteschema" />
+      <Feature path=".">
+        <Join table="?" fromColumns="nationallevel_fk" toColumns="id" />
+        <Href mapping="nationallevel_href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:nationalLevelName">
+      <Join table="administrativeunit_nationallevelname" fromColumns="gid" toColumns="parentfk"
+        orderColumns="num" numbered="true" />
+      <Primitive path="@xlink:type" mapping="attr_type" />
+      <Primitive path="@xlink:href" mapping="attr_href" />
+      <Primitive path="@xlink:role" mapping="attr_role" />
+      <Primitive path="@xlink:arcrole" mapping="attr_arcrole" />
+      <Primitive path="@xlink:title" mapping="attr_title" />
+      <Primitive path="@xlink:show" mapping="attr_show" />
+      <Primitive path="@xlink:actuate" mapping="attr_actuate" />
+      <Primitive path="@uuidref" mapping="attr_uuidref" />
+      <Primitive path="@gco:nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="gmd:LocalisedCharacterString">
+        <Primitive path="text()" mapping="localisedcharacterstring" />
+        <Primitive path="@id" mapping="localisedcharacterstring_attr_id" />
+        <Primitive path="@locale" mapping="localisedcharacterstring_attr_locale" />
+      </Complex>
+    </Complex>
+    <Complex path="au:country">
+      <Primitive path="@gco:nilReason" mapping="country_attr_nilreason" />
+      <Complex path="gmd:Country">
+        <Primitive path="text()" mapping="country_country" />
+        <Primitive path="@codeList" mapping="country_country_attr_codelist" />
+        <Primitive path="@codeListValue" mapping="country_country_attr_codelistvalue" />
+        <Primitive path="@codeSpace" mapping="country_country_attr_codespace" />
+      </Complex>
+    </Complex>
+    <Complex path="au:name">
+      <Join table="administrativeunit_name" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="geographicalname_language" />
+          <Primitive path="@nilReason" mapping="geographicalname_language_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_language_attr_nil" />
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="geographicalname_nativeness_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_nativeness_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="id" />
+            <Href mapping="geographicalname_nativeness_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="geographicalname_namestatus_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_namestatus_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="id" />
+            <Href mapping="geographicalname_namestatus_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="geographicalname_sourceofname" />
+          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_attr_nil" />
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_attr_nil" />
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_7" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_8" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_9" />
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_10" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_11" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_12" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="administrativeunit_name_geographicalname_spelling" fromColumns="id" toColumns="parentfk"
+            orderColumns="num" numbered="true" />
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text" />
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_script" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_attr_nilreason" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_attr_nil" />
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_att_13" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_attr_nil" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalgender_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalnumber_href" />
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:residenceOfAuthority">
+      <Join table="administrativeunit_residenceofauthority" fromColumns="gid" toColumns="parentfk"
+        orderColumns="num" numbered="true" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="au:ResidenceOfAuthority">
+        <Complex path="au:name">
+          <Complex path="gn:GeographicalName">
+            <Complex path="gn:language">
+              <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_language" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_language_attr__14" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_language_attr_nil" />
+            </Complex>
+            <Complex path="gn:nativeness">
+              <Primitive path="@owns" mapping="residenceofauthority_name_geographicalname_nativeness_att_15" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_nativeness_att_16" />
+              <Primitive path="@gml:remoteSchema" mapping="residenceofauthority_name_geographicalname_nativeness_att_17" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_nativeness_attr_nil" />
+              <Feature path=".">
+                <Join table="?" fromColumns="residenceofauthority_name_geographicalname_nativeness_fk" toColumns="id" />
+                <Href mapping="residenceofauthority_name_geographicalname_nativeness_href" />
+              </Feature>
+            </Complex>
+            <Complex path="gn:nameStatus">
+              <Primitive path="@owns" mapping="residenceofauthority_name_geographicalname_namestatus_att_18" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_namestatus_att_19" />
+              <Primitive path="@gml:remoteSchema" mapping="residenceofauthority_name_geographicalname_namestatus_att_20" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_namestatus_attr_nil" />
+              <Feature path=".">
+                <Join table="?" fromColumns="residenceofauthority_name_geographicalname_namestatus_fk" toColumns="id" />
+                <Href mapping="residenceofauthority_name_geographicalname_namestatus_href" />
+              </Feature>
+            </Complex>
+            <Complex path="gn:sourceOfName">
+              <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_sourceofname" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_sourceofname_a_21" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_sourceofname_a_22" />
+            </Complex>
+            <Complex path="gn:pronunciation">
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_pronunciation__23" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_pronunciation__24" />
+              <Complex path="gn:PronunciationOfName">
+                <Complex path="gn:pronunciationSoundLink">
+                  <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_pronunciation__26" />
+                  <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_pronunciation__27" />
+                  <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_pronunciation__28" />
+                </Complex>
+                <Complex path="gn:pronunciationIPA">
+                  <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_pronunciation__29" />
+                  <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_pronunciation__30" />
+                  <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_pronunciation__31" />
+                </Complex>
+              </Complex>
+            </Complex>
+            <Complex path="gn:spelling">
+              <Join table="administrativeunit_residenceofauthority_residenceofauthor_32" fromColumns="id"
+                toColumns="parentfk" orderColumns="num" numbered="true" />
+              <Complex path="gn:SpellingOfName">
+                <Primitive path="gn:text" mapping="residenceofauthority_name_geographicalname_spellingofname_text" />
+                <Complex path="gn:script">
+                  <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_spellingofname_33" />
+                  <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_spellingofname_34" />
+                  <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_spellingofname_35" />
+                </Complex>
+                <Complex path="gn:transliterationScheme">
+                  <Primitive path="text()" mapping="residenceofauthority_name_geographicalname_spellingofname_36" />
+                  <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_spellingofname_37" />
+                  <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_spellingofname_38" />
+                </Complex>
+              </Complex>
+            </Complex>
+            <Complex path="gn:grammaticalGender">
+              <Primitive path="@owns" mapping="residenceofauthority_name_geographicalname_grammaticalgen_39" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_grammaticalgen_40" />
+              <Primitive path="@gml:remoteSchema" mapping="residenceofauthority_name_geographicalname_grammaticalgen_41" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_grammaticalgen_42" />
+              <Feature path=".">
+                <Join table="?" fromColumns="residenceofauthority_name_geographicalname_grammaticalgen_43"
+                  toColumns="id" />
+                <Href mapping="residenceofauthority_name_geographicalname_grammaticalgen_44" />
+              </Feature>
+            </Complex>
+            <Complex path="gn:grammaticalNumber">
+              <Primitive path="@owns" mapping="residenceofauthority_name_geographicalname_grammaticalnum_45" />
+              <Primitive path="@nilReason" mapping="residenceofauthority_name_geographicalname_grammaticalnum_46" />
+              <Primitive path="@gml:remoteSchema" mapping="residenceofauthority_name_geographicalname_grammaticalnum_47" />
+              <Primitive path="@xsi:nil" mapping="residenceofauthority_name_geographicalname_grammaticalnum_48" />
+              <Feature path=".">
+                <Join table="?" fromColumns="residenceofauthority_name_geographicalname_grammaticalnum_49"
+                  toColumns="id" />
+                <Href mapping="residenceofauthority_name_geographicalname_grammaticalnum_50" />
+              </Feature>
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="au:geometry">
+          <Primitive path="@nilReason" mapping="residenceofauthority_geometry_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="residenceofauthority_geometry_attr_remoteschema" />
+          <Primitive path="@owns" mapping="residenceofauthority_geometry_attr_owns" />
+          <Primitive path="@xsi:nil" mapping="residenceofauthority_geometry_attr_nil" />
+          <Geometry path="." mapping="residenceofauthority_geometry_value" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:condominium">
+      <Join table="administrativeunit_condominium" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:lowerLevelUnit">
+      <Join table="administrativeunit_lowerlevelunit" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:upperLevelUnit">
+      <Primitive path="@owns" mapping="upperlevelunit_attr_owns" />
+      <Primitive path="@nilReason" mapping="upperlevelunit_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="upperlevelunit_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="upperlevelunit_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="upperlevelunit_fk" toColumns="id" />
+        <Href mapping="upperlevelunit_href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:administeredBy">
+      <Join table="administrativeunit_administeredby" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:coAdminister">
+      <Join table="administrativeunit_coadminister" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="au:boundary">
+      <Join table="administrativeunit_boundary" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="au:Condominium" table="condominium">
+    <FIDMapping prefix="AU_CONDOMINIUM_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="au:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:name">
+      <Join table="condominium_name" fromColumns="gid" toColumns="parentfk" orderColumns="num" numbered="true" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="geographicalname_language" />
+          <Primitive path="@nilReason" mapping="geographicalname_language_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_language_attr_nil" />
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="geographicalname_nativeness_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_nativeness_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="id" />
+            <Href mapping="geographicalname_nativeness_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="geographicalname_namestatus_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_namestatus_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="id" />
+            <Href mapping="geographicalname_namestatus_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="geographicalname_sourceofname" />
+          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_attr_nil" />
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_attr_nil" />
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_0" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_1" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_2" />
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_3" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_4" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_5" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="condominium_name_geographicalname_spelling" fromColumns="id" toColumns="parentfk"
+            orderColumns="num" numbered="true" />
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text" />
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_script" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_attr_nilreason" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_attr_nil" />
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_att_6" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_attr_nil" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalgender_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalnumber_href" />
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="au:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="au:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="au:admUnit">
+      <Join table="condominium_admunit" fromColumns="gid" toColumns="parentfk" orderColumns="num" numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="cp:BasicPropertyUnit" table="basicpropertyunit">
+    <FIDMapping prefix="CP_BASICPROPERTYUNIT_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="cp:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Primitive path="cp:nationalCadastralReference" mapping="nationalcadastralreference" />
+    <Complex path="cp:areaValue">
+      <Primitive path="text()" mapping="areavalue" />
+      <Primitive path="@nilReason" mapping="areavalue_attr_nilreason" />
+      <Primitive path="@uom" mapping="areavalue_attr_uom" />
+      <Primitive path="@xsi:nil" mapping="areavalue_attr_nil" />
+    </Complex>
+    <Complex path="cp:validFrom">
+      <Primitive path="text()" mapping="validfrom" />
+      <Primitive path="@nilReason" mapping="validfrom_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validfrom_attr_nil" />
+    </Complex>
+    <Complex path="cp:validTo">
+      <Primitive path="text()" mapping="validto" />
+      <Primitive path="@nilReason" mapping="validto_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validto_attr_nil" />
+    </Complex>
+    <Complex path="cp:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:administrativeUnit">
+      <Primitive path="@owns" mapping="administrativeunit_attr_owns" />
+      <Primitive path="@nilReason" mapping="administrativeunit_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="administrativeunit_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="administrativeunit_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="administrativeunit_fk" toColumns="id" />
+        <Href mapping="administrativeunit_href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="cp:CadastralBoundary" table="cadastralboundary">
+    <FIDMapping prefix="CP_CADASTRALBOUNDARY_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="cp:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:estimatedAccuracy">
+      <Primitive path="text()" mapping="estimatedaccuracy" />
+      <Primitive path="@nilReason" mapping="estimatedaccuracy_attr_nilreason" />
+      <Primitive path="@uom" mapping="estimatedaccuracy_attr_uom" />
+      <Primitive path="@xsi:nil" mapping="estimatedaccuracy_attr_nil" />
+    </Complex>
+    <Complex path="cp:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="cp:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="cp:validFrom">
+      <Primitive path="text()" mapping="validfrom" />
+      <Primitive path="@nilReason" mapping="validfrom_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validfrom_attr_nil" />
+    </Complex>
+    <Complex path="cp:validTo">
+      <Primitive path="text()" mapping="validto" />
+      <Primitive path="@nilReason" mapping="validto_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validto_attr_nil" />
+    </Complex>
+    <Complex path="cp:parcel">
+      <Join table="cadastralboundary_parcel" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="cp:CadastralParcel" table="cadastralparcel">
+    <FIDMapping prefix="CP_CADASTRALPARCEL_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="cp:areaValue">
+      <Primitive path="text()" mapping="areavalue" />
+      <Primitive path="@nilReason" mapping="areavalue_attr_nilreason" />
+      <Primitive path="@uom" mapping="areavalue_attr_uom" />
+      <Primitive path="@xsi:nil" mapping="areavalue_attr_nil" />
+    </Complex>
+    <Complex path="cp:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="cp:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Primitive path="cp:label" mapping="label" />
+    <Primitive path="cp:nationalCadastralReference" mapping="nationalcadastralreference" />
+    <Complex path="cp:referencePoint">
+      <Primitive path="@nilReason" mapping="referencepoint_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="referencepoint_attr_remoteschema" />
+      <Primitive path="@owns" mapping="referencepoint_attr_owns" />
+      <Primitive path="@xsi:nil" mapping="referencepoint_attr_nil" />
+      <Geometry path="." mapping="referencepoint_value" />
+    </Complex>
+    <Complex path="cp:validFrom">
+      <Primitive path="text()" mapping="validfrom" />
+      <Primitive path="@nilReason" mapping="validfrom_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validfrom_attr_nil" />
+    </Complex>
+    <Complex path="cp:validTo">
+      <Primitive path="text()" mapping="validto" />
+      <Primitive path="@nilReason" mapping="validto_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validto_attr_nil" />
+    </Complex>
+    <Complex path="cp:basicPropertyUnit">
+      <Join table="cadastralparcel_basicpropertyunit" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+    <Complex path="cp:administrativeUnit">
+      <Primitive path="@owns" mapping="administrativeunit_attr_owns" />
+      <Primitive path="@nilReason" mapping="administrativeunit_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="administrativeunit_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="administrativeunit_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="administrativeunit_fk" toColumns="id" />
+        <Href mapping="administrativeunit_href" />
+      </Feature>
+    </Complex>
+    <Complex path="cp:zoning">
+      <Primitive path="@owns" mapping="zoning_attr_owns" />
+      <Primitive path="@nilReason" mapping="zoning_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="zoning_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="zoning_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="zoning_fk" toColumns="id" />
+        <Href mapping="zoning_href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="cp:CadastralZoning" table="cadastralzoning">
+    <FIDMapping prefix="CP_CADASTRALZONING_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="cp:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="cp:estimatedAccuracy">
+      <Primitive path="text()" mapping="estimatedaccuracy" />
+      <Primitive path="@nilReason" mapping="estimatedaccuracy_attr_nilreason" />
+      <Primitive path="@uom" mapping="estimatedaccuracy_attr_uom" />
+      <Primitive path="@xsi:nil" mapping="estimatedaccuracy_attr_nil" />
+    </Complex>
+    <Complex path="cp:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="cp:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Primitive path="cp:label" mapping="label" />
+    <Complex path="cp:level">
+      <Primitive path="@owns" mapping="level_attr_owns" />
+      <Primitive path="@nilReason" mapping="level_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="level_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="level_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="level_fk" toColumns="id" />
+        <Href mapping="level_href" />
+      </Feature>
+    </Complex>
+    <Complex path="cp:levelName">
+      <Join table="cadastralzoning_levelname" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@xlink:type" mapping="attr_type" />
+      <Primitive path="@xlink:href" mapping="attr_href" />
+      <Primitive path="@xlink:role" mapping="attr_role" />
+      <Primitive path="@xlink:arcrole" mapping="attr_arcrole" />
+      <Primitive path="@xlink:title" mapping="attr_title" />
+      <Primitive path="@xlink:show" mapping="attr_show" />
+      <Primitive path="@xlink:actuate" mapping="attr_actuate" />
+      <Primitive path="@uuidref" mapping="attr_uuidref" />
+      <Primitive path="@gco:nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="gmd:LocalisedCharacterString">
+        <Primitive path="text()" mapping="localisedcharacterstring" />
+        <Primitive path="@id" mapping="localisedcharacterstring_attr_id" />
+        <Primitive path="@locale" mapping="localisedcharacterstring_attr_locale" />
+      </Complex>
+    </Complex>
+    <Complex path="cp:name">
+      <Join table="cadastralzoning_name" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="geographicalname_language" />
+          <Primitive path="@nilReason" mapping="geographicalname_language_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_language_attr_nil" />
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="geographicalname_nativeness_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_nativeness_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="id" />
+            <Href mapping="geographicalname_nativeness_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="geographicalname_namestatus_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_namestatus_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="id" />
+            <Href mapping="geographicalname_namestatus_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="geographicalname_sourceofname" />
+          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_attr_nil" />
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_attr_nil" />
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_51" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_52" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_53" />
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_54" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_55" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_56" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="cadastralzoning_name_geographicalname_spelling" fromColumns="id" toColumns="parentfk"
+            orderColumns="num" numbered="true" />
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text" />
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_script" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_attr_nilreason" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_attr_nil" />
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_att_57" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_attr_nil" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalgender_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalnumber_href" />
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Primitive path="cp:nationalCadastalZoningReference" mapping="nationalcadastalzoningreference" />
+    <Complex path="cp:originalMapScaleDenominator">
+      <Primitive path="text()" mapping="originalmapscaledenominator" />
+      <Primitive path="@nilReason" mapping="originalmapscaledenominator_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="originalmapscaledenominator_attr_nil" />
+    </Complex>
+    <Complex path="cp:referencePoint">
+      <Primitive path="@nilReason" mapping="referencepoint_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="referencepoint_attr_remoteschema" />
+      <Primitive path="@owns" mapping="referencepoint_attr_owns" />
+      <Primitive path="@xsi:nil" mapping="referencepoint_attr_nil" />
+      <Geometry path="." mapping="referencepoint_value" />
+    </Complex>
+    <Complex path="cp:validFrom">
+      <Primitive path="text()" mapping="validfrom" />
+      <Primitive path="@nilReason" mapping="validfrom_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validfrom_attr_nil" />
+    </Complex>
+    <Complex path="cp:validTo">
+      <Primitive path="text()" mapping="validto" />
+      <Primitive path="@nilReason" mapping="validto_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="validto_attr_nil" />
+    </Complex>
+    <Complex path="cp:upperLevelUnit">
+      <Primitive path="@owns" mapping="upperlevelunit_attr_owns" />
+      <Primitive path="@nilReason" mapping="upperlevelunit_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="upperlevelunit_attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="upperlevelunit_attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="upperlevelunit_fk" toColumns="id" />
+        <Href mapping="upperlevelunit_href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+  <FeatureTypeMapping name="gn:NamedPlace" table="namedplace">
+    <FIDMapping prefix="GN_NAMEDPLACE_">
+      <Column name="gid" type="integer" />
+      <AutoIdGenerator />
+    </FIDMapping>
+    <Complex path="gml:identifier">
+      <Primitive path="text()" mapping="identifier" />
+      <Primitive path="@codeSpace" mapping="identifier_attr_codespace" />
+    </Complex>
+    <Complex path="gn:beginLifespanVersion">
+      <Primitive path="text()" mapping="beginlifespanversion" />
+      <Primitive path="@nilReason" mapping="beginlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="beginlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="gn:endLifespanVersion">
+      <Primitive path="text()" mapping="endlifespanversion" />
+      <Primitive path="@nilReason" mapping="endlifespanversion_attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="endlifespanversion_attr_nil" />
+    </Complex>
+    <Complex path="gn:geometry">
+      <Primitive path="@nilReason" mapping="geometry_attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="geometry_attr_remoteschema" />
+      <Primitive path="@owns" mapping="geometry_attr_owns" />
+      <Geometry path="." mapping="geometry_value" />
+    </Complex>
+    <Complex path="gn:inspireId">
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="inspireid_identifier_localid" />
+        <Primitive path="base:namespace" mapping="inspireid_identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="inspireid_identifier_versionid" />
+          <Primitive path="@nilReason" mapping="inspireid_identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="inspireid_identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="gn:leastDetailedViewingResolution">
+      <Primitive path="@nilReason" mapping="leastdetailedviewingresolution_attr_nilreason" />
+      <Primitive path="@owns" mapping="leastdetailedviewingresolution_attr_owns" />
+      <Primitive path="@xsi:nil" mapping="leastdetailedviewingresolution_attr_nil" />
+      <Complex path="gmd:MD_Resolution">
+        <Complex path="gmd:equivalentScale">
+          <Primitive path="@xlink:type" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_58" />
+          <Primitive path="@xlink:href" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_59" />
+          <Primitive path="@xlink:role" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_60" />
+          <Primitive path="@xlink:arcrole" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_61" />
+          <Primitive path="@xlink:title" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_62" />
+          <Primitive path="@xlink:show" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_63" />
+          <Primitive path="@xlink:actuate" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_64" />
+          <Primitive path="@uuidref" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_65" />
+          <Primitive path="@gco:nilReason" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_66" />
+          <Complex path="gmd:MD_RepresentativeFraction">
+            <Primitive path="@id" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_68" />
+            <Primitive path="@uuid" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_69" />
+            <Complex path="gmd:denominator">
+              <Primitive path="@gco:nilReason" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_71" />
+              <Primitive path="gco:Integer" mapping="leastdetailedviewingresolution_md_resolution_equivalentsc_72" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gmd:distance">
+          <Primitive path="@gco:nilReason" mapping="leastdetailedviewingresolution_md_resolution_distance_att_73" />
+          <Complex path="gco:Distance">
+            <Primitive path="text()" mapping="leastdetailedviewingresolution_md_resolution_distance_distance" />
+            <Primitive path="@uom" mapping="leastdetailedviewingresolution_md_resolution_distance_dis_74" />
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="gn:localType">
+      <Join table="namedplace_localtype" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@xlink:type" mapping="attr_type" />
+      <Primitive path="@xlink:href" mapping="attr_href" />
+      <Primitive path="@xlink:role" mapping="attr_role" />
+      <Primitive path="@xlink:arcrole" mapping="attr_arcrole" />
+      <Primitive path="@xlink:title" mapping="attr_title" />
+      <Primitive path="@xlink:show" mapping="attr_show" />
+      <Primitive path="@xlink:actuate" mapping="attr_actuate" />
+      <Primitive path="@uuidref" mapping="attr_uuidref" />
+      <Primitive path="@gco:nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="gmd:LocalisedCharacterString">
+        <Primitive path="text()" mapping="localisedcharacterstring" />
+        <Primitive path="@id" mapping="localisedcharacterstring_attr_id" />
+        <Primitive path="@locale" mapping="localisedcharacterstring_attr_locale" />
+      </Complex>
+    </Complex>
+    <Complex path="gn:mostDetailedViewingResolution">
+      <Primitive path="@nilReason" mapping="mostdetailedviewingresolution_attr_nilreason" />
+      <Primitive path="@owns" mapping="mostdetailedviewingresolution_attr_owns" />
+      <Primitive path="@xsi:nil" mapping="mostdetailedviewingresolution_attr_nil" />
+      <Complex path="gmd:MD_Resolution">
+        <Complex path="gmd:equivalentScale">
+          <Primitive path="@xlink:type" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_75" />
+          <Primitive path="@xlink:href" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_76" />
+          <Primitive path="@xlink:role" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_77" />
+          <Primitive path="@xlink:arcrole" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_78" />
+          <Primitive path="@xlink:title" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_79" />
+          <Primitive path="@xlink:show" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_80" />
+          <Primitive path="@xlink:actuate" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_81" />
+          <Primitive path="@uuidref" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_82" />
+          <Primitive path="@gco:nilReason" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_83" />
+          <Complex path="gmd:MD_RepresentativeFraction">
+            <Primitive path="@id" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_85" />
+            <Primitive path="@uuid" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_86" />
+            <Complex path="gmd:denominator">
+              <Primitive path="@gco:nilReason" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_88" />
+              <Primitive path="gco:Integer" mapping="mostdetailedviewingresolution_md_resolution_equivalentsca_89" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gmd:distance">
+          <Primitive path="@gco:nilReason" mapping="mostdetailedviewingresolution_md_resolution_distance_attr_90" />
+          <Complex path="gco:Distance">
+            <Primitive path="text()" mapping="mostdetailedviewingresolution_md_resolution_distance_distance" />
+            <Primitive path="@uom" mapping="mostdetailedviewingresolution_md_resolution_distance_dist_91" />
+          </Complex>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="gn:name">
+      <Join table="namedplace_name" fromColumns="gid" toColumns="parentfk" orderColumns="num" numbered="true" />
+      <Complex path="gn:GeographicalName">
+        <Complex path="gn:language">
+          <Primitive path="text()" mapping="geographicalname_language" />
+          <Primitive path="@nilReason" mapping="geographicalname_language_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_language_attr_nil" />
+        </Complex>
+        <Complex path="gn:nativeness">
+          <Primitive path="@owns" mapping="geographicalname_nativeness_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_nativeness_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_nativeness_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_nativeness_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_nativeness_fk" toColumns="id" />
+            <Href mapping="geographicalname_nativeness_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:nameStatus">
+          <Primitive path="@owns" mapping="geographicalname_namestatus_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_namestatus_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_namestatus_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_namestatus_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_namestatus_fk" toColumns="id" />
+            <Href mapping="geographicalname_namestatus_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:sourceOfName">
+          <Primitive path="text()" mapping="geographicalname_sourceofname" />
+          <Primitive path="@nilReason" mapping="geographicalname_sourceofname_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_sourceofname_attr_nil" />
+        </Complex>
+        <Complex path="gn:pronunciation">
+          <Primitive path="@nilReason" mapping="geographicalname_pronunciation_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_attr_nil" />
+          <Complex path="gn:PronunciationOfName">
+            <Complex path="gn:pronunciationSoundLink">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_92" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_93" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_94" />
+            </Complex>
+            <Complex path="gn:pronunciationIPA">
+              <Primitive path="text()" mapping="geographicalname_pronunciation_pronunciationofname_pronun_95" />
+              <Primitive path="@nilReason" mapping="geographicalname_pronunciation_pronunciationofname_pronun_96" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_pronunciation_pronunciationofname_pronun_97" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:spelling">
+          <Join table="namedplace_name_geographicalname_spelling" fromColumns="id" toColumns="parentfk"
+            orderColumns="num" numbered="true" />
+          <Complex path="gn:SpellingOfName">
+            <Primitive path="gn:text" mapping="geographicalname_spellingofname_text" />
+            <Complex path="gn:script">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_script" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_script_attr_nilreason" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_script_attr_nil" />
+            </Complex>
+            <Complex path="gn:transliterationScheme">
+              <Primitive path="text()" mapping="geographicalname_spellingofname_transliterationscheme" />
+              <Primitive path="@nilReason" mapping="geographicalname_spellingofname_transliterationscheme_att_98" />
+              <Primitive path="@xsi:nil" mapping="geographicalname_spellingofname_transliterationscheme_attr_nil" />
+            </Complex>
+          </Complex>
+        </Complex>
+        <Complex path="gn:grammaticalGender">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalgender_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalgender_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalgender_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalgender_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalgender_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalgender_href" />
+          </Feature>
+        </Complex>
+        <Complex path="gn:grammaticalNumber">
+          <Primitive path="@owns" mapping="geographicalname_grammaticalnumber_attr_owns" />
+          <Primitive path="@nilReason" mapping="geographicalname_grammaticalnumber_attr_nilreason" />
+          <Primitive path="@gml:remoteSchema" mapping="geographicalname_grammaticalnumber_attr_remoteschema" />
+          <Primitive path="@xsi:nil" mapping="geographicalname_grammaticalnumber_attr_nil" />
+          <Feature path=".">
+            <Join table="?" fromColumns="geographicalname_grammaticalnumber_fk" toColumns="id" />
+            <Href mapping="geographicalname_grammaticalnumber_href" />
+          </Feature>
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="gn:relatedSpatialObject">
+      <Join table="namedplace_relatedspatialobject" fromColumns="gid" toColumns="parentfk" orderColumns="num"
+        numbered="true" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Complex path="base:Identifier">
+        <Primitive path="base:localId" mapping="identifier_localid" />
+        <Primitive path="base:namespace" mapping="identifier_namespace" />
+        <Complex path="base:versionId">
+          <Primitive path="text()" mapping="identifier_versionid" />
+          <Primitive path="@nilReason" mapping="identifier_versionid_attr_nilreason" />
+          <Primitive path="@xsi:nil" mapping="identifier_versionid_attr_nil" />
+        </Complex>
+      </Complex>
+    </Complex>
+    <Complex path="gn:type">
+      <Join table="namedplace_type" fromColumns="gid" toColumns="parentfk" orderColumns="num" numbered="true" />
+      <Primitive path="@owns" mapping="attr_owns" />
+      <Primitive path="@nilReason" mapping="attr_nilreason" />
+      <Primitive path="@gml:remoteSchema" mapping="attr_remoteschema" />
+      <Primitive path="@xsi:nil" mapping="attr_nil" />
+      <Feature path=".">
+        <Join table="?" fromColumns="fk" toColumns="id" />
+        <Href mapping="href" />
+      </Feature>
+    </Complex>
+  </FeatureTypeMapping>
+</SQLFeatureStore>

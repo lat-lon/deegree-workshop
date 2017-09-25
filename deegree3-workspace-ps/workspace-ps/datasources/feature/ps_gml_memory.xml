@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MemoryFeatureStore configVersion="3.4.0" xmlns="http://www.deegree.org/datasource/feature/memory" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.deegree.org/datasource/feature/memory http://schemas.deegree.org/datasource/feature/memory/3.4.0/memory.xsd">
+  <StorageCRS>EPSG:4326</StorageCRS>
+  <GMLSchema version="GML_32">../../appschemas/ProtectedSites.xsd</GMLSchema>
+  <!--
+  <GMLFeatureCollection version="GML_32">../../data/ps_testdata.gml</GMLFeatureCollection>
+  -->
+</MemoryFeatureStore>

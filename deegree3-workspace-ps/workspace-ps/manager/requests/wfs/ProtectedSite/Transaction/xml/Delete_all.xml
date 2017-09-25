@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<wfs:Transaction
+        version="2.0.0"
+        service="WFS"
+        xmlns:gml="http://www.opengis.net/gml/3.2"
+        xmlns:wfs="http://www.opengis.net/wfs/2.0"
+        xmlns:fes="http://www.opengis.net/fes/2.0"
+        xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
+        xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.opengis.net/wfs/2.0
+                       http://schemas.opengis.net/wfs/2.0.0/wfs.xsd 
+                       http://www.opengis.net/gml/3.2 
+                       http://schemas.opengis.net/gml/3.2.1/gml.xsd">
+    <wfs:Delete typeName="ps:ProtectedSite">
+        <fes:Filter>
+            <fes:PropertyIsLike wildCard="*" singleChar="#" escapeChar="!">
+                <fes:ValueReference>ps:inspireID/base:Identifier/base:localId</fes:ValueReference>
+                <fes:Literal>*</fes:Literal>
+            </fes:PropertyIsLike>
+        </fes:Filter>
+    </wfs:Delete>
+</wfs:Transaction>

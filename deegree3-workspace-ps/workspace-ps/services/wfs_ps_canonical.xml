@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deegreeWFS configVersion="3.4.0" xmlns="http://www.deegree.org/services/wfs"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.deegree.org/services/wfs http://schemas.deegree.org/services/wfs/3.4.0/wfs_configuration.xsd">
+
+  <SupportedVersions>
+    <Version>2.0.0</Version>
+  </SupportedVersions>
+
+  <!-- Add here the list of FeatureStores following the naming convention <featureStoreId>.xml -->
+  <FeatureStoreId>ps_canonical</FeatureStoreId>
+
+  <EnableTransactions>true</EnableTransactions>
+
+  <DisabledResources>
+    <Pattern>http://inspire.ec.europa.eu/codelist</Pattern>
+    <Pattern>http://dd.eionet.europa.eu/vocabulary/cdda</Pattern>
+  </DisabledResources>
+
+  <QueryCRS>EPSG:4326</QueryCRS>
+  <QueryCRS>EPSG:4258</QueryCRS>
+
+  <StoredQuery>../storedqueries/GetProtectedSitesBySiteProtectionClassification.xml</StoredQuery>
+
+  <!-- Required for WFS 1.1.0/GML 3.2 output with gml:FeatureCollection root element (as mandated by ESDIN) -->
+  <GMLFormat gmlVersion="GML_32">
+    <MimeType>application/gml+xml; version=3.2</MimeType>
+    <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+    <GetFeatureResponse>
+      <AdditionalSchemaLocation>http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/deprecatedTypes.xsd</AdditionalSchemaLocation>
+      <DisableDynamicSchema>true</DisableDynamicSchema>
+      <DisableStreaming>true</DisableStreaming>
+    </GetFeatureResponse>
+  </GMLFormat>
+
+  <!--
+    Uncomment/adapt the following line to customize generated MetadataURL elements.
+    This replaces/overrides the DatasetMetadata element in the deegreeServicesMetadata file.
+    Hint:
+    Use the MetadataSetId element to specify the id of the corresponding metadata record (in the CSW).
+   -->
+  <MetadataURLTemplate>http://gdk.gdi-de.org/gdi-de/srv/ger/csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;id=${metadataSetId}</MetadataURLTemplate>
+  <FeatureTypeMetadata xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+    <Name>ps:ProtectedSite</Name>
+    <MetadataSetId>beefcafe-beef-cafe-beef-cafebeefcaf</MetadataSetId>
+  </FeatureTypeMetadata>
+
+  <!--
+    Uncomment/adapt the following line to customize generated ExtendedCapabilities element.
+    This replaces/overrides the ExtendedCapabilities element in the deegreeServicesMetadata file.
+    Hint:
+    This special treatment (container element) inspire_ds:ExtendedCapabilities for WFS 2.0.0 is required to provide schema-valid GetCapabilities responses.
+    Can be removed once correct inspire_ds schemas for OWS commons 1.1.0/WFS 2.0.0 are available.
+   -->
+  <ExtendedCapabilities wfsVersions="2.0.0">
+    <ows:ExtendedCapabilities xmlns:ows="http://www.opengis.net/ows/1.1">
+      <inspire_ds:ExtendedCapabilities xmlns:inspire_ds="http://inspire.ec.europa.eu/schemas/inspire_ds/1.0" xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd http://inspire.ec.europa.eu/schemas/inspire_ds/1.0 http://inspire.ec.europa.eu/schemas/inspire_ds/1.0/inspire_ds.xsd">
+        <inspire_common:MetadataUrl>
+          <inspire_common:URL>http://gdk.gdi-de.org/gdi-de/srv/ger/csw?Service=CSW&amp;Request=GetRecordById&amp;Version=2.0.2&amp;id=fileIdentifier&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full
+          </inspire_common:URL>
+          <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
+        </inspire_common:MetadataUrl>
+        <inspire_common:SupportedLanguages>
+          <inspire_common:DefaultLanguage>
+            <inspire_common:Language>ger</inspire_common:Language>
+          </inspire_common:DefaultLanguage>
+        </inspire_common:SupportedLanguages>
+        <inspire_common:ResponseLanguage>
+          <inspire_common:Language>ger</inspire_common:Language>
+        </inspire_common:ResponseLanguage>
+      </inspire_ds:ExtendedCapabilities>
+    </ows:ExtendedCapabilities>
+  </ExtendedCapabilities>
+
+</deegreeWFS>

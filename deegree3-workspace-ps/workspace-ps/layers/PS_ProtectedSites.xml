@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeatureLayers xmlns="http://www.deegree.org/layers/feature"
+               xmlns:l="http://www.deegree.org/layers/base"
+               xmlns:d="http://www.deegree.org/metadata/description"
+               xmlns:s="http://www.deegree.org/metadata/spatial"
+               xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
+               xmlns:xlink="http://www.w3.org/1999/xlink"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.deegree.org/layers/feature http://schemas.deegree.org/layers/feature/3.4.0/feature.xsd"
+               configVersion="3.4.0">
+  <FeatureStoreId>ps_canonical</FeatureStoreId>
+
+  <FeatureLayer>
+    <l:Name>PS.ProtectedSites</l:Name>
+    <d:Title>PS.ProtectedSites</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>protectedsite</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+
+  <!-- siteProtectionClassification -->
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>natureConservation</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesNatureConservation</l:Name>
+    <d:Title>PS.ProtectedSitesNatureConservation</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>nature</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSiteNatureConservation</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>archaeology</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesArcheaological</l:Name>
+    <d:Title>PS.ProtectedSitesArcheaological</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>archaeology</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesArcheaological</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>culture</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesCultural</l:Name>
+    <d:Title>PS.ProtectedSitesCultural</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>culture</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesCultural</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>ecology</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesEcology</l:Name>
+    <d:Title>PS.ProtectedSitesEcology</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>ecology</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesEcology</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>landscape</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesLandscape</l:Name>
+    <d:Title>PS.ProtectedSitesLandscape</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>landscape</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesLandscape</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>environment</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesEnvironment</l:Name>
+    <d:Title>PS.ProtectedSitesEnvironment</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>environment</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesEnvironment</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>geology</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesGeology</l:Name>
+    <d:Title>PS.ProtectedSitesGeology</d:Title>
+    <d:Keywords>
+      <d:Keyword>conservation</d:Keyword>
+      <d:Keyword>geology</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesGeology</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+
+  <!-- siteDesignation.designationScheme -->
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/emeraldNetwork</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesEmeraldNetwork</l:Name>
+    <d:Title>Protected Sites - emerald network</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>EmeraldNetwork</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesEmeraldNetwork</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/IUCN</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesIUCN</l:Name>
+    <d:Title>Protected Sites - IUCN</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>IUCN</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesIUCN</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/nationalMonumentsRecord</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesNationalMonumentsRecord</l:Name>
+    <d:Title>Protected Sites - national monuments record</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>NationalMonumentsRecord</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesNationalMonumentsRecord</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/natura2000</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesNatura2000</l:Name>
+    <d:Title>Protected Sites - natura2000</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>Natura2000</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesNatura2000</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/ramsar</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesRamsar</l:Name>
+    <d:Title>Protected Sites - ramsar</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>Ramsar</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesRamsar</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/UNESCOManAndBiosphereProgramme</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesUNESCOManAndBiosphereProgramme</l:Name>
+    <d:Title>Protected Sites - UNESCO man and biosphere programme</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>UNESCOManAndBiosphereProgramme</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesUNESCOManAndBiosphereProgramme</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+  <FeatureLayer>
+    <Filter>
+      <Filter xmlns="http://www.opengis.net/ogc">
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteDesignation/ps:DesignationType/ps:designationScheme/@xlink:href</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/UNESCOWorldHeritage</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>PS.ProtectedSitesUNESCOWorldHeritage</l:Name>
+    <d:Title>Protected Sites - UNESCO world heritage</d:Title>
+    <d:Keywords>
+      <d:Keyword>Conservation</d:Keyword>
+      <d:Keyword>UNESCOWorldHeritage</d:Keyword>
+    </d:Keywords>
+    <s:CRS>EPSG:4258 EPSG:4326 EPSG:900913 EPSG:28992</s:CRS>
+    <l:MetadataSetId>ProtectedSitesUNESCOWorldHeritage</l:MetadataSetId>
+    <l:StyleRef>
+      <l:StyleStoreId>PS_ProtectedSites_Default</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSites.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites.Default</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSites.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+  </FeatureLayer>
+
+</FeatureLayers>

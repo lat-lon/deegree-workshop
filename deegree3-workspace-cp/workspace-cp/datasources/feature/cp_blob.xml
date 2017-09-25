@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SQLFeatureStore configVersion="3.4.0" xmlns="http://www.deegree.org/datasource/feature/sql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.4.0/sql.xsd">
+  <JDBCConnId>postgresDB_blob</JDBCConnId>
+  <StorageCRS srid="0" dim="2D">EPSG:4326</StorageCRS>
+  <GMLSchema>../../appschemas/CadastralParcels.xsd</GMLSchema>
+  <BLOBMapping>
+    <!-- To use a different schema add the schema name to the table text element, e.g. CP_BLOB.FEATURE_TYPES -->
+    <!-- defaults to public <BlobTable>cp_blob.feature_types</BlobTable> <FeatureTypeTable>CP_blob.gml_objects</FeatureTypeTable> -->
+  </BLOBMapping>
+</SQLFeatureStore>

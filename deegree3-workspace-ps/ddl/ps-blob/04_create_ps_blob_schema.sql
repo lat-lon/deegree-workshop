@@ -1,0 +1,24 @@
+-- as user deegree
+CREATE TABLE feature_types (id smallint PRIMARY KEY, qname text NOT NULL);
+COMMENT ON TABLE feature_types IS 'Ids and bboxes of concrete feature types';
+SELECT ADDGEOMETRYCOLUMN('public', 'feature_types','bbox','0','GEOMETRY',2);
+INSERT INTO feature_types  (id,qname) VALUES (0,'{http://inspire.ec.europa.eu/schemas/base/3.3}SpatialDataSet');
+INSERT INTO feature_types  (id,qname) VALUES (1,'{http://inspire.ec.europa.eu/schemas/gn/4.0}NamedPlace');
+INSERT INTO feature_types  (id,qname) VALUES (2,'{http://inspire.ec.europa.eu/schemas/ps/4.0}ProtectedSite');
+INSERT INTO feature_types  (id,qname) VALUES (3,'{http://www.opengis.net/gml/3.2}DirectedObservation');
+INSERT INTO feature_types  (id,qname) VALUES (4,'{http://www.opengis.net/gml/3.2}DirectedObservationAtDistance');
+INSERT INTO feature_types  (id,qname) VALUES (5,'{http://www.opengis.net/gml/3.2}DynamicFeature');
+INSERT INTO feature_types  (id,qname) VALUES (6,'{http://www.opengis.net/gml/3.2}DynamicFeatureCollection');
+INSERT INTO feature_types  (id,qname) VALUES (7,'{http://www.opengis.net/gml/3.2}FeatureCollection');
+INSERT INTO feature_types  (id,qname) VALUES (8,'{http://www.opengis.net/gml/3.2}GridCoverage');
+INSERT INTO feature_types  (id,qname) VALUES (9,'{http://www.opengis.net/gml/3.2}MultiCurveCoverage');
+INSERT INTO feature_types  (id,qname) VALUES (10,'{http://www.opengis.net/gml/3.2}MultiPointCoverage');
+INSERT INTO feature_types  (id,qname) VALUES (11,'{http://www.opengis.net/gml/3.2}MultiSolidCoverage');
+INSERT INTO feature_types  (id,qname) VALUES (12,'{http://www.opengis.net/gml/3.2}MultiSurfaceCoverage');
+INSERT INTO feature_types  (id,qname) VALUES (13,'{http://www.opengis.net/gml/3.2}Observation');
+INSERT INTO feature_types  (id,qname) VALUES (14,'{http://www.opengis.net/gml/3.2}RectifiedGridCoverage');
+CREATE TABLE gml_objects (id serial PRIMARY KEY, gml_id text UNIQUE NOT NULL, ft_type smallint REFERENCES feature_types , binary_object bytea);
+COMMENT ON TABLE gml_objects IS 'All objects (features and geometries)';
+SELECT ADDGEOMETRYCOLUMN('public', 'gml_objects','gml_bounded_by','0','GEOMETRY',2);
+ALTER TABLE gml_objects ADD CONSTRAINT gml_objects_geochk CHECK (ST_IsValid(gml_bounded_by));
+CREATE INDEX gml_objects_sidx ON gml_objects  USING GIST (gml_bounded_by);

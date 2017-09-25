@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<SQLFeatureStore configVersion="3.4.0" xmlns="http://www.deegree.org/datasource/feature/sql"
+                 xmlns:gml="http://www.opengis.net/gml/3.2"
+                 xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3"
+                 xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0"
+                 xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql http://schemas.deegree.org/datasource/feature/sql/3.4.0/sql.xsd">
+    <JDBCConnId>postgresDS_blob</JDBCConnId>
+    <StorageCRS srid="3035" dim="2D">EPSG:3035</StorageCRS>
+    <GMLSchema>../../appschemas/ProtectedSites.xsd</GMLSchema>
+    <BLOBMapping>
+        <!-- To use a different schema add the schema name to the table text element, e.g. PS_BLOB.FEATURE_TYPES -->
+        <!-- defaults to public
+        <BlobTable>ps_blob.feature_types</BlobTable>
+        <FeatureTypeTable>ps_blob.gml_objects</FeatureTypeTable>
+        -->
+    </BLOBMapping>
+</SQLFeatureStore>
