@@ -47,63 +47,63 @@ General structure of the docker CLI:
 
 Display help per docker command:
 
-docker <command> --help 	- Show help per docker command
+* `docker <command> --help` 	- Show help per docker command
 
 Commands and options used within this tutorial:
 
-docker info 		- Display system-wide information
+* `docker info` 		- Display system-wide information
 
-docker images		- List images
+* `docker images`		- List images
 
-docker pull		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
+* `docker pull`		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
 
-docker ps		- List containers
+* `docker ps`		- List containers
 
-* -a 		- Show all containers, incl. **stopped** containers
+    * -a 		- Show all containers, incl. **stopped** containers
 
-docker network ls	- List all networks
+* `docker network ls`	- List all networks
 
-docker run		- Run a command in a **new** container
+* `docker run`		- Run a command in a **new** container
 
-* -d, --detach      	Run container in background and print container ID
+    * -d, --detach      	Run container in background and print container ID
 
-* -e, --env value           	Set environment variables (default [])
+    * -e, --env value           	Set environment variables (default [])
 
-* -i, --interactive           	Keep STDIN open even if not attached
+    * -i, --interactive           	Keep STDIN open even if not attached
+ 
+    * --link value                  Add link to another container (default [] / )
 
-* --link value                  Add link to another container (default [] / )
+    * -m, --memory string  	Memory limit (format: <number><unit>, where unit = b, k, m or g)
 
-* -m, --memory string  	Memory limit (format: <number><unit>, where unit = b, k, m or g)
+    * --name string            	Assign a name to the container
 
-* --name string            	Assign a name to the container
+    * --network string      	Connect a container to a network (default "default" / [host, bridge]
 
-* --network string      	Connect a container to a network (default "default" / [host, bridge]
+    * -p, --publish value      	Publish a container's port(s) to the host (default [] / host:container)
 
-* -p, --publish value      	Publish a container's port(s) to the host (default [] / host:container)
+    * --rm                          	Automatically remove the container when it exits
 
-* --rm                          	Automatically remove the container when it exits
+    * -t, --tty                 	Allocate a pseudo-TTY
 
-* -t, --tty                 	Allocate a pseudo-TTY
+    * -v, --volume value   	Bind mount a volume (default [] / host_dir:container_dir)
 
-* -v, --volume value   	Bind mount a volume (default [] / host_dir:container_dir)
+* `docker exec`		- Run a command in a **running** container
 
-docker exec		- Run a command in a **running** container
+* `docker logs`		- Fetch the logs of a container
 
-docker logs		- Fetch the logs of a container
+    * -f, --follow    	- Follow log output
 
-* -f, --follow    	- Follow log output
+* `docker start`		- Start one or more stopped containers
 
-docker start		- Start one or more stopped containers
+* `docker stop`		- Stop one or more running containers
 
-docker stop		- Stop one or more running containers
+* `docker load`		- Load a docker image from a tar archive file
 
-docker load		- Load a docker image from a tar archive file
+* `docker save`		- Save a docker image into a tar archive file
 
-docker save		- Save a docker image into a tar archive file
+* `docker rm` 		- Remove one or more containers
 
-docker rm 		- Remove one or more containers
-
-docker rmi		- Remove one or more images
+* `docker rmi`		- Remove one or more images
 
 ## Get docker images and run docker infrastructure
 
@@ -147,8 +147,10 @@ Docker Hub: [https://hub.docker.com/r/fenglc/pgadmin4/](https://hub.docker.com/r
 Open in browser: [http://localhost:5050/browser/](http://localhost:5050/browser/)
 
 Use the following credential to login:
-user: 		pgadmin4@pgadmin.org
-password: 	admin
+
+User: 		pgadmin4@pgadmin.org
+
+Password: 	admin
 
 _**Hint**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as 192.168.99.100 as the  container IP instead of localhost!_
 
@@ -212,7 +214,7 @@ Complete configuration file (saved inside the container in directory `/root/.dee
         <Property name="maxIdle" value="10" />
     </DataSourceConnectionProvider>
 
-After you have successfully tested the database connection you can stop the docker container with CTRL+C.
+After you have successfully tested the database connection you can stop the docker container with CTRL+c.
 
 ### Build deegree docker container based on a Dockerfile (optional)
 
@@ -228,21 +230,18 @@ Use the branch "feature/deegree3_4" to build the container with deegree 3.4-RC3
 
 ### Useful commands to monitor the docker container
 
-docker logs -f deegree	- follow the deegree console output
+* `docker logs -f deegree`	- follow the deegree console output
 
-docker attach deegree		- attach to the deegree container
+* `docker attach deegree`	- attach to the deegree container
+    * You can detach from the container and leave it running with CTRL-p CTRL-q. Requires to pass `-it` option to the docker run command!
+    * You can stop the container with CTRL+c.	
 
-You can detach from the container and leave it running with CTRL-p CTRL-q. Requires to pass -it option to the docker run command!
+* `docker exec -it deegree '/bin/bash'` - opens a shell in the running deegree container. 
+    * Use command `exit` to disconnect from the container.
 
-You can stop the container with CTRL+c.	
+* `docker stats deegree` 	- This will present the CPU utilization for the container, the memory used and total memory available to the container.
 
-docker exec -it deegree '/bin/bash' - opens a shell in the running deegree container. 
-
-Use exit to disconnect from the container.
-
-docker stats deegree 	- This will present the CPU utilization for the container, the memory used and total memory available to the container.
-
-docker network inspect bridge 	- see the IP for each container
+* `docker network inspect bridge` 	- lists the IP for each container.
 
 # Part 2 - configure WFS 2.0 ![image alt text](resources/image_6.png)
 
@@ -343,7 +342,7 @@ The deegree workspace bundle contains all required files. Follow the step-by-ste
 
 6. Reload the workspace to activate the changes!
 
-_**Attention:** As of deegree Version 3.4-RC3 the FeatureStore wizard may skip complex element types while generating the SQL DDL scripts and the deegree FeatureStore configuration file. For the GML application schema ProtectedSites (v.4.0) the element legalFoundationDocument is missing in the generated DDL and in the SQLFeatureStore configuration file (see issue [#742](https://github.com/deegree/deegree3/issues/742)). More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools).
+_**Attention:** As of deegree Version 3.4-RC3 the FeatureStore wizard may skip complex element types while generating the SQL DDL scripts and the deegree FeatureStore configuration file. For the GML application schema ProtectedSites (v.4.0) the element legalFoundationDocument is missing in the generated DDL and in the SQLFeatureStore configuration file (see issue [#742](https://github.com/deegree/deegree3/issues/742)). More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools)._
 
 #### Service Address
 
@@ -413,7 +412,7 @@ _**Hint**: This docker container requires X windows running on the host (LINUX o
 
 ## Setting custom properties
 
-Open the file /var/opt/test/wfs200-soapui-project.xml with SoapUI and select the project root node. 
+Open the file `/var/opt/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
 
 ![image alt text](resources/image_8.png)
 
@@ -431,7 +430,7 @@ To send a WFS-T Insert action submit the test step "INSPIRE ProtectedSite > Tran
 
 ![image alt text](resources/image_9.png)
 
-Switch the wfsEndpoint property to the other endpoint and re-submit the WFS-T Insert request to insert the data also in the other database.
+Switch the "wfsEndpoint" property to the other endpoint and re-submit the WFS-T Insert request to insert the data also in the other database.
 
 ## Import data with HALE
 
