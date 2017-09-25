@@ -2,21 +2,21 @@
 
 ## Agenda
 
-1. Setup the Docker infrastructure
+1. [Setup the Docker infrastructure](#part-1---)
 
-2. Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0
+2. [Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0](#part-2---configure-wfs-20-)
 
-3. Import test data using deegree WFS-T interface
+3. [Import test data using deegree WFS-T interface](#part-3---import-test-data--)
 
-4. Retrieve data with different clients
+4. [Retrieve data with different clients](#part-4---retrieve-data-)
 
-5. Validate service and data
+5. [Validate service and data](#part-5---validate-deegree-webservice-)
 
 ## Online Document
 
 SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/blob/master/README.md](https://github.com/lat-lon/deegree-workshop/blob/master/README.md)**  
 
-**Link to all slides at the end of the document!**
+**[Link to all slides at the end of the document!](#slides)**
 
 
 # Part 1 - ![image alt text](resources/image_0.png)
@@ -27,15 +27,15 @@ SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/blob/master/README.md]
 
 On Ubuntu:
 
-sudo apt-get install docker-engine
+    sudo apt-get install docker-engine
 
 ## Start docker daemon
 
-sudo service docker start
+    sudo service docker start
 
 ## Verify that docker is installed correctly
 
-docker run hello-world
+    docker run hello-world
 
 **Attention:**
 
@@ -45,7 +45,7 @@ On LINUX the docker daemon binds on a UNIX socket which is owned by the user roo
 
 General structure of the docker CLI:
 
-docker <command> [options] [arguments]
+    docker <command> [options] [arguments]
 
 Display help per docker command:
 
@@ -119,15 +119,15 @@ Docker Hub: [https://hub.docker.com/r/mdillon/postgis/](https://hub.docker.com/r
 
 To download the docker image from the docker registry hub.docker.com run:
 
-docker pull mdillon/postgis
+    docker pull mdillon/postgis
 
 In case no Internet connection is available you can import a Docker image from a tar archive:
 
-docker load -i <PATH_TO_USB_DRIVE>/**Docker/postgis.tar**
+    docker load -i <PATH_TO_USB_DRIVE>/**Docker/postgis.tar**
 
 To run the Docker container execute:
 
-docker run -d --name postgis -p 5432:5432 mdillon/postgis
+    docker run -d --name postgis -p 5432:5432 mdillon/postgis
 
 ![image alt text](resources/image_4.png)
 
@@ -135,21 +135,19 @@ Docker Hub: [https://hub.docker.com/r/zfil/pgadmin3/](https://hub.docker.com/r/z
 
 Hint: This docker container requires X windows running on the host (LINUX or macOS are required!)
 
-docker pull zfil/pgadmin3
+    docker pull zfil/pgadmin3
 
-xhost +
+    xhost +
 
-docker run -d -t -v /tmp/.X11-unix:/tmp/.X11-unix -v  ~/.pgadmin:/home/pgadmin -e DISPLAY=unix:0
-
---name pgadmin3 --link postgis:postgres zfil/pgadmin3
+    docker run -d -t -v /tmp/.X11-unix:/tmp/.X11-unix -v  ~/.pgadmin:/home/pgadmin -e DISPLAY=unix:0 --name pgadmin3 --link postgis:postgres zfil/pgadmin3
 
 pgAdmin4 web console
 
 Docker Hub: [https://hub.docker.com/r/fenglc/pgadmin4/](https://hub.docker.com/r/fenglc/pgadmin4/)
 
-docker pull fenglc/pgadmin4
+    docker pull fenglc/pgadmin4
 
-docker run -d --name pgadmin4 -p 5050:5050 --link postgis:postgres fenglc/pgadmin4
+    docker run -d --name pgadmin4 -p 5050:5050 --link postgis:postgres fenglc/pgadmin4
 
 Open in browser: [http://localhost:5050/browser/](http://localhost:5050/browser/)
 
@@ -173,13 +171,13 @@ User:		postgres
 
 Add a technical user for deegree with password ‘deegree’:
 
-CREATE ROLE deegree LOGIN
+    CREATE ROLE deegree LOGIN
 
- ENCRYPTED PASSWORD 'md5b73ce574b23cf58ac77c8ca9ea0d2b5f'
+     ENCRYPTED PASSWORD 'md5b73ce574b23cf58ac77c8ca9ea0d2b5f'
 
- NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
+     NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
 
-COMMENT ON ROLE deegree IS 'technical user for deegree FeatureStore config';
+    COMMENT ON ROLE deegree IS 'technical user for deegree FeatureStore config';
 
 #### Hint:
 
@@ -191,13 +189,13 @@ Docker Hub: [https://hub.docker.com/r/tfr42/deegree/](https://hub.docker.com/r/t
 
 Dockerfile: [https://github.com/tfr42/deegree-docker](https://github.com/tfr42/deegree-docker)
 
-docker pull tfr42/deegree
+    docker pull tfr42/deegree
 
-docker run --name deegree -p 8080:8080 tfr42/deegree
+    docker run --name deegree -p 8080:8080 tfr42/deegree
 
 To link the deegree with the postgis container and run the container attached to the deegree log execute:
 
-docker run --name deegree -p 8080:8080 --link postgis:db tfr42/deegree
+    docker run --name deegree -p 8080:8080 --link postgis:db tfr42/deegree
 
 Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
 
@@ -207,33 +205,21 @@ Change the JDBC URL to jdbc:postgresql://**db**:5432/postgres
 
 Complete configuration file (saved inside the container in directory /root/.deegree/):
 
-<DataSourceConnectionProvider configVersion="3.4.0"
+    <DataSourceConnectionProvider configVersion="3.4.0"
+            xmlns="http://www.deegree.org/connectionprovider/datasource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.deegree.org/connectionprovider/datasource http://schemas.deegree.org/jdbc/datasource/3.4.0/datasource.xsd">
+        <!-- Creation / lookup of javax.sql.DataSource instance -->
+        <DataSource javaClass="org.apache.commons.dbcp.BasicDataSource" />
 
-  xmlns="http://www.deegree.org/connectionprovider/datasource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-
-xsi:schemaLocation="http://www.deegree.org/connectionprovider/datasource http://schemas.deegree.org/jdbc/datasource/3.4.0/datasource.xsd">
-
-  <!-- Creation / lookup of javax.sql.DataSource instance -->
-
-  <DataSource javaClass="org.apache.commons.dbcp.BasicDataSource" />
-
-  <!-- Configuration of DataSource properties -->
-
-  <Property name="driverClassName" value="org.postgresql.Driver" />
-
-  <Property name="url" value="**jdbc:postgresql://db:5432/postgres**" />
-
-  <Property name="username" value="**deegree**" />
-
-  <Property name="password" value="**deegree**" />
-
-  <Property name="poolPreparedStatements" value="true" />
-
-  <Property name="maxActive" value="10" />
-
-  <Property name="maxIdle" value="10" />
-
-</DataSourceConnectionProvider>
+        <!-- Configuration of DataSource properties -->
+        <Property name="driverClassName" value="org.postgresql.Driver" />
+        <Property name="url" value="**jdbc:postgresql://db:5432/postgres**" />
+        <Property name="username" value="**deegree**" />
+        <Property name="password" value="**deegree**" />
+        <Property name="poolPreparedStatements" value="true" />
+        <Property name="maxActive" value="10" />
+        <Property name="maxIdle" value="10" />
+    </DataSourceConnectionProvider>
 
 After you have successfully tested the database connection you can stop the docker container with CTRL+C.
 
@@ -243,11 +229,9 @@ Readme: [https://github.com/tfr42/deegree-docker/tree/master/deegree-webapp-tomc
 
 [Dockerfile](https://github.com/tfr42/deegree-docker/blob/master/deegree-webapp-tomcat/Dockerfile)
 
-git clone [https://github.com/tfr42/deegree-docker.git](https://github.com/tfr42/deegree-docker.git)
-
-cd deegree-docker/deegree-webapp-tomcat/
-
-docker build -t deegree/deegree-tomcat .
+    git clone [https://github.com/tfr42/deegree-docker.git](https://github.com/tfr42/deegree-docker.git)
+    cd deegree-docker/deegree-webapp-tomcat/
+    docker build -t deegree/deegree-tomcat .
 
 Use the branch "feature/deegree3_4" to build the container with deegree 3.4-RC3
 
@@ -275,21 +259,20 @@ docker network inspect bridge 	- see the IP for each container
 
 Download one of the deegree workspace bundle for INSPIRE data themes 
 
-* Protected Sites:  	[deegree3-workshop-workspaces-1.0-SNAPSHOT-ps.zip](https://drive.google.com/open?id=0B5kCqK1r1vn0eGNRSDIybWRZdnM)
+* Protected Sites:  	[deegree3-workspace-ps](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-ps)
 
-* Cadastral Parcels: 	[deegree3-workshop-workspaces-1.0-SNAPSHOT-cp.zip](https://drive.google.com/open?id=0B5kCqK1r1vn0RmhkeGxjdWxwa2M)
+* Cadastral Parcels: 	[deegree3-workspace-cp](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-cp)
 
-Create a new directory ‘.deegree’ in the user home directory and unzip all files into the ~/.deegree directory. 
+Create a new directory `.deegree` in the user home directory and unzip all files into the ~/.deegree directory. 
 
 Stop and delete the docker container deegree before you continue with:
 
-docker stop deegree
-
-docker rm deegree
+    docker stop deegree
+    docker rm deegree
 
 Start a **new** container with mounted directory ~/.deegree:
 
-docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db tfr42/deegree
+    docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db tfr42/deegree
 
 Open the deegree services console: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices) 
 
@@ -341,9 +324,9 @@ PostGIS</td>
 
 ### Database schema and deegree SQLFeatureStore configuration derived from GML application schema using relational/canonical mode
 
-To derive the SQL DDL script and the deegree SQLFeatureStore configuration file from the GML application schema you can use the deegree CLI utility tool (see [Supporting tools](#heading=h.ep7rhnh48gi) for more information).
+To derive the SQL DDL script and the deegree SQLFeatureStore configuration file from the GML application schema you can use the deegree CLI utility tool (see [Supporting tools](#supporting-tools) for more information).
 
-The deegree workspace bundle contains** all required files**.  Follow the step-by-step description to setup the deegree WFS:
+The deegree workspace bundle contains all required files. Follow the step-by-step description to setup the deegree WFS:
 
 1. Create the database
 
@@ -435,11 +418,9 @@ Dockerfile: -
 
 Hint: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html) 
 
-docker pull tfr42/docker-soapui
-
-xhost +
-
-docker run --name soapui --rm -t -i -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}/.deegree:/var/opt --link deegree:deegree tfr42/docker-soapui '/opt/SoapUI/bin/soapui.sh'
+    docker pull tfr42/docker-soapui
+    xhost +
+    docker run --name soapui --rm -t -i -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}/.deegree:/var/opt --link deegree:deegree tfr42/docker-soapui '/opt/SoapUI/bin/soapui.sh'
 
 ## Setting custom properties
 
@@ -485,15 +466,13 @@ docker pull kartoza/qgis-desktop
 
 QGIS 2.18:
 
-xhost +
-
-docker run --name gqis-desktop_2_18 -i -t -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:2.18.12 '/usr/bin/qgis'
+    xhost +
+    docker run --name gqis-desktop_2_18 -i -t -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:2.18.12 '/usr/bin/qgis'
 
 QGIS 2.18 (latest DEV):
 
-xhost +
-
-docker run --name gqis-desktop_master -i -t  -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:latest '/usr/bin/qgis'
+    xhost +
+    docker run --name gqis-desktop_master -i -t  -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:latest '/usr/bin/qgis'
 
 WMS Endpoint for PS: [http://localhost:8080/deegree-webservices/services/wms_ps](http://localhost:8080/deegree-webservices/services/wms_ps) 
 
@@ -507,15 +486,13 @@ Dockerfile: [https://github.com/tfr42/teamengine/tree/feature/addDockerConfig/te
 
 ## TEAM Engine 4.6 with WFS ETS 1.22:
 
-##### docker pull tfr42/teamengine
-
-docker run -d --name teamengine -p 8088:8080 --link deegree:deegree tfr42/teamengine
+    docker pull tfr42/teamengine
+    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree tfr42/teamengine
 
 ## TEAM Engine 4.10 with WFS ETS 1.26:
 
-docker load -i teamengine-ets-wfs20.tar 
-
-docker run -d --name teamengine -p 8088:8080 --link deegree:deegree opengis/teamengine-ets-wfs20
+    docker load -i teamengine-ets-wfs20.tar 
+    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree opengis/teamengine-ets-wfs20
 
 Open in browser: [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
 
@@ -527,7 +504,7 @@ Use either
 
 to run the validation against.
 
-deegree WFS 2.0 Reference Implementation online:
+### deegree WFS 2.0 Reference Implementation online:
 
 [http://ogctestbed12.lat-lon.de/deegree/services/wfs?service=WFS&request=GetCapabilities](http://ogctestbed12.lat-lon.de/deegree/services/wfs?service=WFS&request=GetCapabilities)
 
@@ -541,13 +518,14 @@ Online Resources:
 
 [https://hub.docker.com/r/iide/etf-webapp/](https://hub.docker.com/r/iide/etf-webapp/) 
 
-##### docker run --name etf -d -p 8188:8080 -v ~/etf:/etf --link deegree:deegree iide/etf-webapp:latest
+    docker pull iide/etf-webapp
+    docker run --name etf -d -p 8188:8080 -v ~/etf:/etf --link deegree:deegree iide/etf-webapp:latest
 
 Open in browser: [http://localhost:8188/etf-webapp](http://localhost:8088/etf-webapp)
 
 To allow access to the local Docker Container running deegree you need to change the configuration file ~/etf/config/etf-config.properties and set the property:
 
-  etf.testobject.allow.privatenet.access = true
+    etf.testobject.allow.privatenet.access = true
 
 More information how to configure the etf-web application under [http://docs.etf-validator.net/](http://docs.etf-validator.net/) 
 
@@ -694,6 +672,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 ### Data specifications
 
 [http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/](http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/)
+[http://inspire.ec.europa.eu/Themes/Data-Specifications/2892](http://inspire.ec.europa.eu/Themes/Data-Specifications/2892)
 
 ### INSPIRE Download Services
 
