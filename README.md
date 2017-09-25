@@ -668,6 +668,11 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [http://grillmayer.eu/blog/#hale-projekt-inklusive-daten-protected-sites-austria](http://grillmayer.eu/blog/#hale-projekt-inklusive-daten-protected-sites-austria) 
 
+### INSPIRE in Practice
+
+[https://inspire-reference.jrc.ec.europa.eu/](https://inspire-reference.jrc.ec.europa.eu/)
+[https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
+
 ## OSGeo
 
 [https://live.osgeo.org/en/index.html](https://live.osgeo.org/en/index.html)
