@@ -37,9 +37,7 @@ On Ubuntu:
 
     docker run hello-world
 
-**Attention:**
-
-On LINUX the docker daemon binds on a UNIX socket which is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user.
+_**Attention:** On LINUX the docker daemon binds on a UNIX socket which is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user._
 
 ### Basic docker commands
 
@@ -174,9 +172,7 @@ Add a technical user for deegree with password ‘deegree’:
 
     COMMENT ON ROLE deegree IS 'technical user for deegree FeatureStore config';
 
-#### Hint:
-
-Use persistent [data volume container](https://docs.docker.com/engine/tutorials/dockervolumes/) for productive systems, otherwise you may lose your data when removing the container!
+_**Hint**: Use persistent [data volume container](https://docs.docker.com/engine/tutorials/dockervolumes/) for productive systems, otherwise you may lose your data when removing the container!_
 
 ## ![image alt text](resources/image_5.png)eegree Webservices 
 
@@ -196,7 +192,7 @@ Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:80
 
 Navigate to "connections > databases" and create a new connection of type “DataSource” with config template “PostgreSQL (minimal)”.
 
-Change the JDBC URL to `jdbc:postgresql://**db**:5432/postgres`
+Change the JDBC URL to `jdbc:postgresql://db:5432/postgres` using the link name of the docker container running the PostgreSQL/PostGIS database.
 
 Complete configuration file (saved inside the container in directory `/root/.deegree/`):
 
@@ -208,9 +204,9 @@ Complete configuration file (saved inside the container in directory `/root/.dee
 
         <!-- Configuration of DataSource properties -->
         <Property name="driverClassName" value="org.postgresql.Driver" />
-        <Property name="url" value="**jdbc:postgresql://db:5432/postgres**" />
-        <Property name="username" value="**deegree**" />
-        <Property name="password" value="**deegree**" />
+        <Property name="url" value="jdbc:postgresql://db:5432/postgres" />
+        <Property name="username" value="deegree" />
+        <Property name="password" value="deegree" />
         <Property name="poolPreparedStatements" value="true" />
         <Property name="maxActive" value="10" />
         <Property name="maxIdle" value="10" />
@@ -258,14 +254,14 @@ Download one of the deegree workspace bundle for INSPIRE data themes
 
 * Cadastral Parcels: 	[deegree3-workspace-cp](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-cp)
 
-Create a new directory `.deegree` in the user home directory and unzip all files into the `~/.deegree` directory. 
+Create a new directory `.deegree` in the user home directory and copy all files into the `~/.deegree` directory. 
 
 Stop and delete the docker container deegree before you continue with:
 
     docker stop deegree
     docker rm deegree
 
-Start a **new** container with mounted directory ~/.deegree:
+Start a **new** container with mounted directory `~/.deegree`:
 
     docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db tfr42/deegree
 
@@ -347,9 +343,7 @@ The deegree workspace bundle contains all required files. Follow the step-by-ste
 
 6. Reload the workspace to activate the changes!
 
-**Attention:**
-
-As of deegree Version 3.4-RC3 the FeatureStore wizard may skip complex element types while generating the SQL DDL scripts and the deegree FeatureStore configuration file. For the GML application schema ProtectedSites (v.4.0) the element legalFoundationDocument is missing in the generated DDL and in the SQLFeatureStore configuration file (see issue [#742](https://github.com/deegree/deegree3/issues/742)). More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#heading=h.ep7rhnh48gi).
+_**Attention:** As of deegree Version 3.4-RC3 the FeatureStore wizard may skip complex element types while generating the SQL DDL scripts and the deegree FeatureStore configuration file. For the GML application schema ProtectedSites (v.4.0) the element legalFoundationDocument is missing in the generated DDL and in the SQLFeatureStore configuration file (see issue [#742](https://github.com/deegree/deegree3/issues/742)). More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools).
 
 #### Service Address
 
@@ -363,25 +357,25 @@ WFS Capabilities:
 
 1. Create the database
 
-    1. As user postgres - ~/.deegree/ddl/ps-blob/create_ps_blob_db.sql
+    1. As user postgres - `~/.deegree/ddl/ps-blob/create_ps_blob_db.sql`
 
-    2. As user deegree connected to ps_blob database - ~/.deegree/ddl/ps-blob/create_ps_blob_schema.sql
+    2. As user deegree connected to ps_blob database - `~/.deegree/ddl/ps-blob/create_ps_blob_schema.sql`
 
 2. GML application schema should be present already
 
-    3. ~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd
+    3. `~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd`
 
 3. Create the database connection configuration file
 
-    4. ~/.deegree/workspace-ps/jdbc/postgresDS_blob.xml
+    4. `~/.deegree/workspace-ps/jdbc/postgresDS_blob.xml`
 
 4. Create the SQLFeatureStore configuration file
 
-    5. ~/.deegree/workspace-ps/datasources/feature/ps_blob.xml
+    5. `~/.deegree/workspace-ps/datasources/feature/ps_blob.xml`
 
 5. Create the WFS service configuration file
 
-    6. ~/.deegree/workspace-ps/services/wfs_ps_blob.xml
+    6. `~/.deegree/workspace-ps/services/wfs_ps_blob.xml`
 
 6. Reload the workspace to activate the changes!
 
@@ -447,7 +441,7 @@ Switch the wfsEndpoint property to the other endpoint and re-submit the WFS-T In
 
 3. Import project "Protected_Sites_DS_Version_4_Example.hale" into HALE workbench
 
-4. Start the "Export transformed data" function and select “WFS-T” as destination using one of the WFS endpoints
+4. Start the "Export transformed data" function and select “WFS-T” as destination using one of the WFS endpoints configured.
 
 # Part 4 - Retrieve data ![image alt text](resources/image_10.png)
 
@@ -505,24 +499,20 @@ to run the validation against.
 
 ## Further testing with the INSPIRE Reference Validator
 
-Online Resources:
+Docker hub: [https://hub.docker.com/r/iide/etf-webapp/](https://hub.docker.com/r/iide/etf-webapp/)
 
-[https://github.com/inspire-eu-validation/ets-repository](https://github.com/inspire-eu-validation/ets-repository) 
-
-[https://github.com/interactive-instruments/etf-webapp](https://github.com/interactive-instruments/etf-webapp) 
-
-[https://hub.docker.com/r/iide/etf-webapp/](https://hub.docker.com/r/iide/etf-webapp/) 
+Dockerfile: [https://github.com/interactive-instruments/etf-webapp](https://github.com/interactive-instruments/etf-webapp) 
 
     docker pull iide/etf-webapp
     docker run --name etf -d -p 8188:8080 -v ~/etf:/etf --link deegree:deegree iide/etf-webapp:latest
 
 Open in browser: [http://localhost:8188/etf-webapp](http://localhost:8088/etf-webapp)
 
-To allow access to the local Docker Container running deegree you need to change the configuration file `~/etf/config/etf-config.properties and set the property:
+To allow access to the local Docker Container running deegree you need to change the configuration file `~/etf/config/etf-config.properties` and set the property:
 
     etf.testobject.allow.privatenet.access = true
 
-More information how to configure the etf-web application under [http://docs.etf-validator.net/](http://docs.etf-validator.net/) 
+More information how to configure the etf-web application under [http://docs.etf-validator.net/](http://docs.etf-validator.net/) and [https://github.com/inspire-eu-validation/ets-repository](https://github.com/inspire-eu-validation/ets-repository). 
 
 # Troubleshooting
 
