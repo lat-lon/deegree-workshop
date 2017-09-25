@@ -607,6 +607,8 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 
 [http://osgeo.getinteractive.nl/projects/deegree/](http://osgeo.getinteractive.nl/projects/deegree/) 
 
+[https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
+
 Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.20/html/](http://download.deegree.org/documentation/3.3.20/html/) 
 
 Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](http://download.deegree.org/documentation/3.4-RC3/html/) 
@@ -671,7 +673,6 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 ### INSPIRE in Practice
 
 [https://inspire-reference.jrc.ec.europa.eu/](https://inspire-reference.jrc.ec.europa.eu/)
-[https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
 
 ## OSGeo
 
