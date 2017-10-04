@@ -479,8 +479,8 @@ Dockerfile: [https://github.com/tfr42/teamengine/tree/feature/addDockerConfig/te
 
 ## TEAM Engine 4.10 with WFS ETS 1.26:
 
-    docker load -i teamengine-ets-wfs20.tar 
-    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree opengis/teamengine-ets-wfs20
+    docker pull dstenger/teamengine-ets-all
+    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree dstenger/teamengine-ets-all
 
 Open in browser: [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
 
