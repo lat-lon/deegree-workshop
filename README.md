@@ -575,9 +575,13 @@ More information how to configure the etf-web application under [http://docs.etf
 
 [07_TP_Validation-of-service-and-data.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0cTFlUi1mU3l0dVk)
 
-Archive:
+### Complete Bundle 
 
-[https://githu](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)[b.com/tfr42/deegree-docker/tree/foss4g2016_workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
+[http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip](http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip)
+
+### Archive:
+
+[https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
 
 ## Docker
 
