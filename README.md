@@ -178,7 +178,7 @@ Stop and delete the docker container deegree before you continue with:
 
 Start now a **new** container with mounted user home directory `~/.deegree`:
 
-    docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db tfr42/deegree
+    docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
 
 Open the deegree services console: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices) 
 
@@ -196,7 +196,7 @@ To configure a INSPIRE direct-access download service based on deegree WFS 2.0 s
 
 5. Create the WFS service configuration file
 
-The workspace bundle contains the following resources:
+The workspace bundle (see the download link under workshop resources - [Complete Tutorial Bundle](#complete-tutorial-bundle)) contains the following resources:
 
 | Directory       | Content     | Documentation |
 | :-------------- | :---------- | :------------ |   
