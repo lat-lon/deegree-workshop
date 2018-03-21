@@ -16,7 +16,7 @@
 
 SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/blob/nintyMinutesQuickTutorial/README.md](https://github.com/lat-lon/deegree-workshop/blob/nintyMinutesQuickTutorial/README.md)**  
 
-**[Link to all slides at the end of the document!](#slides)**
+**[Link to all slides at the end of the document!](#tutorial-resources-and-slides)**
 
 
 # Part 1 - ![image alt text](resources/image_0.png)
