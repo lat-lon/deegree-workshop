@@ -366,11 +366,6 @@ Docker hub: [https://hub.docker.com/r/tfr42/teamengine/](https://hub.docker.com/
 
 Dockerfile: [https://github.com/tfr42/teamengine/tree/feature/addDockerConfig/teamengine-docker](https://github.com/tfr42/teamengine/tree/feature/addDockerConfig/teamengine-docker)
 
-## TEAM Engine 4.6 with WFS ETS 1.22:
-
-    docker pull tfr42/teamengine
-    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree tfr42/teamengine
-
 ## TEAM Engine 4.10 with WFS ETS 1.26:
 
     docker pull dstenger/teamengine-ets-all
@@ -388,7 +383,7 @@ to run the validation against.
 
 ### deegree WFS 2.0 Reference Implementation online:
 
-[http://ogctestbed12.lat-lon.de/deegree/services/wfs?service=WFS&request=GetCapabilities](http://ogctestbed12.lat-lon.de/deegree/services/wfs?service=WFS&request=GetCapabilities)
+[http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities)
 
 ## Further testing with the INSPIRE Reference Validator
 
