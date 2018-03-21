@@ -1,6 +1,6 @@
-# Tutorial "INSPIRE Network Services with deegree on Docker"
+# Quickstart Tutorial "INSPIRE Network Services with deegree on Docker"
 
-## Agenda
+## Agenda for 90 minutes
 
 1. [Setup the Docker infrastructure](#part-1---)
 
@@ -39,72 +39,6 @@ On Ubuntu:
 
 _**Attention:** On LINUX the docker daemon binds on a UNIX socket which is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user._
 
-### Basic docker commands
-
-General structure of the docker CLI:
-
-    docker <command> [options] [arguments]
-
-Display help per docker command:
-
-* `docker <command> --help` 	- Show help per docker command
-
-Commands and options used within this tutorial:
-
-* `docker info` 		- Display system-wide information
-
-* `docker images`		- List images
-
-* `docker pull`		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
-
-* `docker ps`		- List containers
-
-    * -a 		- Show all containers, incl. **stopped** containers
-
-* `docker network ls`	- List all networks
-
-* `docker run`		- Run a command in a **new** container
-
-    * -d, --detach      	Run container in background and print container ID
-
-    * -e, --env value           	Set environment variables (default [])
-
-    * -i, --interactive           	Keep STDIN open even if not attached
- 
-    * --link value                  Add link to another container (default [] / )
-
-    * -m, --memory string  	Memory limit (format: <number><unit>, where unit = b, k, m or g)
-
-    * --name string            	Assign a name to the container
-
-    * --network string      	Connect a container to a network (default "default" / [host, bridge]
-
-    * -p, --publish value      	Publish a container's port(s) to the host (default [] / host:container)
-
-    * --rm                          	Automatically remove the container when it exits
-
-    * -t, --tty                 	Allocate a pseudo-TTY
-
-    * -v, --volume value   	Bind mount a volume (default [] / host_dir:container_dir)
-
-* `docker exec`		- Run a command in a **running** container
-
-* `docker logs`		- Fetch the logs of a container
-
-    * -f, --follow    	- Follow log output
-
-* `docker start`		- Start one or more stopped containers
-
-* `docker stop`		- Stop one or more running containers
-
-* `docker load`		- Load a docker image from a tar archive file
-
-* `docker save`		- Save a docker image into a tar archive file
-
-* `docker rm` 		- Remove one or more containers
-
-* `docker rmi`		- Remove one or more images
-
 ## Get docker images and run docker infrastructure
 
 ![image alt text](resources/image_1.png)
@@ -127,15 +61,7 @@ To run the Docker container execute:
 
     docker run -d --name postgis -p 5432:5432 mdillon/postgis
 
-![image alt text](resources/image_4.png)
-
-Docker Hub: [https://hub.docker.com/r/zfil/pgadmin3/](https://hub.docker.com/r/zfil/pgadmin3/)
-
-_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!)_
-
-    docker pull zfil/pgadmin3
-    xhost +
-    docker run -d -t -v /tmp/.X11-unix:/tmp/.X11-unix -v  ~/.pgadmin:/home/pgadmin -e DISPLAY=unix:0 --name pgadmin3 --link postgis:postgres zfil/pgadmin3
+_**Hint:** You can find an overview of basic Docker commands at the end of this tutorial under [Overview of basic docker commands](#overview-of-basic-docker-commands-)._ 
 
 #### pgAdmin4 web console
 
@@ -214,27 +140,15 @@ Complete configuration file (saved inside the container in directory `/root/.dee
         <Property name="maxIdle" value="10" />
     </DataSourceConnectionProvider>
 
-After you have successfully tested the database connection you can stop the docker container with CTRL+c.
-
-### Build deegree docker container based on a Dockerfile (optional)
-
-Readme: [https://github.com/tfr42/deegree-docker/tree/master/deegree-webapp-tomcat](https://github.com/tfr42/deegree-docker/tree/master/deegree-webapp-tomcat)
-
-[Dockerfile](https://github.com/tfr42/deegree-docker/blob/master/deegree-webapp-tomcat/Dockerfile)
-
-    git clone [https://github.com/tfr42/deegree-docker.git](https://github.com/tfr42/deegree-docker.git)
-    cd deegree-docker/deegree-webapp-tomcat/
-    docker build -t deegree/deegree-tomcat .
-
-Use the branch "feature/deegree3_4" to build the container with deegree 3.4-RC3
+After you have successfully tested the database connection you can stop the docker container with `CTRL+c`.
 
 ### Useful commands to monitor the docker container
 
 * `docker logs -f deegree`	- follow the deegree console output
 
 * `docker attach deegree`	- attach to the deegree container
-    * You can detach from the container and leave it running with CTRL-p CTRL-q. Requires to pass `-it` option to the docker run command!
-    * You can stop the container with CTRL+c.	
+    * You can detach from the container and leave it running with `CTRL-p CTRL-q`. Requires to pass `-it` option to the docker run command!
+    * You can stop the container with `CTRL+c`.	
 
 * `docker exec -it deegree '/bin/bash'` - opens a shell in the running deegree container. 
     * Use command `exit` to disconnect from the container.
@@ -342,7 +256,7 @@ The deegree workspace bundle contains all required files. Follow the step-by-ste
 
 6. Reload the workspace to activate the changes!
 
-_**Attention:** As of deegree Version 3.4-RC3 the FeatureStore wizard may skip complex element types while generating the SQL DDL scripts and the deegree FeatureStore configuration file. For the GML application schema ProtectedSites (v.4.0) the element legalFoundationDocument is missing in the generated DDL and in the SQLFeatureStore configuration file (see issue [#742](https://github.com/deegree/deegree3/issues/742)). More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools)._
+_**Attention:** As of deegree Version 3.4 the FeatureStore wizard is not fully functional. More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools)._
 
 #### Service Address
 
@@ -392,11 +306,9 @@ Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
 
 * deegree services console - [http://localhost:8080/deegree-webservices/](http://localhost:8080/deegree-webservices/) 
 
-    * in 3.4-RC3 the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
+    * in 3.4-RC7 the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
 
-    * deegree 3.3.20 (limited support for complex GML application schema)
-
-* [deegree CLI utility tool](https://github.com/lat-lon/deegree-cli-utility/tree/deegree-3.4) 
+* [deegree CLI utility tool](https://github.com/deegree/deegree3/tree/master/deegree-tools/deegree-tools-config) 
 
 # Part 3 - Import test data  ![image alt text](resources/image_7.png) 
 
@@ -442,6 +354,8 @@ Switch the "wfsEndpoint" property to the other endpoint and re-submit the WFS-T 
 
 4. Start the "Export transformed data" function and select “WFS-T” as destination using one of the WFS endpoints configured.
 
+_**Attention**: Importing large GML files may require more hardware resources. Please check [github issue #743](https://github.com/deegree/deegree3/issues/743) for further information._ 
+
 # Part 4 - Retrieve data ![image alt text](resources/image_10.png)
 
 Docker hub: [https://hub.docker.com/r/kartoza/qgis-desktop/](https://hub.docker.com/r/kartoza/qgis-desktop/)
@@ -455,7 +369,7 @@ _**Hint**: This docker container requires X windows running on the host (LINUX o
 QGIS 2.18:
 
     xhost +
-    docker run --name gqis-desktop_2_18 -i -t -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:2.18.12 '/usr/bin/qgis'
+    docker run --name gqis-desktop_2_18 -i -t -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:2.18.17 '/usr/bin/qgis'
 
 QGIS 2.18 (latest DEV):
 
@@ -556,10 +470,76 @@ More information how to configure the etf-web application under [http://docs.etf
         * `GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO deegree;`
 
         * `GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to deegree;`
+        
+# Overview of basic docker commands
+ 
+ General structure of the docker CLI:
+ 
+     docker <command> [options] [arguments]
+ 
+ Display help per docker command:
+ 
+ * `docker <command> --help` 	- Show help per docker command
+ 
+ Commands and options used within this tutorial:
+ 
+ * `docker info` 		- Display system-wide information
+ 
+ * `docker images`		- List images
+ 
+ * `docker pull`		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
+ 
+ * `docker ps`		- List containers
+ 
+     * -a 		- Show all containers, incl. **stopped** containers
+ 
+ * `docker network ls`	- List all networks
+ 
+ * `docker run`		- Run a command in a **new** container
+ 
+     * -d, --detach      	Run container in background and print container ID
+ 
+     * -e, --env value           	Set environment variables (default [])
+ 
+     * -i, --interactive           	Keep STDIN open even if not attached
+  
+     * --link value                  Add link to another container (default [] / )
+ 
+     * -m, --memory string  	Memory limit (format: <number><unit>, where unit = b, k, m or g)
+ 
+     * --name string            	Assign a name to the container
+ 
+     * --network string      	Connect a container to a network (default "default" / [host, bridge]
+ 
+     * -p, --publish value      	Publish a container's port(s) to the host (default [] / host:container)
+ 
+     * --rm                          	Automatically remove the container when it exits
+ 
+     * -t, --tty                 	Allocate a pseudo-TTY
+ 
+     * -v, --volume value   	Bind mount a volume (default [] / host_dir:container_dir)
+ 
+ * `docker exec`		- Run a command in a **running** container
+ 
+ * `docker logs`		- Fetch the logs of a container
+ 
+     * -f, --follow    	- Follow log output
+ 
+ * `docker start`		- Start one or more stopped containers
+ 
+ * `docker stop`		- Stop one or more running containers
+ 
+ * `docker load`		- Load a docker image from a tar archive file
+ 
+ * `docker save`		- Save a docker image into a tar archive file
+ 
+ * `docker rm` 		- Remove one or more containers
+ 
+ * `docker rmi`		- Remove one or more images
+        
+# Links for further reading and resources
 
-# Links for further reading
-
-## Slides
+## Tutorial resources and slides
 
 [01_T_Introduction.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0YVZXYVRaVWFtYms)
 
@@ -575,13 +555,15 @@ More information how to configure the etf-web application under [http://docs.etf
 
 [07_TP_Validation-of-service-and-data.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0cTFlUi1mU3l0dVk)
 
-### Complete Bundle 
+### Complete Tutorial Bundle 
 
-[http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip](http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip)
+--TODO-- 
 
 ### Archive:
 
-[https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
+[INSPIRE Conference 2017_Workshop ZIP-Bundle](http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip)
+
+[FOSS4G 2016 Workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
 
 ## Docker
 
@@ -603,7 +585,7 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 
 [https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
 
-## deegree
+## deegree resources
 
 [https://github.com/deegree/deegree3](https://github.com/deegree/deegree3)
 
@@ -613,15 +595,15 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 
 [https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
 
-Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.20/html/](http://download.deegree.org/documentation/3.3.20/html/) 
+Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.21/html/](http://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](http://download.deegree.org/documentation/3.4-RC3/html/) 
+Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC7/html/](http://download.deegree.org/documentation/3.4-RC7/html/) 
 
 ### deegree on Docker Hub
 
-[https://hub.docker.com/r/tfr42/deegree/](https://hub.docker.com/r/tfr42/deegree/)
+[https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
 
-### deegree workspace for INSPIRE
+### Public available deegree workspace configurations for INSPIRE
 
 [https://github.com/de-bkg/deegree-workspace-dlm250-inspire](https://github.com/de-bkg/deegree-workspace-dlm250-inspire)
 
@@ -641,7 +623,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [https://github.com/opengeospatial/teamengine-docker](https://github.com/opengeospatial/teamengine-docker)
 
-## INSPIRE
+## INSPIRE resources
 
 ### General Information about INSPIRE
 
@@ -649,7 +631,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [http://www.slideshare.net/ChrisSchubert1/inspirehandsondatatransformation](http://www.slideshare.net/ChrisSchubert1/inspirehandsondatatransformation)
 
-### Validation 
+### Validation tools for INSPIRE
 
 [http://inspire-geoportal.ec.europa.eu/validator2/](http://inspire-geoportal.ec.europa.eu/validator2/)
 
@@ -659,7 +641,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [https://github.com/Geonovum/etf-test-projects-inspire](https://github.com/Geonovum/etf-test-projects-inspire) 
 
-### Data specifications
+### INSPIRE Data specifications
 
 [http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/](http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/)
 [http://inspire.ec.europa.eu/Themes/Data-Specifications/2892](http://inspire.ec.europa.eu/Themes/Data-Specifications/2892)
@@ -678,7 +660,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [https://inspire-reference.jrc.ec.europa.eu/](https://inspire-reference.jrc.ec.europa.eu/)
 
-## OSGeo
+## OSGeo resources
 
 [https://live.osgeo.org/en/index.html](https://live.osgeo.org/en/index.html)
 
@@ -692,7 +674,7 @@ Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC3/html/](
 
 [https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory](https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory)
 
-### Data and services
+### OpenStreet Map, Open Data and public spatial services
 
 WMS with OSM data
 
