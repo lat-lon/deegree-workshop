@@ -61,7 +61,7 @@ To run the Docker container execute:
 
     docker run -d --name postgis -p 5432:5432 mdillon/postgis
 
-_**Hint:** You can find an overview of basic Docker commands at the end of this tutorial under [Overview of basic docker commands](#overview-of-basic-docker-commands-)._ 
+_**Hint:** You can find an overview of basic Docker commands at the end of this tutorial under [Overview of basic docker commands](#overview-of-basic-docker-commands)._ 
 
 #### pgAdmin4 web console
 
