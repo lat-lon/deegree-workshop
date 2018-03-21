@@ -23,7 +23,7 @@ SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/blob/nintyMinutesQuick
 
 ## Install docker
 
-[https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/) 
+[7 minute tutorial how to install Docker Community Edition (CE)](https://docs.docker.com/install/) 
 
 On Ubuntu:
 
