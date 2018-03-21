@@ -1,6 +1,6 @@
 # Quickstart Tutorial "INSPIRE Network Services with deegree on Docker"
 
-## Agenda for 90 minutes
+## Agenda   
 
 1. [Setup the Docker infrastructure](#part-1---)
 
@@ -196,7 +196,7 @@ To configure a INSPIRE direct-access download service based on deegree WFS 2.0 s
 
 5. Create the WFS service configuration file
 
-The workspace bundle (see the download link under workshop resources - [Complete Tutorial Bundle](#complete-tutorial-bundle)) contains the following resources:
+Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) contains the following resources:
 
 | Directory       | Content     | Documentation |
 | :-------------- | :---------- | :------------ |   
