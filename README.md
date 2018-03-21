@@ -88,20 +88,6 @@ Port: 		5432
 
 User:		postgres
 
-#### Database setup
-
-Add a technical user for deegree with password ‘deegree’:
-
-    CREATE ROLE deegree LOGIN
-
-     ENCRYPTED PASSWORD 'md5b73ce574b23cf58ac77c8ca9ea0d2b5f'
-
-     NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
-
-    COMMENT ON ROLE deegree IS 'technical user for deegree FeatureStore config';
-
-_**Hint**: Use persistent [data volume container](https://docs.docker.com/engine/tutorials/dockervolumes/) for productive systems, otherwise you may lose your data when removing the container!_
-
 ## ![image alt text](resources/image_5.png)eegree Webservices 
 
 Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
@@ -110,37 +96,11 @@ Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deeg
 
     docker pull deegree/deegree3-docker
 
-    docker run --name deegree -p 8080:8080 deegree/deegree3-docker
-
-In case the container starts successfully stop it with `docker stop deegree` or `CTRL+c` and remove the container with `docker rm deegree`.
-
 Now link the deegree container with the postgis container and ro run the container attached to the deegree log execute the command:
 
     docker run --name deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
 
 Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
-
-Navigate to "connections > databases" and create a new connection of type “DataSource” with config template “PostgreSQL (minimal)”.
-
-Change the JDBC URL to `jdbc:postgresql://db:5432/postgres` using the link name of the docker container running the PostgreSQL/PostGIS database.
-
-Complete configuration file (saved inside the container in directory `/root/.deegree/`):
-
-    <DataSourceConnectionProvider configVersion="3.4.0"
-            xmlns="http://www.deegree.org/connectionprovider/datasource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://www.deegree.org/connectionprovider/datasource http://schemas.deegree.org/jdbc/datasource/3.4.0/datasource.xsd">
-        <!-- Creation / lookup of javax.sql.DataSource instance -->
-        <DataSource javaClass="org.apache.commons.dbcp.BasicDataSource" />
-
-        <!-- Configuration of DataSource properties -->
-        <Property name="driverClassName" value="org.postgresql.Driver" />
-        <Property name="url" value="jdbc:postgresql://db:5432/postgres" />
-        <Property name="username" value="deegree" />
-        <Property name="password" value="deegree" />
-        <Property name="poolPreparedStatements" value="true" />
-        <Property name="maxActive" value="10" />
-        <Property name="maxIdle" value="10" />
-    </DataSourceConnectionProvider>
 
 After you have successfully tested the database connection you can stop the docker container with `CTRL+c`.
 
@@ -163,7 +123,7 @@ After you have successfully tested the database connection you can stop the dock
 
 ## Start deegree docker container with local deegree workspace directory
 
-Download one of the deegree workspace bundle for INSPIRE data themes 
+Download one of the deegree workspace bundle (as ZIP file) for the INSPIRE data themes:
 
 * Protected Sites:  	[deegree3-workspace-ps](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-ps)
 
@@ -182,19 +142,13 @@ Start now a **new** container with mounted user home directory `~/.deegree`:
 
 Open the deegree services console: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices) 
 
-## Create WFS serving INSPIRE data theme Protected Sites
+## Start deegree WFS serving INSPIRE data theme Protected Sites
 
 To configure a INSPIRE direct-access download service based on deegree WFS 2.0 serving harmonized data the following steps are needed:
 
-1. Create the database and schema 
+1. Create the database and schema with the provided SQL scripts using pgAdmin or use the shell script `scripts/setupDB.sh`
 
-2. Add the GML application schema to the deegree workspace
-
-3. Create the database connection configuration file
-
-4. Create the SQLFeatureStore configuration file
-
-5. Create the WFS service configuration file
+2. Select and reload the workspace for Protected Sites in the deegree service console
 
 Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) contains the following resources:
 
@@ -206,37 +160,25 @@ Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) 
 | `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
 | `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
 
-### Database schema and deegree SQLFeatureStore configuration derived from GML application schema using relational/canonical mode
+### Detailed description for Protected Sites with canonical database structure
 
-To derive the SQL DDL script and the deegree SQLFeatureStore configuration file from the GML application schema you can use the deegree CLI utility tool (see [Supporting tools](#supporting-tools) for more information).
+The shell script `setupDB.sh` creates both, the canonical and BLOB database schema!
 
-The deegree workspace bundle contains all required files. Follow the step-by-step description to setup the deegree WFS:
+1. Create the database using pgAdmin
 
-1. Create the database
+    1. As user postgres create user and database
+        
+        - `~/.deegree/ddl/01_create_deegree_user.sql`
+        - `~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql`
+        - `~/.deegree/ddl/03_create_extension_postgis.sql`
+        
+    2. As user deegree connect to ps_canonical database and create the schema with 
+    
+        - `~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql`
 
-    1. As user postgres - `~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql`
+2. Now open the deegree service console and reload the workspace:
 
-    2. As user deegree connected to ps_canonical database - `~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql`
-
-2. Add the GML application schema to workspace ([source of XSD](http://inspire.ec.europa.eu/schemas/ps/4.0/ProtectedSites.xsd))
-
-    3. `~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd`
-
-3. Create the database connection configuration file
-
-    4. `~/.deegree/workspace-ps/jdbc/postgresDS_canonical.xml`
-
-4. Create the SQLFeatureStore configuration file
-
-    5. `~/.deegree/workspace-ps/datasources/feature/ps_canonical.xml`
-
-5. Create the WFS service configuration file
-
-    6. `~/.deegree/workspace-ps/services/wfs_ps_canonical.xml`
-
-6. Reload the workspace to activate the changes!
-
-_**Attention:** As of deegree Version 3.4 the FeatureStore wizard is not fully functional. More information how to generate the mapping and SQL DDL files read further in paragraph [Supporting tools](#supporting-tools)._
+    1. The WFS service configuration is located in `/services/wfs_ps_canonical.xml`
 
 #### Service Address
 
@@ -248,29 +190,17 @@ WFS Capabilities:
 
 ### Database schema and deegree SQLFeatureStore configuration based on BLOB-mode GML application mapping
 
-1. Create the database
+1. Create the database using pgAdmin
 
-    1. As user postgres - `~/.deegree/ddl/ps-blob/create_ps_blob_db.sql`
+    1. As user postgres database
 
-    2. As user deegree connected to ps_blob database - `~/.deegree/ddl/ps-blob/create_ps_blob_schema.sql`
+        - `~/.deegree/ddl/ps-blob/create_ps_blob_db.sql`
 
-2. GML application schema should be present already
+    2. As user deegree connect to ps_blob database and create the schema with 
+    
+        - `~/.deegree/ddl/ps-blob/04_create_ps_blob_schema.sql`
 
-    3. `~/.deegree/workspace-ps/appschemas/ProtectedSites.xsd`
-
-3. Create the database connection configuration file
-
-    4. `~/.deegree/workspace-ps/jdbc/postgresDS_blob.xml`
-
-4. Create the SQLFeatureStore configuration file
-
-    5. `~/.deegree/workspace-ps/datasources/feature/ps_blob.xml`
-
-5. Create the WFS service configuration file
-
-    6. `~/.deegree/workspace-ps/services/wfs_ps_blob.xml`
-
-6. Reload the workspace to activate the changes!
+2. Reload the workspace to activate the changes!
 
 #### Service Address
 
