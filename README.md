@@ -198,35 +198,13 @@ To configure a INSPIRE direct-access download service based on deegree WFS 2.0 s
 
 The workspace bundle contains the following resources:
 
-<table>
-  <tr>
-    <td>Directory</td>
-    <td>Content</td>
-    <td>Documentation</td>
-  </tr>
-  <tr>
-    <td>ddl</td>
-    <td>SQL DDL scripts for canonical and blob mapping</td>
-    <td>PostgreSQL
-PostGIS</td>
-  </tr>
-  <tr>
-    <td>scripts</td>
-    <td>Shell scripts to execute all SQL scripts using psql CLI (Linux/Unix only)</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>test</td>
-    <td>SoapUI project for testing</td>
-    <td>Getting started with SoapUI</td>
-  </tr>
-  <tr>
-    <td>workspace-ps</td>
-    <td>Complete deegree workspace with WFS and WMS configuration including a configuration set for BLOB and canonical mapping</td>
-    <td>Configuration basics with deegree</td>
-  </tr>
-</table>
-
+| Directory       | Content     | Documentation |
+| :-------------- | :---------- | :------------ |   
+| `/ddl`          | SQL DDL scripts for canonical and blob mapping | [PostgreSQL](https://www.postgresql.org/docs/current/static/tutorial.html), [PostGIS](http://workshops.boundlessgeo.com/postgis-intro/) |
+| `/scripts`      | Shell scripts to execute all SQL scripts using psql CLI (Linux/Unix only) |  |
+| `/test`         | SoapUI project for testing | [Getting started with SoapUI](https://www.soapui.org/getting-started/your-first-soapui-project.html) | 
+| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
+| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
 
 ### Database schema and deegree SQLFeatureStore configuration derived from GML application schema using relational/canonical mode
 
