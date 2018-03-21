@@ -514,25 +514,19 @@ More information how to configure the etf-web application under [http://docs.etf
         
 # Links for further reading and resources
 
-## Tutorial resources and slides
-
-[01_T_Introduction.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0YVZXYVRaVWFtYms)
-
-[02_T_INSPIRE-Download-Services.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0NFpqZko3OWNmSFk)
-
-[03_TP_Docker.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0b3ZkVDNkbHJKSG8)
-
-[04_P_deegree-on-Docker.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0dTJoQnIwODRDLU0)
-
-[05_TP_deegree.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0X2w1MG1Yc1JVaW8)
-
-[06_P_Configuration-of-a-deegree-INSPIRE-Download-Service.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0MGRvazdfVzBTeU0)
-
-[07_TP_Validation-of-service-and-data.pdf](https://drive.google.com/open?id=0B5kCqK1r1vn0cTFlUi1mU3l0dVk)
-
 ### Complete Tutorial Bundle 
 
---TODO-- 
+[FOSSGIS Konference 2018_Workshop ZIP-Bundle](http://www.lat-lon.de/Download/20180322_FOSSGISConf2018_Workshop.zip)
+
+## Tutorial resources and slides 
+
+- slides/01_T_Introduction.pdf
+- slides/02_T_INSPIRE-Download-Services.pdf
+- slides/03_TP_Docker.pdf
+- slides/04_P_deegree-on-Docker.pdf
+- slides/05_TP_deegree.pdf
+- slides/06_P_Configuration-of-a-deegree-INSPIRE-Download-Service.pdf
+- slides/07_TP_Validation-of-service-and-data.pdf
 
 ### Archive:
 
