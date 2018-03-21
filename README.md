@@ -104,17 +104,19 @@ _**Hint**: Use persistent [data volume container](https://docs.docker.com/engine
 
 ## ![image alt text](resources/image_5.png)eegree Webservices 
 
-Docker Hub: [https://hub.docker.com/r/tfr42/deegree/](https://hub.docker.com/r/tfr42/deegree/)
+Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
 
-Dockerfile: [https://github.com/tfr42/deegree-docker](https://github.com/tfr42/deegree-docker)
+Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
 
-    docker pull tfr42/deegree
+    docker pull deegree/deegree3-docker
 
-    docker run --name deegree -p 8080:8080 tfr42/deegree
+    docker run --name deegree -p 8080:8080 deegree/deegree3-docker
 
-To link the deegree with the postgis container and run the container attached to the deegree log execute:
+In case the container starts successfully stop it with `docker stop deegree` or `CTRL+c` and remove the container with `docker rm deegree`.
 
-    docker run --name deegree -p 8080:8080 --link postgis:db tfr42/deegree
+Now link the deegree container with the postgis container and ro run the container attached to the deegree log execute the command:
+
+    docker run --name deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
 
 Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
 
@@ -174,7 +176,7 @@ Stop and delete the docker container deegree before you continue with:
     docker stop deegree
     docker rm deegree
 
-Start a **new** container with mounted directory `~/.deegree`:
+Start now a **new** container with mounted user home directory `~/.deegree`:
 
     docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db tfr42/deegree
 
