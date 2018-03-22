@@ -476,13 +476,15 @@ More information how to configure the etf-web application under [http://docs.etf
 
 ### Talks about Docker and GIS
 
-Video (german) - [https://www.fossgis.de/konferenz/2015/programm/events/847.de.html](https://www.fossgis.de/konferenz/2015/programm/events/847.de.html)
+Talk (german) - [FOSSGIS 2018 - Dockerize stuff - Postgis swarm and other geo boxes](https://www.fossgis-konferenz.de/2018/programm/event.php?id=5292)
 
-Slides (english) - [https://2016.foss4g-na.org/session/spatial-data-processing-docker](https://2016.foss4g-na.org/session/spatial-data-processing-docker)
+Video (german) - [Docker für den GIS-Einsatz](https://www.fossgis.de/konferenz/2015/programm/events/847.de.html)
+
+Slides (english) - [Spatial Data Processing with Docker](https://2016.foss4g-na.org/session/spatial-data-processing-docker.html)
 
 Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.de/pub/misc/openstreetmap/FOSS4G-2016/foss4g-2016-1146-an_overview_of_docker_images_for_geospatial_applications-hd.mp4)
 
-[https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
+Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
 
 ## deegree resources
 
