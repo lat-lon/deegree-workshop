@@ -55,7 +55,7 @@ To download the docker image from the docker registry hub.docker.com run:
 
 In case no Internet connection is available you can import a Docker image from a tar archive:
 
-    docker load -i <PATH_TO_USB_DRIVE>/**Docker/postgis.tar**
+    docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar
 
 To run the Docker container execute:
 
