@@ -157,8 +157,8 @@ Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) 
 | `/ddl`          | SQL DDL scripts for canonical and blob mapping | [PostgreSQL](https://www.postgresql.org/docs/current/static/tutorial.html), [PostGIS](http://workshops.boundlessgeo.com/postgis-intro/) |
 | `/scripts`      | Shell scripts to execute all SQL scripts using psql CLI (Linux/Unix only) |  |
 | `/test`         | SoapUI project for testing | [Getting started with SoapUI](https://www.soapui.org/getting-started/your-first-soapui-project.html) | 
-| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
-| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
+| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
+| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
 
 ### Detailed description for Protected Sites with canonical database structure
 
@@ -216,7 +216,7 @@ Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
 
 * deegree services console - [http://localhost:8080/deegree-webservices/](http://localhost:8080/deegree-webservices/) 
 
-    * in 3.4-RC7 the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
+    * in 3.4-RC7 and later the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
 
 * [deegree CLI utility tool](https://github.com/deegree/deegree3/tree/master/deegree-tools/deegree-tools-config) 
 
@@ -313,7 +313,7 @@ to run the validation against.
 
 ### deegree WFS 2.0 Reference Implementation online:
 
-[http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities)
+[http://cite.deegree.org/deegree-webservices-3.4.0/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4.0/services/wfs200?service=WFS&request=GetCapabilities)
 
 ## Further testing with the INSPIRE Reference Validator
 
@@ -498,7 +498,7 @@ Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/ev
 
 Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.21/html/](http://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC7/html/](http://download.deegree.org/documentation/3.4-RC7/html/) 
+Documentation 3.4.x - [http://download.deegree.org/documentation/3.4.0/html/](http://download.deegree.org/documentation/3.4.0/html/) 
 
 ### deegree on Docker Hub
 
