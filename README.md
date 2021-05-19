@@ -203,8 +203,8 @@ Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) 
 | `/ddl`          | SQL DDL scripts for canonical and blob mapping | [PostgreSQL](https://www.postgresql.org/docs/current/static/tutorial.html), [PostGIS](http://workshops.boundlessgeo.com/postgis-intro/) |
 | `/scripts`      | Shell scripts to execute all SQL scripts using psql CLI (Linux/Unix only) |  |
 | `/test`         | SoapUI project for testing | [Getting started with SoapUI](https://www.soapui.org/getting-started/your-first-soapui-project.html) | 
-| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
-| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4-RC7/html/lightly.html#example-workspace-1-inspire-network-services) |
+| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/current/html/lightly.html#example-workspace-1-inspire-network-services) |
+| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/current/html/lightly.html#example-workspace-1-inspire-network-services) |
 
 ### Database schema and deegree SQLFeatureStore configuration derived from GML application schema using relational/canonical mode
 
@@ -558,15 +558,15 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 
 [https://github.com/deegree/deegree3](https://github.com/deegree/deegree3)
 
-[http://www.deegree.org](http://www.deegree.org)
+[https://www.deegree.org](https://www.deegree.org)
 
-[http://osgeo.getinteractive.nl/projects/deegree/](http://osgeo.getinteractive.nl/projects/deegree/) 
+[https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/) 
 
-[https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
+[https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/](https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/)
 
-Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.21/html/](http://download.deegree.org/documentation/3.3.21/html/) 
+Documentation 3.3.x - [https://download.deegree.org/documentation/3.3.21/html/](https://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [http://download.deegree.org/documentation/3.4-RC7/html/](http://download.deegree.org/documentation/3.4-RC7/html/) 
+Documentation 3.4.x - [https://download.deegree.org/documentation/3.4.16/html/](https://download.deegree.org/documentation/3.4.16/html/) 
 
 ### deegree on Docker Hub
 
