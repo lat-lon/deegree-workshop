@@ -313,7 +313,7 @@ to run the validation against.
 
 ### deegree WFS 2.0 Reference Implementation online:
 
-[http://cite.deegree.org/deegree-webservices-3.4.0/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4.0/services/wfs200?service=WFS&request=GetCapabilities)
+[http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities)
 
 ## Further testing with the INSPIRE Reference Validator
 
@@ -490,15 +490,15 @@ Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/ev
 
 [https://github.com/deegree/deegree3](https://github.com/deegree/deegree3)
 
-[http://www.deegree.org](http://www.deegree.org)
+[https://www.deegree.org](https://www.deegree.org)
 
-[http://osgeo.getinteractive.nl/projects/deegree/](http://osgeo.getinteractive.nl/projects/deegree/) 
+[https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/) 
 
-[https://inspire-reference.jrc.ec.europa.eu/tools/deegree](https://inspire-reference.jrc.ec.europa.eu/tools/deegree)
+[https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/](https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/)
 
-Documentation 3.3.x - [http://download.deegree.org/documentation/3.3.21/html/](http://download.deegree.org/documentation/3.3.21/html/) 
+Documentation 3.3.x - [https://download.deegree.org/documentation/3.3.21/html/](https://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [http://download.deegree.org/documentation/3.4.0/html/](http://download.deegree.org/documentation/3.4.0/html/) 
+Documentation 3.4.x - [https://download.deegree.org/documentation/3.4.16/html/](https://download.deegree.org/documentation/3.4.16/html/) 
 
 ### deegree on Docker Hub
 
