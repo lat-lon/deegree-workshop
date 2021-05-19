@@ -383,7 +383,7 @@ to run the validation against.
 
 ### deegree WFS 2.0 Reference Implementation online:
 
-[http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4-RC3/services/wfs200?service=WFS&request=GetCapabilities)
+[http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities)
 
 ## Further testing with the INSPIRE Reference Validator
 
