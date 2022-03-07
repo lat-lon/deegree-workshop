@@ -356,9 +356,9 @@ WMS Capabilities: [http://localhost:8080/deegree-webservices/services/wms_ps?ser
 
 # Part 5 - Validate deegree Webservice ![image alt text](resources/image_11.png)
 
-Docker hub: [https://hub.docker.com/r/dstenger/teamengine-ets-all/](https://hub.docker.com/r/dstenger/teamengine-ets-all/)
+Docker hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
 
-Dockerfile: -
+Dockerfile: https://github.com/opengeospatial/teamengine-docker/
 
 ## TEAM Engine 4.10 with WFS ETS 1.26:
 
