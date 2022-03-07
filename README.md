@@ -492,7 +492,7 @@ Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/ev
 
 Documentation 3.3.x - [https://download.deegree.org/documentation/3.3.21/html/](https://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [https://download.deegree.org/documentation/3.4.16/html/](https://download.deegree.org/documentation/3.4.16/html/) 
+Documentation 3.4.x - [https://download.deegree.org/documentation/current/html/](https://download.deegree.org/documentation/3.4.26/html/) 
 
 ### deegree on Docker Hub
 
