@@ -55,7 +55,7 @@ To download the docker image from the docker registry hub.docker.com run:
 
 In case no Internet connection is available you can import a Docker image from a tar archive:
 
-    docker load -i <PATH_TO_USB_DRIVE>/**Docker/postgis.tar**
+    docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar
 
 To run the Docker container execute:
 
@@ -226,7 +226,7 @@ The deegree workspace bundle contains all required files. Follow the step-by-ste
 
     4. `~/.deegree/workspace-ps/jdbc/postgresDS_canonical.xml`
 
-4. Create the SQLFeatureStore configuration file
+4. Create the SQLFeatureStore configuration file using the deegree GMLTools CLI:
 
     5. `~/.deegree/workspace-ps/datasources/feature/ps_canonical.xml`
 
@@ -286,25 +286,19 @@ Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
 
 * deegree services console - [http://localhost:8080/deegree-webservices/](http://localhost:8080/deegree-webservices/) 
 
-    * in 3.4-RC7 the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
+    * in 3.4-RC7 and later the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
 
 * [deegree CLI utility tool](https://github.com/deegree/deegree3/tree/master/deegree-tools/deegree-tools-config) 
 
 # Part 3 - Import test data  ![image alt text](resources/image_7.png) 
 
-Docker hub: [https://hub.docker.com/r/tfr42/docker-soapui/](https://hub.docker.com/r/tfr42/docker-soapui/)
-
 Dockerfile: -
 
-_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_
-
-    docker pull tfr42/docker-soapui
-    xhost +
-    docker run --name soapui --rm -t -i -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}/.deegree:/var/opt --link deegree:deegree tfr42/docker-soapui '/opt/SoapUI/bin/soapui.sh'
+_**Hint**: Download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_, and unzip the package. Then start SoapUI using the start scripts or the links created by the installer. For a short intro use the [Getting Starting Guide](https://www.soapui.org/getting-started/).
 
 ## Setting custom properties
 
-Open the file `/var/opt/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
+Open the file `deegree3-workspace-ps/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
 
 ![image alt text](resources/image_8.png)
 
@@ -546,13 +540,15 @@ More information how to configure the etf-web application under [http://docs.etf
 
 ### Talks about Docker and GIS
 
-Video (german) - [https://www.fossgis.de/konferenz/2015/programm/events/847.de.html](https://www.fossgis.de/konferenz/2015/programm/events/847.de.html)
+Talk (german) - [FOSSGIS 2018 - Dockerize stuff - Postgis swarm and other geo boxes](https://www.fossgis-konferenz.de/2018/programm/event.php?id=5292)
 
-Slides (english) - [https://2016.foss4g-na.org/session/spatial-data-processing-docker](https://2016.foss4g-na.org/session/spatial-data-processing-docker)
+Video (german) - [Docker für den GIS-Einsatz](https://www.fossgis.de/konferenz/2015/programm/events/847.de.html)
+
+Slides (english) - [Spatial Data Processing with Docker](https://2016.foss4g-na.org/session/spatial-data-processing-docker.html)
 
 Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.de/pub/misc/openstreetmap/FOSS4G-2016/foss4g-2016-1146-an_overview_of_docker_images_for_geospatial_applications-hd.mp4)
 
-[https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
+Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
 
 ## deegree resources
 
@@ -566,7 +562,7 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 
 Documentation 3.3.x - [https://download.deegree.org/documentation/3.3.21/html/](https://download.deegree.org/documentation/3.3.21/html/) 
 
-Documentation 3.4.x - [https://download.deegree.org/documentation/3.4.16/html/](https://download.deegree.org/documentation/3.4.16/html/) 
+Documentation 3.4.x - [https://download.deegree.org/documentation/current/html/](https://download.deegree.org/documentation/3.4.26/html/) 
 
 ### deegree on Docker Hub
 
