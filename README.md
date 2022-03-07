@@ -222,19 +222,13 @@ Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
 
 # Part 3 - Import test data  ![image alt text](resources/image_7.png) 
 
-Docker hub: [https://hub.docker.com/r/tfr42/docker-soapui/](https://hub.docker.com/r/tfr42/docker-soapui/)
-
 Dockerfile: -
 
-_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_
-
-    docker pull tfr42/docker-soapui
-    xhost +
-    docker run --name soapui --rm -t -i -e DISPLAY=:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}/.deegree:/var/opt --link deegree:deegree tfr42/docker-soapui '/opt/SoapUI/bin/soapui.sh'
+_**Hint**: Download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_, and unzip the package. Then start SoapUI using the start scripts or the links created by the installer. For a short intro use the [Getting Starting Guide](https://www.soapui.org/getting-started/).
 
 ## Setting custom properties
 
-Open the file `/var/opt/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
+Open the file `deegree3-workspace-ps/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
 
 ![image alt text](resources/image_8.png)
 
