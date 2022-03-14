@@ -1,4 +1,4 @@
-# Quickstart Tutorial "INSPIRE Network Services with deegree on Docker"
+# Quickstart Tutorial "INSPIRE Network Services with deegree on Docker" (90 minutes)
 
 ## Agenda   
 
@@ -47,32 +47,28 @@ _**Attention:** On LINUX the docker daemon binds on a UNIX socket which is owned
 
 ![image alt text](resources/image_2.png) ![image alt text](resources/image_3.png)
 
-Docker Hub: [https://hub.docker.com/r/mdillon/postgis/](https://hub.docker.com/r/mdillon/postgis/)
+Docker Hub: [https://hub.docker.com/r/postgis/postgis/](https://hub.docker.com/r/postgis/postgis/)
 
 To download the docker image from the docker registry hub.docker.com run:
 
-    docker pull mdillon/postgis
+    docker pull postgis/postgis:9.6-2.5
 
-In case no Internet connection is available you can import a Docker image from a tar archive:
+To run the Docker container listening on port 5432 and using the password for user postgres execute:
 
-    docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar
-
-To run the Docker container execute:
-
-    docker run -d --name postgis -p 5432:5432 mdillon/postgis
+    docker run -d --name postgis -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgis/postgis:9.6-2.5
 
 _**Hint:** You can find an overview of basic Docker commands at the end of this tutorial under [Overview of basic docker commands](#overview-of-basic-docker-commands)._ 
 
 #### pgAdmin4 web console
 
-Docker Hub: [https://hub.docker.com/r/fenglc/pgadmin4/](https://hub.docker.com/r/fenglc/pgadmin4/)
+Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
 
-    docker pull fenglc/pgadmin4
-    docker run -d --name pgadmin4 -p 5050:5050 --link postgis:postgres fenglc/pgadmin4
+    docker pull dpage/pgadmin4
+    docker run -d --name pgadmin4 -p 5080:80 -e 'PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org' -e 'PGADMIN_DEFAULT_PASSWORD=admin' --link postgis:postgres dpage/pgadmin4
 
-Open in browser: [http://localhost:5050/browser/](http://localhost:5050/browser/)
+Open in browser: [http://localhost:5080/](http://localhost:5080/)
 
-Use the following credential to login:
+Use the following credential to login into pgAdmin:
 
 User: 		pgadmin4@pgadmin.org
 
@@ -80,13 +76,15 @@ Password: 	admin
 
 _**Hint**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as 192.168.99.100 as the  container IP instead of localhost!_
 
-#### Connection parameters for DBA
+#### Connection parameters for pgAdmin > Register > Server... > Connection
 
-Hostname: 	postgres
+Host name: 	postgres
 
 Port: 		5432
 
 User:		postgres
+
+Password:   postgres (as set in the docker environment variable `POSTGRES_PASSWORD` for the container postgis)
 
 ## ![image alt text](resources/image_5.png)eegree Webservices 
 
@@ -96,7 +94,7 @@ Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deeg
 
     docker pull deegree/deegree3-docker
 
-Now link the deegree container with the postgis container and ro run the container attached to the deegree log execute the command:
+Now link the deegree container with the postgis container and run the container attached to the deegree log with the command:
 
     docker run --name deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
 
@@ -104,37 +102,24 @@ Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:80
 
 After you have successfully tested the database connection you can stop the docker container with `CTRL+c`.
 
-### Useful commands to monitor the docker container
+Then stop and delete the docker container deegree before you continue with:
 
-* `docker logs -f deegree`	- follow the deegree console output
-
-* `docker attach deegree`	- attach to the deegree container
-    * You can detach from the container and leave it running with `CTRL-p CTRL-q`. Requires to pass `-it` option to the docker run command!
-    * You can stop the container with `CTRL+c`.	
-
-* `docker exec -it deegree '/bin/bash'` - opens a shell in the running deegree container. 
-    * Use command `exit` to disconnect from the container.
-
-* `docker stats deegree` 	- This will present the CPU utilization for the container, the memory used and total memory available to the container.
-
-* `docker network inspect bridge` 	- lists the IP for each container.
+    docker stop deegree
+    docker rm deegree
 
 # Part 2 - configure WFS 2.0 ![image alt text](resources/image_6.png)
 
 ## Start deegree docker container with local deegree workspace directory
 
-Download one of the deegree workspace bundle (as ZIP file) for the INSPIRE data themes:
+Download the deegree demo workspace bundle (as ZIP file) for the INSPIRE data theme protected sites:
 
 * Protected Sites:  	[deegree3-workspace-ps](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-ps)
 
-* Cadastral Parcels: 	[deegree3-workspace-cp](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-cp)
+* Download the ZIP file from https://github.com/lat-lon/deegree-workshop
 
-Create a new directory `.deegree` in the user home directory and copy all files into the `~/.deegree` directory. 
+* Unzip the file _deegree-workshop-X.zip_ to your local drive
 
-Stop and delete the docker container deegree before you continue with:
-
-    docker stop deegree
-    docker rm deegree
+* Create a new directory `.deegree` in the user's home directory and move the sub-directory `workspace-ps/` into the `~/.deegree` directory. 
 
 Start now a **new** container with mounted user home directory `~/.deegree`:
 
@@ -142,13 +127,15 @@ Start now a **new** container with mounted user home directory `~/.deegree`:
 
 Open the deegree services console: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices) 
 
+* Then select under "workspaces > available workspaces" the workspace _workspace_ps_ and start the workspace with "Start".
+
 ## Start deegree WFS serving INSPIRE data theme Protected Sites
 
 To configure a INSPIRE direct-access download service based on deegree WFS 2.0 serving harmonized data the following steps are needed:
 
 1. Create the database and schema with the provided SQL scripts using pgAdmin or use the shell script `scripts/setupDB.sh`
 
-2. Select and reload the workspace for Protected Sites in the deegree service console
+2. Select and reload the workspace for Protected Sites in the deegree service console (now all warnings should be gone!)
 
 Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) contains the following resources:
 
@@ -160,20 +147,20 @@ Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) 
 | `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
 | `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
 
-### Detailed description for Protected Sites with canonical database structure
+### Detailed description for Protected Sites with manual database setup
 
-The shell script `setupDB.sh` creates both, the canonical and BLOB database schema!
+The shell script `setupDB.sh` creates both, the canonical and BLOB database schema! In case you can't run the shell script execute the following scripts in pgAdmin:
 
-1. Create the database using pgAdmin
+1. Connect to the database server and open Query Tool in pgAdmin
 
-    1. As user postgres create user and database
+    1. As user postgres create user and database with:
         
         - `~/.deegree/ddl/01_create_deegree_user.sql`
         - `~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql`
-        - `~/.deegree/ddl/03_create_extension_postgis.sql`
         
-    2. As user deegree connect to ps_canonical database and create the schema with 
-    
+    2. As user deegree connect to _ps_canonical_ database and create the schema with 
+
+        - `~/.deegree/ddl/03_create_extension_postgis.sql`
         - `~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql`
 
 2. Now open the deegree service console and reload the workspace:
@@ -192,12 +179,13 @@ WFS Capabilities:
 
 1. Create the database using pgAdmin
 
-    1. As user postgres database
+    1. As user postgres create the database
 
         - `~/.deegree/ddl/ps-blob/create_ps_blob_db.sql`
 
     2. As user deegree connect to ps_blob database and create the schema with 
-    
+
+        - `~/.deegree/ddl/03_create_extension_postgis.sql`
         - `~/.deegree/ddl/ps-blob/04_create_ps_blob_schema.sql`
 
 2. Reload the workspace to activate the changes!
@@ -248,18 +236,6 @@ To send a WFS-T Insert action submit the test step "INSPIRE ProtectedSite > Tran
 
 Switch the "wfsEndpoint" property to the other endpoint and re-submit the WFS-T Insert request to insert the data also in the other database.
 
-## Import data with HALE
-
-1. Download and install HALE [http://www.esdi-community.eu/projects/hale](http://www.esdi-community.eu/projects/hale) 
-
-2. Download and unzip [http://grillmayer.eu/wp-content/uploads/2014/12/Protected_Sites_DS_Version_4_Example-1.zip](http://grillmayer.eu/wp-content/uploads/2014/12/Protected_Sites_DS_Version_4_Example-1.zip) 
-
-3. Import project "Protected_Sites_DS_Version_4_Example.hale" into HALE workbench
-
-4. Start the "Export transformed data" function and select “WFS-T” as destination using one of the WFS endpoints configured.
-
-_**Attention**: Importing large GML files may require more hardware resources. Please check [github issue #743](https://github.com/deegree/deegree3/issues/743) for further information._ 
-
 # Part 4 - Retrieve data ![image alt text](resources/image_10.png)
 
 Docker hub: [https://hub.docker.com/r/kartoza/qgis-desktop/](https://hub.docker.com/r/kartoza/qgis-desktop/)
@@ -290,10 +266,10 @@ Docker hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hu
 
 Dockerfile: https://github.com/opengeospatial/teamengine-docker/
 
-## TEAM Engine 4.10 with WFS ETS 1.26:
+## TEAM Engine 5.x with WFS ETS 1.x:
 
-    docker pull dstenger/teamengine-ets-all
-    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree dstenger/teamengine-ets-all
+    docker pull ogccite/teamengine-production
+    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree ogccite/teamengine-production
 
 Open in browser: [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
 
@@ -332,11 +308,30 @@ More information how to configure the etf-web application under [http://docs.etf
 
     * check if the docker daemon is running and use `sudo`
 
+* Can't pull docker image in case no Internet connection is available you can import a Docker image from a tar archive:
+
+    * `docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar`
+
 * Error while starting docker container - 
 
     * check system resources if memory is still available
+    * `docker stats deegree` 	- This will present the CPU utilization for the container, the memory used and total memory available to the container.
+    * Stop and remove the container with `docker stop deegree && docker rm deegree` and re-run the container
 
-    * Remove the container with docker rm and re-run the container
+* Check the deegree console output in case of errors -
+
+    * `docker logs -f deegree`
+
+* Attach to the deegree container when starting the container to execute commands inside of the container -
+ 
+    * `docker attach deegree`
+    * You can detach from the container and leave it running with `CTRL-p CTRL-q`. Requires to pass the `-it` option to the docker run command!
+    * You can stop the container with `CTRL+c`.	
+
+* To run commands inside of the container open a shell in the running deegree container - 
+    
+    * `docker exec -it deegree '/bin/bash'`
+    * Use command `exit` to disconnect from the container.
 
 * For more hints and tips check [https://docs.docker.com/toolbox/faqs/troubleshoot/](https://docs.docker.com/toolbox/faqs/troubleshoot/)
 
@@ -345,6 +340,8 @@ More information how to configure the etf-web application under [http://docs.etf
     * For Windows:  [https://docs.docker.com/docker-for-windows/troubleshoot/](https://docs.docker.com/docker-for-windows/troubleshoot/)
 
 * Can’t access the Docker container within Docker network then try the following
+
+    * `docker network inspect bridge` 	- lists the IP for each container.
 
     * `docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 inspirenet`
 
@@ -388,13 +385,13 @@ More information how to configure the etf-web application under [http://docs.etf
  
  * `docker pull`		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
  
- * `docker ps`		- List containers
+ * `docker ps`		    - List containers
  
-     * -a 		- Show all containers, incl. **stopped** containers
+     * -a 		        - Show all containers, incl. **stopped** containers
  
  * `docker network ls`	- List all networks
  
- * `docker run`		- Run a command in a **new** container
+ * `docker run`		    - Run a command in a **new** container
  
      * -d, --detach      	Run container in background and print container ID
  
@@ -432,15 +429,11 @@ More information how to configure the etf-web application under [http://docs.etf
  
  * `docker save`		- Save a docker image into a tar archive file
  
- * `docker rm` 		- Remove one or more containers
+ * `docker rm` 		    - Remove one or more containers
  
- * `docker rmi`		- Remove one or more images
+ * `docker rmi`		    - Remove one or more images
         
 # Links for further reading and resources
-
-### Complete Tutorial Bundle 
-
-[FOSSGIS Konference 2018_Workshop ZIP-Bundle](http://www.lat-lon.de/Download/20180322_FOSSGISConf2018_Workshop.zip)
 
 ## Tutorial resources and slides 
 
@@ -453,8 +446,6 @@ More information how to configure the etf-web application under [http://docs.etf
 - slides/07_TP_Validation-of-service-and-data.pdf
 
 ### Archive:
-
-[INSPIRE Conference 2017_Workshop ZIP-Bundle](http://www.lat-lon.de/Download/20170904_INSPIREConf2017_Workshop.zip)
 
 [FOSS4G 2016 Workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
 
