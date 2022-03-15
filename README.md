@@ -100,9 +100,10 @@ Now link the deegree container with the postgis container and run the container 
 
 Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
 
+Now select "connections > databases" and create a new database connection using "datasource" as type and "PostgreSQL (minimal)" as a template. Change the values for `url`, `username`, and `password` according to the setup of the database.
 After you have successfully tested the database connection you can stop the docker container with `CTRL+c`.
 
-Then stop and delete the docker container deegree before you continue with:
+Then stop and delete the docker container deegree before you continue:
 
     docker stop deegree
     docker rm deegree
@@ -137,7 +138,7 @@ To configure a INSPIRE direct-access download service based on deegree WFS 2.0 s
 
 2. Select and reload the workspace for Protected Sites in the deegree service console (now all warnings should be gone!)
 
-Each workspace bundle (deegree3-workspace-cp.zip and deegree3-workspace-ps.zip) contains the following resources:
+Each workspace bundle (deegree3-workspace-cp and deegree3-workspace-ps) contains the following resources:
 
 | Directory       | Content     | Documentation |
 | :-------------- | :---------- | :------------ |   
@@ -198,16 +199,6 @@ WFS Capabilities:
 
 [http://localhost:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities)
 
-### Supporting tools
-
-Tools to create the SQL DDL and the deegree SQLFeatureStore configuration files:
-
-* deegree services console - [http://localhost:8080/deegree-webservices/](http://localhost:8080/deegree-webservices/) 
-
-    * in 3.4-RC7 and later the wizard is broken (see [issue #471](https://github.com/deegree/deegree3/issues/471) and related issues) 
-
-* [deegree CLI utility tool](https://github.com/deegree/deegree3/tree/master/deegree-tools/deegree-tools-config) 
-
 # Part 3 - Import test data  ![image alt text](resources/image_7.png) 
 
 Dockerfile: -
@@ -238,27 +229,13 @@ Switch the "wfsEndpoint" property to the other endpoint and re-submit the WFS-T 
 
 # Part 4 - Retrieve data ![image alt text](resources/image_10.png)
 
-Docker hub: [https://hub.docker.com/r/kartoza/qgis-desktop/](https://hub.docker.com/r/kartoza/qgis-desktop/)
+Docker hub: [https://hub.docker.com/r/qgis/qgis/](https://hub.docker.com/r/qgis/qgis/)
 
-Dockerfile: [https://github.com/kartoza/docker-qgis-desktop](https://github.com/kartoza/docker-qgis-desktop)
+Dockerfile: -
 
-_**Hint**: This docker container requires X windows running on the host (LINUX or macOS are required!). For Windows download QGIS here: [http://download.qgis.org](http://download.qgis.org)_ 
+_**Hint**: Download QGIS for your operating system from [http://download.qgis.org](http://download.qgis.org) and install as documented._ 
 
-    docker pull kartoza/qgis-desktop
-
-QGIS 2.18:
-
-    xhost +
-    docker run --name gqis-desktop_2_18 -i -t -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:2.18.17 '/usr/bin/qgis'
-
-QGIS 2.18 (latest DEV):
-
-    xhost +
-    docker run --name gqis-desktop_master -i -t  -v /tmp/.X11-unix:/tmp/.X11-unix -v ${HOME}:/home/${USER} -e DISPLAY=unix:0 --link deegree:deegree --rm kartoza/qgis-desktop:latest '/usr/bin/qgis'
-
-WMS Endpoint for PS: [http://localhost:8080/deegree-webservices/services/wms_ps](http://localhost:8080/deegree-webservices/services/wms_ps) 
-
-WMS Capabilities: [http://localhost:8080/deegree-webservices/services/wms_ps?service=WMS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/wms_ps?service=WMS&request=GetCapabilities) 
+Create a new project and add the WMS 1.3.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wms_ps](http://localhost:8080/deegree-webservices/services/wms_ps) and the WFS 2.0.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wfs_ps_canonical](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical). 
 
 # Part 5 - Validate deegree Webservice ![image alt text](resources/image_11.png)
 
