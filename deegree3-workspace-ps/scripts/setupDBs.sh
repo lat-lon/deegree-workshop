@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Script to setup the ```INSPIRE``` databases The following arguments are supported (in this order!):
-#  * PORT (dfeault: 5432)
+#  * PORT (default: 5432)
 #  * HOST (default: localhost)
 #  * POSTGRES_USER (default: postgres)
 # Examples:
