@@ -1,114 +1,108 @@
-# Quickstart Tutorial "INSPIRE Network Services with deegree on Docker" (90 minutes)
+# Quickstart Tutorial "INSPIRE Network Services with deegree 3.5 on Docker" (90 minutes)
+
+[Online-Version (GitHub)](https://github.com/lat-lon/deegree-workshop/blob/main/README.md)
 
 ## Agenda   
 
-1. [Setup the Docker infrastructure](#part-1---)
+1. [Setup the Docker infrastructure](#setlink)
 
-2. [Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0](#part-2---configure-wfs-20-)
+2. [Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0](#setlink)
 
-3. [Import test data using deegree WFS-T interface](#part-3---import-test-data--)
+3. [Import test data using deegree WFS-T interface](#setlink)
 
-4. [Retrieve data with different clients](#part-4---retrieve-data-)
+4. [Retrieve data with different clients](#setlink)
 
-5. [Validate service and data](#part-5---validate-deegree-webservice-)
+5. [Validate service and data](#setlink)
 
-## Tutorial online
+---
 
-SELF-LINK: **[https://github.com/lat-lon/deegree-workshop/blob/nintyMinutesQuickTutorial/README.md](https://github.com/lat-lon/deegree-workshop/blob/nintyMinutesQuickTutorial/README.md)**  
+## 1. Setup the Docker infrastructure
 
-**[Link to all slides at the end of the document!](#tutorial-resources-and-slides)**
+![image alt text](resources/docker-logo-blue.svg)
 
+### 1.1 Install Docker
 
-# Part 1 - ![image alt text](resources/image_0.png)
+> **Info**: "Docker Desktop provides a user-friendly graphical interface that simplifies the management of containers and services. It includes Docker Engine as this is the core technology that powers Docker containers. Docker Desktop for Linux also comes with additional features like Docker Scout and Docker Extensions" [(Docker Inc. 2024)](https://docs.docker.com/desktop/install/linux-install/).
 
-## Install docker
+#### Docker Desktop
+ 
+* [Linux](https://docs.docker.com/desktop/install/linux-install/) (recommended)
+* [Windows](https://docs.docker.com/desktop/install/windows-install/)
+* [Mac](https://docs.docker.com/desktop/install/mac-install/)
 
-[7 minute tutorial how to install Docker Community Edition (CE)](https://docs.docker.com/install/) 
+#### Docker Engine
 
-On Ubuntu:
+* [Linux](https://docs.docker.com/engine/install/) (advanced)
 
-    sudo apt-get install docker-engine
+### 1.2 Set up a docker network:
 
-## Start docker daemon
+    docker network create -d bridge deegreenetwork
 
-    sudo service docker start
+> **Info**: A Docker network is a virtual network that allows containers to communicate with each other and with external networks.
 
-## Verify that docker is installed correctly
+### 1.2 Create a spatial database with PostgreSQL and PostGIS
 
-    docker run hello-world
-
-_**Attention:** On LINUX the docker daemon binds on a UNIX socket which is owned by the user root and other users can access it with sudo. For this reason, docker daemon always runs as the root user._
-
-## Get docker images and run docker infrastructure
-
-![image alt text](resources/image_1.png)
-
-### Spatial Database 
-
-![image alt text](resources/image_2.png) ![image alt text](resources/image_3.png)
+![image alt text](resources/postgresql-horizontal.svg) ![image alt text](resources/image_3.png)
 
 Docker Hub: [https://hub.docker.com/r/postgis/postgis/](https://hub.docker.com/r/postgis/postgis/)
 
-To download the docker image from the docker registry hub.docker.com run:
+To download the Docker image from the docker registry hub.docker.com run:
 
-    docker pull postgis/postgis:9.6-2.5
+    docker pull postgis/postgis:16-3.4
 
 To run the Docker container listening on port 5432 and using the password for user postgres execute:
 
-    docker run -d --name postgis -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgis/postgis:9.6-2.5
+    docker run -d --name postgis --network="deegreenetwork" -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgis/postgis:16-3.4
 
-_**Hint:** You can find an overview of basic Docker commands at the end of this tutorial under [Overview of basic docker commands](#overview-of-basic-docker-commands)._ 
+>**Info:** You can find an overview of basic Docker commands at the end of this tutorial under: [Overview of basic docker commands](#overview-of-basic-docker-commands). 
 
-#### pgAdmin4 web console
+### 1.3 Connect the database to the pgAdmin4 web console
 
 Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
 
-    docker pull dpage/pgadmin4
-    docker run -d --name pgadmin4 -p 5080:80 -e 'PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org' -e 'PGADMIN_DEFAULT_PASSWORD=admin' --link postgis:postgres dpage/pgadmin4
+    docker pull dpage/pgadmin4:8.9
+    docker run -d --name pgadmin4 --network="deegreenetwork" -p 5080:80 -e 'PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org' -e 'PGADMIN_DEFAULT_PASSWORD=admin' dpage/pgadmin4:8.9
 
 Open in browser: [http://localhost:5080/](http://localhost:5080/)
 
 Use the following credential to login into pgAdmin:
 
-User: 		pgadmin4@pgadmin.org
+* **User**: pgadmin4@pgadmin.org
+* **Password**: admin
 
-Password: 	admin
+> **Info**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as '172.17.0.2' as the container IP instead of 'localhost'!
 
-_**Hint**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as 192.168.99.100 as the  container IP instead of localhost!_
+#### Connection parameters for pgAdmin4 > Register > Server... > Connection
 
-#### Connection parameters for pgAdmin > Register > Server... > Connection
+* **Host name**: postgres
+* **Port**: 5432
+* **User**:	postgres
+* **Password**: postgres
 
-Host name: 	postgres
+>**Info**: The password is 'postgres', since the previously set docker environment variable for the container postgis is `POSTGRES_PASSWORD=postgres`!
 
-Port: 		5432
-
-User:		postgres
-
-Password:   postgres (as set in the docker environment variable `POSTGRES_PASSWORD` for the container postgis)
-
-## ![image alt text](resources/image_5.png)eegree Webservices 
+## 1.4 Set up a deegree webservices docker container
+![image alt text](resources/deegree_logo.svg)
 
 Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
-
 Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
 
-    docker pull deegree/deegree3-docker
+    docker pull deegree/deegree3-docker:3.5.8
 
 Now link the deegree container with the postgis container and run the container attached to the deegree log with the command:
 
-    docker run --name deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
+    docker run --name deegree -p 8080:8080 --network="deegreenetwork" deegree/deegree3-docker:3.5.8
 
 Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
 
 Now select "connections > databases" and create a new database connection using "datasource" as type and "PostgreSQL (minimal)" as a template. Change the values for `url`, `username`, and `password` according to the setup of the database.
-After you have successfully tested the database connection you can stop the docker container with `CTRL+c`.
 
 Then stop and delete the docker container deegree before you continue:
 
     docker stop deegree
     docker rm deegree
 
-# Part 2 - configure WFS 2.0 ![image alt text](resources/image_6.png)
+# Part 2 - configure WFS 2.0
 
 ## Start deegree docker container with local deegree workspace directory
 
