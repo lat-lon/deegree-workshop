@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeatureLayers xmlns="http://www.deegree.org/layers/feature"
+  xmlns:s="http://www.deegree.org/metadata/spatial"
+  xmlns:l="http://www.deegree.org/layers/base"
+  xmlns:d="http://www.deegree.org/metadata/description"
+  xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
+  xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.5/layers/feature/feature.xsd">
+  <FeatureStoreId>INSPIRE_ProtectedSites_WMS</FeatureStoreId>
+  <FeatureLayer>
+    <FeatureType>ps:ProtectedSite</FeatureType>
+    <Filter>
+      <ogc:Filter>        <!-- Filterregel -->
+        <ogc:PropertyIsEqualTo>
+          <ogc:PropertyName>ps:designation</ogc:PropertyName>
+          <ogc:Literal>http://registry.gdi-de.org/codelist/de.vdl-denkmalpflege/GermanMonumentsRecordDesignationValue/baudenkmal</ogc:Literal>
+        </ogc:PropertyIsEqualTo>
+      </ogc:Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesArchitecturalMonument</l:Name>
+    <d:Title>Baudenkmal</d:Title>
+    <d:Abstract>Bauliche Anlage oder Teile davon aus vergangener Zeit.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>
+    <FeatureType>ps:ProtectedSite</FeatureType>
+    <Filter>
+      <ogc:Filter>        <!-- Filterregel -->
+        <ogc:PropertyIsEqualTo>
+          <ogc:PropertyName>ps:designation</ogc:PropertyName>
+          <ogc:Literal>http://registry.gdi-de.org/codelist/de.vdl-denkmalpflege/GermanMonumentsRecordDesignationValue/archaeologischesDenkmal</ogc:Literal>
+        </ogc:PropertyIsEqualTo>
+      </ogc:Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesArchaeologicalSite</l:Name>
+    <d:Title>archaeologisches Denkmal</d:Title>
+    <d:Abstract>Bewegliches oder unbewegliches Denkmal, das sich im Boden befindet oder befand und in der Regel aus vor- oder frühgeschichtlicher Zeit stammt.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>
+    <FeatureType>ps:ProtectedSite</FeatureType>
+    <Filter>
+      <ogc:Filter>        <!-- Filterregel -->
+        <ogc:PropertyIsEqualTo>
+          <ogc:PropertyName>ps:designation</ogc:PropertyName>
+          <ogc:Literal>http://registry.gdi-de.org/codelist/de.vdl-denkmalpflege/GermanMonumentsRecordDesignationValue/grabungsschutzgebiet</ogc:Literal>
+        </ogc:PropertyIsEqualTo>
+      </ogc:Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesArcheologicalReserve</l:Name>
+    <d:Title>Grabungsschutzgebiet</d:Title>
+    <d:Abstract>Schutzgebiet auf dem alle Arbeiten, die ein Bodendenkmal gefährden könnten, einer Erlaubnis bedürfen.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+</FeatureLayers>

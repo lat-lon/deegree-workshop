@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Themes xmlns="http://www.deegree.org/themes/standard"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:d="http://www.deegree.org/metadata/description"
+  xmlns:s="http://www.deegree.org/metadata/spatial" xsi:schemaLocation="http://www.deegree.org/themes/standard https://schemas.deegree.org/core/3.5/themes/themes.xsd">
+
+  <LayerStoreId>ps.ProtectedSites</LayerStoreId>
+  <LayerStoreId>ps.ProtectedSites.bfn</LayerStoreId>
+  <LayerStoreId>ps.ProtectedSites.vdl</LayerStoreId>
+
+  <Theme>
+    <d:Title>INSPIRE SL Schutzgebiete</d:Title>
+    <d:Abstract>Gebiete, die auf Grundlage eines Rechtsaktes auf internationaler, EU- oder nationalstaatlicher Ebene geschaffen wurden oder verwaltet werden, um bestimmte fachspezifische Schutzziele zu erreichen.</d:Abstract>
+    <d:Keywords>
+      <d:Keyword>Schutzgebiete</d:Keyword>
+      <d:Keyword>Protected Sites</d:Keyword>
+    </d:Keywords>
+    <s:Envelope>
+      <s:LowerCorner>6.355789 49.112026</s:LowerCorner>
+      <s:UpperCorner>7.404585 49.639410</s:UpperCorner>
+    </s:Envelope>
+    <s:CRS>
+      EPSG:25832 
+      EPSG:4326 
+      EPSG:4258 
+      EPSG:3857 
+      EPSG:3035 
+      EPSG:25833
+    </s:CRS>
+
+    <Theme>
+      <Identifier>PS.ProtectedSitesNaturConservation</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - biologischen Vielfalt</d:Title>
+      <d:Abstract>Das Schutzgebiet wird zur Erhaltung der biologischen Vielfalt geschützt.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>biologischen Vielfalt</d:Keyword>
+        <d:Keyword>Natur Conservation</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesNatureConservation</Layer>
+    </Theme>
+
+    <Theme>
+      <Identifier>PS.ProtectedSitesArchaeological</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - Archaeologie</d:Title>
+      <d:Abstract>Das Schutzgebiet wird zur Erhaltung des archaeologischen Erbes geschützt.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>Archaeologie</d:Keyword>
+        <d:Keyword>Archaeological</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesArchaeological</Layer>
+    </Theme>
+
+    <Theme>
+      <Identifier>PS.ProtectedSitesCultural</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - Kulturell</d:Title>
+      <d:Abstract>Das Schutzgebiet wird zur Erhaltung des kulturellen Erbes geschützt.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>Erhaltung</d:Keyword>
+        <d:Keyword>Conservation</d:Keyword>
+        <d:Keyword>Kultur</d:Keyword>
+        <d:Keyword>culture</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesCultural</Layer>
+    </Theme>
+
+    <Theme>
+      <Identifier>PS.ProtectedSitesLandscape</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - Eigenarten der Landschaft</d:Title>
+      <d:Abstract>Das Schutzgebiet wird zur Erhaltung der Eigenarten der Landschaft geschützt.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>Eigenarten der Landschaft</d:Keyword>
+        <d:Keyword>Landscape</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesLandscape</Layer>
+    </Theme>
+
+    <Theme>
+      <Identifier>PS.ProtectedSitesIUCN</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - IUCN</d:Title>
+      <d:Abstract>Dieser Layer visualisiert die saarländischen nach dem Klassifikationsschema der Internationalen Naturschutzunion klassifizierten Schutzgebiete.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>Internationale Naturschutzunion</d:Keyword>
+        <d:Keyword>IUCN</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesIUCN</Layer>
+      <!--Theme>
+            <Identifier>PS.ProtectedSitesStrictNatureReserve</Identifier>
+            <d:Title>INS.SL.PS Schutzgebiete - Strenges Naturreservat</d:Title>
+          <d:Abstract>Die Schutzgebiete sind gemäß der IUCN-Kategorisierung als Strenge Naturreservate eingestuft.</d:Abstract>
+            <d:Keywords>
+              <d:Keyword>Strenges Naturreservat</d:Keyword>
+              <d:Keyword>Strict Nature Reserve</d:Keyword>
+              <d:Keyword>Schutzgebiete</d:Keyword>
+              <d:Keyword>Protected Sites</d:Keyword>
+            </d:Keywords>  
+            <s:CRS>
+              EPSG:25832 
+              EPSG:4326 
+              EPSG:4258 
+              EPSG:3857 
+              EPSG:3035 
+              EPSG:25833
+            </s:CRS>
+            <Layer>ps.ProtectedSitesStrictNatureReserve</Layer>
+        </Theme-->
+      <Theme>
+        <Identifier>PS.ProtectedSitesProtectedLandscapeOrSeascape</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Geschützte Landschaft/Geschütztes marines Gebiet</d:Title>
+        <d:Abstract>Die Schutzgebiete sind gemäß der IUCN-Kategorisierung als Geschützte Landschaften/Geschützte marine Gebiete eingestuft.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Geschützte Landschaft</d:Keyword>
+          <d:Keyword>Geschütztes marines Gebiet</d:Keyword>
+          <d:Keyword>Protected Landscape Or Seascape</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+            EPSG:25832 
+            EPSG:4326 
+            EPSG:4258 
+            EPSG:3857 
+            EPSG:3035 
+            EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesProtectedLandscapeOrSeascape</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSitesWildernessArea</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Wildnisgebiet</d:Title>        <!--Google Übersetzer-->
+        <d:Abstract>Das Schutzgebiet ist gemäß dem IUCN-Klassifizierungsschema als Wildnisgebiet klassifiziert.</d:Abstract>        <!--Google Übersetzer-->
+        <d:Keywords>
+          <d:Keyword>Wildnisgebiet</d:Keyword>
+          <d:Keyword>Wilderness Area</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+            EPSG:25832 
+            EPSG:4326 
+            EPSG:4258 
+            EPSG:3857 
+            EPSG:3035 
+            EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesWildernessArea</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSitesHabitatSpeciesManagementArea</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Bewirtschaftungsgebiet für Lebensraumarten</d:Title>        <!--Google Übersetzer-->
+        <d:Abstract>Das Schutzgebiet ist gemäß dem IUCN-Klassifizierungsschema als Lebensraumartenmanagementgebiet eingestuft.</d:Abstract>        <!--Google Übersetzer-->
+        <d:Keywords>
+          <d:Keyword>Bewirtschaftungsgebiet für Lebensraumarten</d:Keyword>
+          <d:Keyword>Habitat Species Management Area</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+            EPSG:25832 
+            EPSG:4326 
+            EPSG:4258 
+            EPSG:3857 
+            EPSG:3035 
+            EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesHabitatSpeciesManagementArea</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSitesNaturalMonument</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Naturdenkmal</d:Title>
+        <d:Abstract>Die Schutzgebiete sind  gemäß der IUCN-Kategorisierung als Naturdenkmäler eingestuft.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Naturdenkmal</d:Keyword>
+          <d:Keyword>Natural Monument</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+            EPSG:25832 
+            EPSG:4326 
+            EPSG:4258 
+            EPSG:3857 
+            EPSG:3035 
+            EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesNaturalMonument</Layer>
+      </Theme>
+    </Theme>
+    <Theme>
+      <Identifier>PS.ProtectedSitesUNESCOManAndBiosphereProgramme</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - UNESCO-Programm Der Mensch und die Biosphäre</d:Title>
+      <d:Abstract>Die Schutzgebiete verfügen über eine Bezeichnung gemäß dem UNESCO-Programm Der Mensch und die Biosphäre.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>UNESCO-Programm Der Mensch und die Biosphäre</d:Keyword>
+        <d:Keyword>UNESCOManAndBiosphereProgramme</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesUNESCOManAndBiosphereProgramme</Layer>
+      <Theme>
+        <Identifier>PS.ProtectedSitesBiosphereReserve</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Biosphärenreservat</d:Title>
+        <d:Abstract>Die Schutzgebiete werden gemäß dem Programm Der Mensch und die Biosphäre als Biosphärenreservate bezeichnet.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Biosphärenreservat</d:Keyword>
+          <d:Keyword>Biosphere Reserve</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+          EPSG:25832 
+          EPSG:4326 
+          EPSG:4258 
+          EPSG:3857 
+          EPSG:3035 
+          EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesBiosphereReserve</Layer>
+      </Theme>
+    </Theme>
+    <Theme>
+      <Identifier>PS.ProtectedSitesNationalMonumentsRecord</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - National Monuments Record</d:Title>
+      <d:Abstract>Das Schutzgebiet verfügt über eine Klassifikation gemäß dem Klassifikationssystem des National Monuments Record.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>National Monuments Record</d:Keyword>
+        <d:Keyword>NationalMonumentsRecord</d:Keyword>
+        <d:Keyword>Erhaltung</d:Keyword>
+        <d:Keyword>Conservation</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesNationalMonumentsRecord</Layer>
+      <Theme>
+        <Identifier>PS.ProtectedSitesMonument</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Monument</d:Title>
+        <d:Abstract>Das Schutzgebiet ist gemäß dem Klassifikationssystem des National Monuments Record als Denkmal mit einer nicht kategorisierten Form (monument with some unclassified form) eingestuft.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>National Monuments Record</d:Keyword>
+          <d:Keyword>NationalMonumentsRecord</d:Keyword>
+          <d:Keyword>Erhaltung</d:Keyword>
+          <d:Keyword>Conservation</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+          EPSG:25832 
+          EPSG:4326 
+          EPSG:4258 
+          EPSG:3857 
+          EPSG:3035 
+          EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesMonument</Layer>
+      </Theme>
+    </Theme>
+    <Theme>
+      <Identifier>PS.ProtectedSitesNatura2000</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - Natura2000</d:Title>
+      <d:Abstract>Die Schutzgebiete verfügen über eine Bezeichnung gemäß der Habitat-Richtlinie (92/43/EWG) oder der Vogelschutzrichtlinie (79/409/EWG).</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>natura2000</d:Keyword>
+        <d:Keyword>Habitatschutz</d:Keyword>
+        <d:Keyword>Vogelschutz</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Layer>ps.ProtectedSitesNatura2000</Layer>
+      <Theme>
+        <Identifier>PS.ProtectedSitesSpecialProtectionArea</Identifier>
+        <d:Title>INS.SL.PS Schutzgebiete - Besonderes Schutzgebiet</d:Title>
+        <d:Abstract>Die Schutzgebiete werden gemäß Natura 2000 als besonderes Schutzgebiet (SPA, Special Protection Area) bezeichnet.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Besonderes Schutzgebiet</d:Keyword>
+          <d:Keyword>Special Protection Area</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesSpecialProtectionArea</Layer>
+      </Theme>
+      <!--Theme>
+        <Identifier>PS.ProtectedSitesProposedSpecialProtectionArea</Identifier>
+        <d:Title>Schutzgebiete - Besonderes Schutzgebiet Vorschlag</d:Title>
+        <d:Abstract>Die Schutzgebiete werden gemäß Natura 2000 als besonderes Schutzgebiet (SPA, Special Protection Area) vorgeschlagen.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Besonderes Schutzgebiet Vorschlag</d:Keyword>
+          <d:Keyword>Proposed Special Protection Area</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>  
+        <s:CRS>
+          EPSG:25832 
+          EPSG:4326 
+          EPSG:4258 
+          EPSG:3857 
+          EPSG:3035 
+          EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesproposedSpecialProtectionArea</Layer>
+      </Theme-->
+    </Theme>
+    <Theme>
+      <Identifier>PS.ProtectedSitesGermanMonumentsRecordDesignation</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - Deutsche Denkmallisten</d:Title>
+      <d:Abstract>Die Schutzgebiete nach den deutschen Schutzgebietstypen unter Berücksichtigung des BNatschG.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>Deutsche Denkmallisten</d:Keyword>
+        <d:Keyword>Baudenkmal</d:Keyword>
+        <d:Keyword>archaeologisches Denkmal</d:Keyword>
+        <d:Keyword>Grabungsschutzgebiet</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Theme>
+        <Identifier>PS.ProtectedSitesArchitecturalMonument</Identifier>
+        <d:Title>Baudenkmal</d:Title>
+        <d:Abstract>Bauliche Anlage oder Teile davon aus vergangener Zeit.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>architectural monument</d:Keyword>
+          <d:Keyword>Baudenkmal</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesArchitecturalMonument</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSitesArchaeologicalSite</Identifier>
+        <d:Title>archaeologisches Denkmal</d:Title>
+        <d:Abstract>Bewegliches oder unbewegliches Denkmal, das sich im Boden befindet oder befand und in der Regel aus vor- oder frühgeschichtlicher Zeit stammt.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>archaeological site</d:Keyword>
+          <d:Keyword>archaeologisches Denkmal</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesArchaeologicalSite</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSitesArcheologicalReserve</Identifier>
+        <d:Title>Grabungsschutzgebiet</d:Title>
+        <d:Abstract>Schutzgebiet auf dem alle Arbeiten, die ein Bodendenkmal gefährden könnten, einer Erlaubnis bedürfen.</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>archeological reserve</d:Keyword>
+          <d:Keyword>Grabungsschutzgebiet</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSitesArcheologicalReserve</Layer>
+      </Theme>
+    </Theme>
+    <Theme>
+      <Identifier>PS.ProtectedSitesSchutzgebietstypenDeutschland</Identifier>
+      <d:Title>INS.SL.PS Schutzgebiete - SchutzgebietstypenDeutschland</d:Title>
+      <d:Abstract>Die Schutzgebiete nach den deutschen Schutzgebietstypen unter Berücksichtigung des BNatschG.</d:Abstract>
+      <d:Keywords>
+        <d:Keyword>SchutzgebietstypenDeutschland</d:Keyword>
+        <d:Keyword>Biosphärenreservat</d:Keyword>
+        <d:Keyword>FFH-Gebiete</d:Keyword>
+        <d:Keyword>Naturdenkmäler</d:Keyword>
+        <d:Keyword>Naturschutzgebiet</d:Keyword>
+        <d:Keyword>Landschaftsschutzgebiete</d:Keyword>
+        <d:Keyword>Vogelschutzgebiete</d:Keyword>
+        <d:Keyword>Schutzgebiete</d:Keyword>
+        <d:Keyword>Protected Sites</d:Keyword>
+      </d:Keywords>
+      <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+      </s:CRS>
+      <Theme>
+        <Identifier>PS.ProtectedSites.BR</Identifier>
+        <d:Title>Biosphärenreservat</d:Title>
+        <d:Abstract>Gebiete nach §25 BNatSchG</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Biosphärenreservat</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.BR</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSites.FFH</Identifier>
+        <d:Title>FFH-Gebiet</d:Title>
+        <d:Abstract>Gebiete nach Fauna-Flora-Habitat-Richtlinie (92/43/EWG)</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>FFH-Gebiet</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.FFH</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSites.LSG</Identifier>
+        <d:Title>Landschaftsschutzgebiet</d:Title>
+        <d:Abstract>Gebiete nach §26 BNatSchG</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Landschaftsschutzgebiet</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.LSG</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSites.ND</Identifier>
+        <d:Title>Naturdenkmäler</d:Title>
+        <d:Abstract>Gebiete nach §28 BNatSchG</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Naturdenkmäler</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.ND</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSites.NSG</Identifier>
+        <d:Title>Naturschutzgebiet</d:Title>
+        <d:Abstract>Gebiete nach §23 BNatSchG</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Naturschutzgebiet</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.NSG</Layer>
+      </Theme>
+      <Theme>
+        <Identifier>PS.ProtectedSites.VSG</Identifier>
+        <d:Title>Vogelschutzgebiet</d:Title>
+        <d:Abstract>Gebiete nach §23 BNatSchG</d:Abstract>
+        <d:Keywords>
+          <d:Keyword>Vogelschutzgebiet</d:Keyword>
+          <d:Keyword>Schutzgebiete</d:Keyword>
+          <d:Keyword>Protected Sites</d:Keyword>
+        </d:Keywords>
+        <s:CRS>
+        EPSG:25832 
+        EPSG:4326 
+        EPSG:4258 
+        EPSG:3857 
+        EPSG:3035 
+        EPSG:25833
+        </s:CRS>
+        <Layer>ps.ProtectedSites.VSG</Layer>
+      </Theme>
+    </Theme>
+  </Theme>
+</Themes>
+

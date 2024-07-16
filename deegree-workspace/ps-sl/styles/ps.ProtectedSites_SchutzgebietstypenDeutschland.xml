@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sld:StyledLayerDescriptor version="1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
+    xmlns:sld="http://www.opengis.net/sld"
+    xmlns:se="http://www.opengis.net/se"
+    xmlns:ogc="http://www.opengis.net/ogc"
+    xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/StyledLayerDescriptor.xsd">
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.OSPAR</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>OSPAR-Gebiet</se:Title>
+                        <se:Abstract>
+                    Gebiete nach dem Übereinkommen zum Schutz der Meeresumwelt des Nordost-Atlantiks (Oslo-Paris Konvention)
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/OSPAR</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:SvgParameter name="fill">#cc462c</se:SvgParameter>
+                            <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
+                        </se:Fill>
+                        <se:Stroke>
+                            <se:SvgParameter name="stroke">#cc462c</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.HELCOM</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>HELCOM-Gebiet</se:Title>
+                        <se:Abstract>
+                    Gebiete nach dem Übereinkommen zum Schutz der Meeresumwelt des Ostseegebietes (Neue Helsinki-Konvention)
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/HELCOM</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:SvgParameter name="fill">#ccf000</se:SvgParameter>
+                            <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
+                        </se:Fill>
+                        <se:Stroke>
+                            <se:SvgParameter name="stroke">#ccf000</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.NSG</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Naturschutzgebiet</se:Title>
+                        <se:Abstract>
+                                Naturschutzgebiet nach §23 BNatSchG 
+                        </se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>                        
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/NSG</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:SvgParameter name="fill">#e60000</se:SvgParameter>
+                            <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
+                        </se:Fill>
+                        <!-- <se:Stroke>
+                                <se:SvgParameter name="stroke">#e60000</se:SvgParameter>
+                                <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                                <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                                <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                            </se:Stroke> -->
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.ND</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>                    <!-- hier müssen eventuel Punkte, Linien hin eingefügt werden (Stylisierung?)-->
+                        <se:Title>Naturdenkmal</se:Title>
+                    	<se:Abstract>
+                     	Naturdenkmal nach §28 BNatSchG 
+                    	</se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/ND</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:SvgParameter name="fill">#a8a800</se:SvgParameter>
+                            <se:SvgParameter name="fill-opacity">1</se:SvgParameter>
+                        </se:Fill>
+                        <se:Stroke>
+                            <se:SvgParameter name="stroke">#4d7400</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.NLP</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Nationalpark</se:Title>
+                        <se:Abstract>
+                                Nationalpark nach §24 BNatSchG 
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/NLP</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/lila_punkt.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>8</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#00a886"-->
+                            <se:SvgParameter name="stroke">#8400A8</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.RAM</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Ramsar-Gebiet</se:Title>
+                        <se:Abstract>
+                        Gebiete nach der Ramsar-Konvention zum Schutz und der nachhaltige Nutzung (&quot; wise use &quot;) von Feuchtgebieten
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/RAM</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/mittelgruen_punkt.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>8</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#00a886"-->
+                            <se:SvgParameter name="stroke">#00a886</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.FFH</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Fauna-Flora-Habitat-Gebiet</se:Title>
+                        <se:Abstract>
+                            Gebiet nach der Fauna-Flora-Habitat-Richtlinie (92-43-EWG)
+                        </se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/FFH</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/rotbraun_diagonal_luro.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>16</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#9F4338"-->
+                            <se:SvgParameter name="stroke">#9F4338</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.VSG</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Vogelschutzgebiet</se:Title>
+                        <se:Abstract>
+                         Europäische Vogelschutzgebiete nach Vogelschutz-Richtlinie (2009-147-EG) 
+                    	</se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>                       
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/VSG</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/tuerkis_diagonal_loru.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>16</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#007479"-->
+                            <se:SvgParameter name="stroke">#007479</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.BR</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Biosphärenreservat</se:Title>
+                        <se:Abstract>
+                        Biosphärenreservat nach §25 BNatSchG 
+                        </se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>                    
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/BR</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/gelb_horizontal.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>18</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#fff000"-->
+                            <se:SvgParameter name="stroke">#FFFF00</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.MAB</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>MAB-Gebiet</se:Title>
+                        <se:Abstract>
+                    Gebiete nach dem UNESCO-Programm &quot; Der Mensch und die Biosphäre &quot; 
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/MAB</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/gelb_vertikal.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>18</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#fff000"-->
+                            <se:SvgParameter name="stroke">#FFFF00</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.NRP</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Naturpark</se:Title>
+                        <se:Abstract>
+                             Naturpark nach §27 BNatSchG
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/NRP</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/gruen_vertikal.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>18</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <se:SvgParameter name="stroke">#CDF57A</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.LSG</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Landschaftsschutzgebiet</se:Title>
+                        <se:Abstract>
+                         Landschaftsschutzgebiet nach §26 BNatSchG
+                        </se:Abstract>
+                    </se:Description>
+                    <!--ogc:Filter>>
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/LSG</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter-->
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/gruen_punkt.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>8</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#4cd200"-->
+                            <se:SvgParameter name="stroke">#4CD200</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+    <sld:NamedLayer>
+        <se:Name>PS.ProtectedSite.NNM</se:Name>
+        <sld:UserStyle>
+            <se:Name>inspire_common:PS.DE</se:Name>
+            <se:FeatureTypeStyle>
+				<se:FeatureTypeName>ps:ProtectedSite</se:FeatureTypeName>
+                <se:Rule>
+                    <se:Description>
+                        <se:Title>Nationales Naturmonument</se:Title>
+                        <se:Abstract>
+                             Nationale Naturmonument nach §24 BNatSchG 
+                        </se:Abstract>
+                    </se:Description>
+                    <ogc:Filter>                        <!-- Filterregel -->
+                        <ogc:PropertyIsEqualTo>
+                            <ogc:PropertyName>designation</ogc:PropertyName>
+                            <ogc:Literal>http://registry.gdi-de.org/codelist/de.bund.bfn/SchutzgebietstypenDeutschland/NNM</ogc:Literal>
+                        </ogc:PropertyIsEqualTo>
+                    </ogc:Filter>
+                    <se:PolygonSymbolizer>
+                        <se:Fill>
+                            <se:GraphicFill>
+                                <se:Graphic>
+                                    <se:ExternalGraphic>
+                                        <se:OnlineResource xlink:type="simple" xlink:href="../data/signatures/BFN_PS/rosa_gekreuzt.png"/>
+                                        <se:Format>image/png</se:Format>
+                                    </se:ExternalGraphic>
+                                    <se:Size>16</se:Size>
+                                </se:Graphic>
+                            </se:GraphicFill>
+                        </se:Fill>
+                        <se:Stroke>
+                            <!-- fill states polygons boundary with RGB color "#FF00C5"-->
+                            <se:SvgParameter name="stroke">#FF00C5</se:SvgParameter>
+                            <se:SvgParameter name="stroke-opacity">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-width">1</se:SvgParameter>
+                            <se:SvgParameter name="stroke-linejoin">round</se:SvgParameter>
+                        </se:Stroke>
+                    </se:PolygonSymbolizer>
+                </se:Rule>
+            </se:FeatureTypeStyle>
+        </sld:UserStyle>
+    </sld:NamedLayer>
+</sld:StyledLayerDescriptor>

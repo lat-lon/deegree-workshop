@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DataSourceConnectionProvider xmlns="http://www.deegree.org/connectionprovider/datasource"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/connectionprovider/datasource https://schemas.deegree.org/core/3.5/connectionprovider/datasource/datasource.xsd">
+
+  <!-- Creation / lookup of javax.sql.DataSource instance -->
+  <DataSource javaClass="org.apache.commons.dbcp2.BasicDataSource" destroyMethod="close"/>
+
+  <!-- Configuration of DataSource properties -->
+  <Property name="driverClassName" value="org.postgresql.Driver"/>
+  <Property name="url" value="jdbc:postgresql://postgres_database:5432/inspire"/> <!--1-->
+  <Property name="username" value="postgres"/> <!--2-->
+  <Property name="password" value="postgres"/> <!--3-->
+  <Property name="initialSize" value="5"/>
+  <Property name="maxTotal" value="10"/>
+  <Property name="maxIdle" value="5"/>
+  <Property name="maxWaitMillis" value="5000"/>
+  <Property name="testOnReturn" value="true"/>
+  <Property name="testOnBorrow" value="true"/>
+  <Property name="validationQuery" value="select 1"/>
+  <Property name="poolPreparedStatements" value="true" />
+  <!--Property name="defaultTransactionIsolation" value="NONE"/ -->
+  <Property name="defaultReadOnly" value="false"/>
+  <Property name="removeAbandonedOnMaintenance" value="true"/>
+  <Property name="removeAbandonedOnBorrow" value="true"/>
+
+</DataSourceConnectionProvider>

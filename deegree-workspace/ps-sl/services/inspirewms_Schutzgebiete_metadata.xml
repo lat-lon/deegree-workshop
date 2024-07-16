@@ -1,0 +1,188 @@
+<deegreeServicesMetadata xmlns="http://www.deegree.org/services/metadata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/metadata https://schemas.deegree.org/core/3.5/services/metadata/metadata.xsd">
+  <ServiceIdentification>
+    <Title>INSPIRE-WMS SL Schutzgebiete</Title>
+    <Abstract>Dieser Dienst stellt für das INSPIRE-Thema Schutzgebiete aus den Geofachdaten umgesetzte Daten bereit.</Abstract>
+    <Keywords>
+      <Keyword>Geofachdaten</Keyword>
+      <Keyword>WMS</Keyword>
+      <Keyword>SL</Keyword>
+      <Keyword>Saarland</Keyword>
+      <!--Keyword>inspireidentifiziert</Keyword-->
+      <Keyword>infoMapAccessService</Keyword>
+      <Keyword>Schutzgebiete</Keyword>
+      <Keyword>Naturschutz</Keyword>
+      <Keyword>Naturschutzgebiet</Keyword>
+      <Keyword>Umwelt</Keyword>
+    </Keywords>
+    <Fees>Keine</Fees>
+    <AccessConstraints>Alle Nutzungsarten sind frei, aber grundsätzlich wird nicht auf das Urheberrecht verzichtet.</AccessConstraints>
+  </ServiceIdentification>
+   <ServiceProvider>
+    <ProviderName>LVGL</ProviderName>
+    <ProviderSite>http://www.lvgl.saarland.de</ProviderSite>
+    <ServiceContact>
+      <IndividualName>GIS Administration</IndividualName>
+      <PositionName>Technik</PositionName>
+      <Phone>+49 (0)681 9712 - 03</Phone>
+      <Facsimile>+49 (0)681 9712 - 200</Facsimile>
+      <ElectronicMailAddress>gis.administration@lvgl.saarland.de</ElectronicMailAddress>
+      <Address>
+        <DeliveryPoint>Von der Heydt 22</DeliveryPoint>
+        <City>Saarbrücken</City>
+        <AdministrativeArea>SL</AdministrativeArea>
+        <PostalCode>66115</PostalCode>
+        <Country>Germany</Country>
+      </Address>
+      <OnlineResource>https://geoportal.saarland.de</OnlineResource>
+      <HoursOfService>24x7</HoursOfService>
+      <ContactInstructions>Do not hesitate to call</ContactInstructions>
+      <Role>PointOfContact</Role>
+    </ServiceContact>
+  </ServiceProvider>
+  <DatasetMetadata>
+    <ExternalMetadataAuthority name="GDI-SL">https://registry.gdi-de.org/id/de.sl/</ExternalMetadataAuthority>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites</Name>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesNaturConservation</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesArchaeological</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesCultural</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesLandscape</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesIUCN</Name>
+    </Dataset>
+    <!--Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesStrictNatureReserve</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+     </Dataset-->
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesProtectedLandscapeOrSeascape</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesWildernessArea</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesHabitatSpeciesManagementArea</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesNaturalMonument</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesUNESCOManAndBiosphereProgramme</Name>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesBiosphereReserve</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesNationalMonumentsRecord</Name>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesMonument</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesNatura2000</Name>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesSpecialProtectionArea</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <!--Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesproposedSpecialProtectionArea</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+     </Dataset-->
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesArchitecturalMonument</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesArchaeologicalSite</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSitesArcheologicalReserve</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.BR</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.FFH</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.LSG</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.ND</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.NSG</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>PS.ProtectedSites.VSG</Name>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+      <ExternalMetadataSetId authority="GDI-SL">https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</ExternalMetadataSetId>
+    </Dataset>
+  </DatasetMetadata>
+  <ExtendedCapabilities protocolVersions="1.3.0">
+    <inspire_vs:ExtendedCapabilities xmlns:inspire_vs="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"
+      xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/common/1.0 http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd http://inspire.ec.europa.eu/schemas/inspire_vs/1.0 http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd">
+      <inspire_common:MetadataUrl>
+        <inspire_common:URL>https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=5851c171-e551-c35f-b25d-e21e64a44bdd</inspire_common:URL>
+        <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
+      </inspire_common:MetadataUrl>
+      <inspire_common:SupportedLanguages>
+        <inspire_common:DefaultLanguage>
+          <inspire_common:Language>ger</inspire_common:Language>
+        </inspire_common:DefaultLanguage>
+      </inspire_common:SupportedLanguages>
+      <inspire_common:ResponseLanguage>
+        <inspire_common:Language>ger</inspire_common:Language>
+      </inspire_common:ResponseLanguage>
+    </inspire_vs:ExtendedCapabilities>
+  </ExtendedCapabilities>
+</deegreeServicesMetadata>

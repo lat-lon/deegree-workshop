@@ -1,0 +1,49 @@
+<deegreeWFS xmlns="http://www.deegree.org/services/wfs"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/wfs https://schemas.deegree.org/core/3.5/services/wfs/wfs_configuration.xsd">
+
+
+  <SupportedVersions>
+    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
+  </SupportedVersions>
+
+  <FeatureStoreId>INSPIRE_ProtectedSites_WFS</FeatureStoreId>
+
+  <EnableTransactions idGen="UseExisting">false</EnableTransactions>
+  <EnableResponseBuffering>true</EnableResponseBuffering>
+  <!--DisabledResources>
+    <Pattern>http://inspire.ec.europa.eu/codelist</Pattern>
+  </DisabledResources-->
+  <QueryCRS>urn:ogc:def:crs:EPSG::4258</QueryCRS>
+  <QueryCRS>urn:ogc:def:crs:EPSG::4326</QueryCRS>
+
+  <!--StoredQuery>../queries/GetDataSetById.xml</StoredQuery-->
+  <!--StoredQuery>/usr/share/tomcat8/.deegree/saar2Q04/queries/PS_GetFeatureByID.xml</StoredQuery-->
+  <!--StoredQuery>../queries/TypeQuery.xml</StoredQuery-->
+
+  <!-- Required for WFS 1.1.0/GML 3.2 output with gml:FeatureCollection root element (as mandated by ESDIN) -->
+  <GMLFormat gmlVersion="GML_32">
+    <MimeType>application/gml+xml; version=3.2</MimeType>
+    <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+    <GenerateBoundedByForFeatures>false</GenerateBoundedByForFeatures>
+    <GetFeatureResponse xmlns:gml="http://www.opengis.net/gml/3.2">
+      <ContainerElement>gml:FeatureCollection</ContainerElement>
+      <FeatureMemberElement>gml:featureMember</FeatureMemberElement>
+      <AdditionalSchemaLocation>http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/deprecatedTypes.xsd
+      </AdditionalSchemaLocation>
+      <DisableDynamicSchema>true</DisableDynamicSchema>
+      <DisableStreaming>false</DisableStreaming>
+    </GetFeatureResponse>
+  </GMLFormat>
+
+  <!-- Uncomment/adapt the following line to customize generated MetadataURL elements -->
+  <!--
+  <MetadataURLTemplate>http://portalu.saarland.de/csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;id=${metadataSetId}</MetadataURLTemplate>
+  <FeatureTypeMetadata xmlns:ps="urn:x-inspire:specification:gmlas:ProtectedSites:4.0">
+    <Name>ps:ProtectedSites</Name>
+    <MetadataSetId>09e434ed-2f22-479f-b629-8d488f2193d7</MetadataSetId>
+  </FeatureTypeMetadata>
+  -->
+  <Strict>true</Strict>
+</deegreeWFS>
+

@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FeatureLayers xmlns="http://www.deegree.org/layers/feature"
+  xmlns:s="http://www.deegree.org/metadata/spatial"
+  xmlns:l="http://www.deegree.org/layers/base"
+  xmlns:d="http://www.deegree.org/metadata/description"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.5/layers/feature/feature.xsd">
+  <FeatureStoreId>INSPIRE_ProtectedSites_WMS</FeatureStoreId>
+  <FeatureLayer>    <!--ProtectedSites-->
+    <l:Name>ps.ProtectedSites</l:Name>
+    <d:Title>Schutzgebiete</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--nature Conservation-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>natureConservation</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesNatureConservation</l:Name>
+    <d:Title>Schutzgebiete - Naturschutzgebiet</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Naturschutzgebiete.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Archaeological-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>archaeological</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesArchaeological</l:Name>
+    <d:Title>Schutzgebiete - Archaeologisch</d:Title>
+    <d:Abstract>Das Schutzgebiet wird zur Erhaltung des archaeologischen Erbes geschützt.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Cultural-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>cultural</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesCultural</l:Name>
+    <d:Title>Schutzgebiete - Kulturell</d:Title>
+    <d:Abstract>Das Schutzgebiet wird zur Erhaltung des kulturellen Erbes geschützt.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Point.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Landscape-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:siteProtectionClassification</PropertyName>
+          <Literal>landscape</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesLandscape</l:Name>
+    <d:Title>Schutzgebiete - Landschaftsschutzgebiet</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Landschaftsschutzgebiete.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:designationScheme</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/IUCN</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesIUCN</l:Name>
+    <d:Title>Schutzgebiete - IUCN</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen nach dem Klassifikationsschema der Internationalen Naturschutzunion klassifizierten Schutzgebiete.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN - strict Nature Reserve-->    <!--seit 2020-01-16 nicht mehr in Verwendung-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%strictNatureReserve</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesStrictNatureReserve</l:Name>
+    <d:Title>Schutzgebiete - absolutes Natuschutzgebiet</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche nach dem IUCN-Klassifizierungsschema als absolute Naturschutzgebiete klassifiziert wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN - Protected Landscape Or Seascape-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%protectedLandscapeOrSeascape</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesProtectedLandscapeOrSeascape</l:Name>
+    <d:Title>Schutzgebiete - Geschützte Landschaft oder Seenlandschaft</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche nach dem IUCN-Klassifizierungsschema als absolute Naturschutzgebiete klassifiziert wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN - Natural Monument-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%naturalMonument</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesNaturalMonument</l:Name>
+    <d:Title>Schutzgebiete - Natur Denkmal</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche nach dem IUCN-Klassifizierungsschema als absolute Naturschutzgebiete klassifiziert wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN - Wilderness Area-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%wildernessArea</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesWildernessArea</l:Name>
+    <d:Title>Schutzgebiete - Wildnisgebiet</d:Title>    <!--Quelle google übersetzer-->
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche nach dem IUCN-Klassifizierungsschema als absolute Naturschutzgebiete klassifiziert wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--IUCN - Habitat Species Management Area-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%habitatSpeciesManagementArea</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesHabitatSpeciesManagementArea</l:Name>
+    <d:Title>Schutzgebiete - Bewirtschaftungsgebiet für Lebensraumarten</d:Title>    <!--Quelle google übersetzer-->
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche nach dem IUCN-Klassifizierungsschema als absolute Naturschutzgebiete klassifiziert wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--UNESCOManAndBiosphereProgramme-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:designationScheme</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/UNESCOManAndBiosphereProgramme</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesUNESCOManAndBiosphereProgramme</l:Name>
+    <d:Title>Schutzgebiete - UNESCOManAndBiosphereProgramme</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete welche zu dem UNESCO Man and Biosphere Programm gehören.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--UNESCOManAndBiosphereProgramme - biosphere Reserve-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/UNESCOManAndBiosphereProgrammeDesignationValue/biosphereReserve</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesBiosphereReserve</l:Name>
+    <d:Title>Schutzgebiete - BiosphereReserve</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche im Rahmen des Programms "Man and Biosphere" als Biosphärenreservat ausgewiesen wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Natura2000-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:designationScheme</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/natura2000</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesNatura2000</l:Name>
+    <d:Title>Schutzgebiete - Natura2000</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Natura2000 Schutzgebiete.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Natura2000 - Special Protection Area-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%specialProtectionArea%</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesSpecialProtectionArea</l:Name>
+    <d:Title>Schutzgebiete - SpecialProtectionArea</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche als besondere Schutzgebiete im Rahmen von Natura2000 ausgewiesen wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Natura2000 - Special Protection Area-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%specialAreaOfConservation</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesSpecialAreaOfConservation</l:Name>
+    <d:Title>Schutzgebiete - SpecialAreaOfConservation</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche als besondere Schutzgebiete im Rahmen von Natura2000 ausgewiesen wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--Natura2000 - proposed Special Protection Area-->    <!--seit 2020-01-16 nicht mehr in Verwendung-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%proposedSpecialProtectionArea</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesproposedSpecialProtectionArea</l:Name>
+    <d:Title>Schutzgebiete - proposedSpecialProtectionArea</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche als besondere Schutzgebiete im Rahmen von Natura2000 ausgewiesen wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Polygon.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--nationalMonumentsRecord-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsEqualTo>
+          <PropertyName>ps:designationScheme</PropertyName>
+          <Literal>http://inspire.ec.europa.eu/codelist/DesignationSchemeValue/nationalMonumentsRecord</Literal>
+        </PropertyIsEqualTo>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesNationalMonumentsRecord</l:Name>
+    <d:Title>Schutzgebiete - NationalMonumentsRecord</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete welche zu den national monuments record Programm gehören.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+  <FeatureLayer>    <!--nationalMonumentsRecord - monument-->
+    <!--FeatureType xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">ps:ProtectedSite</FeatureType-->
+    <Filter>
+      <Filter xmlns='http://www.opengis.net/ogc'>
+        <PropertyIsLike escapeChar="\" wildCard="%" singleChar="_">
+          <PropertyName>ps:designation</PropertyName>
+          <Literal>%monument</Literal>
+        </PropertyIsLike>
+      </Filter>
+    </Filter>
+    <l:Name>ps.ProtectedSitesMonument</l:Name>
+    <d:Title>Schutzgebiete - Monument</d:Title>
+    <d:Abstract>Dieser Layer visualisiert die saarländischen Schutzgebiete, welche im Rahmen des Programms "national monuments record" als monument ausgewiesen wurden.</d:Abstract>
+    <s:CRS>EPSG:4258</s:CRS>
+    <l:StyleRef>
+      <l:StyleStoreId>ps.ProtectedSites</l:StyleStoreId>
+      <l:Style>
+        <l:StyleName>PS.ProtectedSite.Default</l:StyleName>
+        <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+        <l:StyleNameRef>PS.ProtectedSite.Default</l:StyleNameRef>
+        <l:LegendStyle>
+          <l:LayerNameRef>PS.ProtectedSites</l:LayerNameRef>
+          <l:StyleNameRef>PS.ProtectedSite.Legende</l:StyleNameRef>
+        </l:LegendStyle>
+      </l:Style>
+    </l:StyleRef>
+    <l:LayerOptions>
+      <!--l:AntiAliasing>TEXT</l:AntiAliasing>
+      <l:MaxFeatures>1000</l:MaxFeatures-->
+      <l:FeatureInfo enabled='true' pixelRadius='2'/>
+    </l:LayerOptions>
+  </FeatureLayer>
+</FeatureLayers>

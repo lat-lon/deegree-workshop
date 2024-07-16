@@ -1,0 +1,105 @@
+<deegreeServicesMetadata xmlns="http://www.deegree.org/services/metadata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/metadata https://schemas.deegree.org/core/3.5/services/metadata/metadata.xsd">
+  <ServiceIdentification>
+    <Title>INSPIRE-WFS SL Schutzgebiete</Title>
+    <Abstract>Dieser Dienst stellt für das INSPIRE-Thema Schutzgebiete aus dem Geofachdaten umgesetzte Daten bereit.</Abstract>
+    <Keywords>
+      <Keyword>Geofachdaten</Keyword>
+      <Keyword>WFS</Keyword>
+      <Keyword>SL</Keyword>
+      <Keyword>Saarland</Keyword>
+      <!--Keyword>inspireidentifiziert</Keyword-->
+      <Keyword>infoFeatureAccessService</Keyword>
+      <Keyword>Schutzgebiete</Keyword>
+      <Keyword>Naturschutz</Keyword>
+      <Keyword>Naturschutzgebiet</Keyword>
+      <Keyword>Umwelt</Keyword>
+    </Keywords>
+    <Fees>Keine</Fees>
+    <AccessConstraints>Alle Nutzungsarten sind frei, aber grundsätzlich wird nicht auf das Urheberrecht verzichtet.</AccessConstraints>
+  </ServiceIdentification>
+  <ServiceProvider>
+    <ProviderName>LVGL</ProviderName>
+    <ProviderSite>http://www.lvgl.saarland.de</ProviderSite>
+    <ServiceContact>
+      <IndividualName>GIS Administration</IndividualName>
+      <PositionName>Technik</PositionName>
+      <Phone>+49 (0)681 9712 - 03</Phone>
+      <Facsimile>+49 (0)681 9712 - 200</Facsimile>
+      <ElectronicMailAddress>gis.administration@lvgl.saarland.de</ElectronicMailAddress>
+      <Address>
+        <DeliveryPoint>Von der Heydt 22</DeliveryPoint>
+        <City>Saarbrücken</City>
+        <AdministrativeArea>SL</AdministrativeArea>
+        <PostalCode>66115</PostalCode>
+        <Country>Germany</Country>
+      </Address>
+      <OnlineResource>https://geoportal.saarland.de</OnlineResource>
+      <HoursOfService>24x7</HoursOfService>
+      <ContactInstructions>Do not hesitate to call</ContactInstructions>
+      <Role>PointOfContact</Role>
+    </ServiceContact>
+  </ServiceProvider>
+
+  <DatasetMetadata>
+    <MetadataUrlTemplate>https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=${metadataSetId}</MetadataUrlTemplate>
+    <Dataset xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+      <Name>ps:ProtectedSite</Name>
+      <Title>Schutzgebiet</Title>
+      <Title lang="eng">ProtectedSite</Title>
+      <Abstract>Ein Gebiet, das auf Grundlage eines Rechtsaktes auf internationaler, EU- oder nationalstaatlicher Ebene geschaffen wurde oder verwaltet wird, um bestimmte fachspezifische Schutzziele zu erreichen</Abstract>
+      <Keywords>
+        <Keyword>ProtectedSite</Keyword>
+        <Keyword>Schutzgebiet</Keyword>
+      </Keywords>
+      <MetadataURL format="application/vnd.iso.19139+xml" type="ISO19115:2003">https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=41903385-0592-4d9e-9a85-7db717362813</MetadataURL>
+    </Dataset>
+  </DatasetMetadata>
+
+  <ExtendedCapabilities protocolVersions="1.1.0">
+    <inspire_dls:ExtendedCapabilities xmlns:inspire_dls="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+      xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/common/1.0
+      http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
+      http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
+      http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd">
+      <inspire_common:MetadataUrl>
+        <inspire_common:URL>https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=171853d7-76b0-414f-9ba9-38880c46fe9f</inspire_common:URL>
+        <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
+      </inspire_common:MetadataUrl>
+      <inspire_common:SupportedLanguages>
+        <inspire_common:DefaultLanguage>
+          <inspire_common:Language>ger</inspire_common:Language>
+        </inspire_common:DefaultLanguage>
+      </inspire_common:SupportedLanguages>
+      <inspire_common:ResponseLanguage>
+        <inspire_common:Language>ger</inspire_common:Language>
+      </inspire_common:ResponseLanguage>
+      <inspire_dls:SpatialDataSetIdentifier>
+        <inspire_common:Code>https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</inspire_common:Code>
+      </inspire_dls:SpatialDataSetIdentifier>
+    </inspire_dls:ExtendedCapabilities>
+  </ExtendedCapabilities>
+  <ExtendedCapabilities protocolVersions="2.0.0">
+    <inspire_dls:ExtendedCapabilities xmlns:inspire_dls="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+      xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0" xsi:schemaLocation="http://inspire.ec.europa.eu/schemas/common/1.0
+      http://inspire.ec.europa.eu/schemas/common/1.0/common.xsd
+      http://inspire.ec.europa.eu/schemas/inspire_dls/1.0
+      http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd">
+      <inspire_common:MetadataUrl>
+        <inspire_common:URL>https://geoportal.saarland.de/gdi-sl/inspirecsw?SERVICE=CSW&amp;VERSION=2.0.2&amp;REQUEST=GetRecordById&amp;ELEMENTSETNAME=full&amp;OUTPUTSCHEMA=http://www.isotc211.org/2005/gmd&amp;ID=171853d7-76b0-414f-9ba9-38880c46fe9f</inspire_common:URL>
+        <inspire_common:MediaType>application/vnd.iso.19139+xml</inspire_common:MediaType>
+      </inspire_common:MetadataUrl>
+      <inspire_common:SupportedLanguages>
+        <inspire_common:DefaultLanguage>
+          <inspire_common:Language>ger</inspire_common:Language>
+        </inspire_common:DefaultLanguage>
+      </inspire_common:SupportedLanguages>
+      <inspire_common:ResponseLanguage>
+        <inspire_common:Language>ger</inspire_common:Language>
+      </inspire_common:ResponseLanguage>
+      <inspire_dls:SpatialDataSetIdentifier>
+        <inspire_common:Code>https://registry.gdi-de.org/id/de.sl/41903385-0592-4d9e-9a85-7db717362813</inspire_common:Code>
+      </inspire_dls:SpatialDataSetIdentifier>
+    </inspire_dls:ExtendedCapabilities>
+  </ExtendedCapabilities>
+</deegreeServicesMetadata>

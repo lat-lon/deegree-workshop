@@ -1,0 +1,22 @@
+<SQLFeatureStore 
+  xmlns="http://www.deegree.org/datasource/feature/sql"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/datasource/feature/sql https://schemas.deegree.org/core/3.5/datasource/feature/sql/sql.xsd"
+  xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0">
+
+  <JDBCConnId>inspire_db</JDBCConnId>
+  <StorageCRS srid="4258" dim="2D">EPSG:4258</StorageCRS>
+
+  <FeatureTypeMapping name="ps:ProtectedSite" table="schutzgeb.v_ps_protectedsites_default">
+    <FIDMapping prefix="PS_PROTECTEDSITE_">
+      <Column name="attr_gml_id" type="string"/>
+      <UUIDGenerator />
+    </FIDMapping>
+    <Geometry path="ps:geometry" mapping="ps_geometry_value" />
+    <Primitive path="ps:designationScheme" mapping="ps_designationscheme" />
+    <Primitive path="ps:designation" mapping="ps_designation" />
+    <Primitive path="ps:siteProtectionClassification" mapping="ps_siteprotectionclassification" />
+    <Primitive path="ps:geometry_type" mapping="geom_type"/>
+  </FeatureTypeMapping>
+
+</SQLFeatureStore>
+ 
