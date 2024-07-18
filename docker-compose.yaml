@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   deegree:
     image: deegree/deegree3-docker:${DEEGREE_VERSION}
@@ -11,7 +13,9 @@ services:
     depends_on:
       postgres:
         condition: service_started
-  
+    networks:
+      - network
+
   postgres:
     image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
     container_name: postgres_database
@@ -22,3 +26,20 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./sql:/docker-entrypoint-initdb.d/
+    networks:
+      - network
+
+  pgadmin:
+    image: dpage/pgadmin4:${PGADMIN_VERSION}
+    container_name: pgadmin_${PGADMIN_VERSION}
+    ports:
+      - 5080:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - network
+
+networks:
+  network:
+    name: deegree_workshop
