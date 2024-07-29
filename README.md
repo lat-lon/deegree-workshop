@@ -4,7 +4,7 @@
 
 ## Agenda   
 
-1. [Setup the Docker infrastructure](#setlink)
+1. [Setup the Docker Compose infrastructure](#setlink)
 
 2. [Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0](#setlink)
 
@@ -34,14 +34,9 @@
 
 * [Linux](https://docs.docker.com/engine/install/) (advanced)
 
-### 1.2 Set up a docker network:
+### 1.2 Pull the desired Docker Image versions of deegree, PostgreSQL/PostGIS and pgAdmin4
 
-    docker network create -d bridge deegreenetwork
-
-> **Info**: A Docker network is a virtual network that allows containers to communicate with each other and with external networks.
-
-### 1.2 Create a spatial database with PostgreSQL and PostGIS
-
+#### PostgreSQL/PostGIS Database
 ![image alt text](resources/postgresql-horizontal.svg) ![image alt text](resources/image_3.png)
 
 Docker Hub: [https://hub.docker.com/r/postgis/postgis/](https://hub.docker.com/r/postgis/postgis/)
@@ -50,38 +45,13 @@ To download the Docker image from the docker registry hub.docker.com run:
 
     docker pull postgis/postgis:16-3.4
 
-To run the Docker container listening on port 5432 and using the password for user postgres execute:
-
-    docker run -d --name postgis --network="deegreenetwork" -p 5432:5432 -e POSTGRES_PASSWORD=postgres postgis/postgis:16-3.4
-
->**Info:** You can find an overview of basic Docker commands at the end of this tutorial under: [Overview of basic docker commands](#overview-of-basic-docker-commands). 
-
-### 1.3 Connect the database to the pgAdmin4 web console
+#### pgAdmin4 Web Console
 
 Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
 
     docker pull dpage/pgadmin4:8.9
-    docker run -d --name pgadmin4 --network="deegreenetwork" -p 5080:80 -e 'PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org' -e 'PGADMIN_DEFAULT_PASSWORD=admin' dpage/pgadmin4:8.9
 
-Open in browser: [http://localhost:5080/](http://localhost:5080/)
-
-Use the following credential to login into pgAdmin:
-
-* **User**: pgadmin4@pgadmin.org
-* **Password**: admin
-
-> **Info**: On Windows and macOS when running Docker with Docker Toolbox (using VirtualBox) you have to use the IP of the Docker Machine, such as '172.17.0.2' as the container IP instead of 'localhost'!
-
-#### Connection parameters for pgAdmin4 > Register > Server... > Connection
-
-* **Host name**: postgres
-* **Port**: 5432
-* **User**:	postgres
-* **Password**: postgres
-
->**Info**: The password is 'postgres', since the previously set docker environment variable for the container postgis is `POSTGRES_PASSWORD=postgres`!
-
-## 1.4 Set up a deegree webservices docker container
+#### deegree Webservices
 ![image alt text](resources/deegree_logo.svg)
 
 Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
@@ -89,20 +59,90 @@ Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deeg
 
     docker pull deegree/deegree3-docker:3.5.8
 
-Now link the deegree container with the postgis container and run the container attached to the deegree log with the command:
+## 1.3 Configure the Docker Compose file
 
-    docker run --name deegree -p 8080:8080 --network="deegreenetwork" deegree/deegree3-docker:3.5.8
+For this tutorial, a ready-to-use Docker Compose file is provided. Additionally, all the needed configurations for setting up an INSPIRE deegree workspace are available for Download in form of a [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
 
-Open in browser: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices)
+The contents of [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip) and in particular its containing folder `deegree-workshop-bundle` are as followed:
 
-Now select "connections > databases" and create a new database connection using "datasource" as type and "PostgreSQL (minimal)" as a template. Change the values for `url`, `username`, and `password` according to the setup of the database.
+| Directory       | Content     | Documentation |
+| :-------------- | :---------- | :------------ |   
+| `/deegree-workspace/ps-sl`          | Complete deegree workspace with data and configuration files (WFS, WMS, layers, styles and database) for the INSPIRE Annex 1 data theme ProtectedSites from the federal state of Saarland | [What is a deegree workspace?](https://download.deegree.org/documentation/current/html/#_the_deegree_workspace) |
+| `/sql`      |  SQL scripts for setting up the PostgreSQL database | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
+| `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin4  | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
+| `.env` | Used to set the necessery environment variables | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
 
-Then stop and delete the docker container deegree before you continue:
+The provided Docker Compose file contains the following configuration:
 
-    docker stop deegree
-    docker rm deegree
+```
+version: '3.8'
+
+services:
+  deegree:
+    image: deegree/deegree3-docker:${DEEGREE_VERSION}
+    container_name: deegree_${DEEGREE_VERSION}
+    ports:
+      - 8080:8080
+    links:
+      - postgres
+    volumes:
+      - ./deegree-workspace:/root/.deegree:rw
+    depends_on:
+      postgres:
+        condition: service_started
+    networks:
+      - network
+
+  postgres:
+    image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
+    container_name: postgres_database
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/
+    networks:
+      - network
+
+  pgadmin:
+    image: dpage/pgadmin4:${PGADMIN_VERSION}
+    container_name: pgadmin_${PGADMIN_VERSION}
+    ports:
+      - 5080:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - network
+
+networks:
+  network:
+    name: deegree_workshop
+```
+[comment]: <> (... Addmore info to configuration details!)
+
+>**Info:** You can find an overview of basic Docker Compose commands at the end of this tutorial under: [Overview of basic Docker Compose commands](#overview-of-basic-docker-commands). 
 
 # Part 2 - configure WFS 2.0
+
+### X.X Use the pgAdmin Web Console 
+Open in browser: [http://localhost:5080/](http://localhost:5080/)
+
+Use the following credential to login into pgAdmin:
+
+* **User**: pgadmin4@pgadmin.org
+* **Password**: admin
+
+##### Connection parameters for pgAdmin4 > Register > Server... > Connection
+
+* **Host name**: postgres
+* **Port**: 5432
+* **User**:	postgres
+* **Password**: postgres
+
+>**Info**: The password is 'postgres', since the previously set docker environment variable for the container postgis is `POSTGRES_PASSWORD=postgres`!
 
 ## Start deegree docker container with local deegree workspace directory
 
@@ -418,124 +458,97 @@ More information how to configure the etf-web application under [http://docs.etf
 
 ### Archive:
 
-[FOSS4G 2016 Workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
+* [FOSS4G 2016 Workshop](https://github.com/tfr42/deegree-docker/tree/foss4g2016_workshop)
 
 ## Docker
 
-[https://www.docker.com](https://www.docker.com)
-
-[https://docs.docker.com](https://docs.docker.com)
-
-[https://hub.docker.com](https://hub.docker.com)
-
-[http://linoxide.com/linux-how-to/run-gui-apps-docker-container/](http://linoxide.com/linux-how-to/run-gui-apps-docker-container/)
+* [https://www.docker.com](https://www.docker.com)
+* [https://docs.docker.com](https://docs.docker.com)
+* [https://hub.docker.com](https://hub.docker.com)
 
 ### Talks about Docker and GIS
 
-Talk (german) - [FOSSGIS 2018 - Dockerize stuff - Postgis swarm and other geo boxes](https://www.fossgis-konferenz.de/2018/programm/event.php?id=5292)
-
-Video (german) - [Docker für den GIS-Einsatz](https://www.fossgis.de/konferenz/2015/programm/events/847.de.html)
-
-Slides (english) - [Spatial Data Processing with Docker](https://2016.foss4g-na.org/session/spatial-data-processing-docker.html)
-
 Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.de/pub/misc/openstreetmap/FOSS4G-2016/foss4g-2016-1146-an_overview_of_docker_images_for_geospatial_applications-hd.mp4)
 
-Talk (english)- [INSPIRE ready SDI using docker](https://inspire.ec.europa.eu/events/conferences/inspire_2017/submissions/169.html)
-
+[comment]: <> (... generell mehr adden, vor allem zu Docker Compose)
 ## deegree resources
 
-[https://github.com/deegree/deegree3](https://github.com/deegree/deegree3)
+* [https://github.com/deegree/deegree3](https://github.com/deegree/deegree3)
+* [https://www.deegree.org](https://www.deegree.org)
+* [https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/)
+* [https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/](https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/)
 
-[https://www.deegree.org](https://www.deegree.org)
+### Documentation 3.5.x (current))
 
-[https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/) 
+* [https://download.deegree.org/documentation/current/html/](https://download.deegree.org/documentation/current/html/) 
 
-[https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/](https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/)
+### Documentation 3.4.x
 
-Documentation 3.3.x - [https://download.deegree.org/documentation/3.3.21/html/](https://download.deegree.org/documentation/3.3.21/html/) 
-
-Documentation 3.4.x - [https://download.deegree.org/documentation/current/html/](https://download.deegree.org/documentation/3.4.26/html/) 
+* [https://download.deegree.org/documentation/3.4.35/html/](https://download.deegree.org/documentation/3.4.35/html/)
 
 ### deegree on Docker Hub
 
-[https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
+* [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
 
-### Public available deegree workspace configurations for INSPIRE
+### deegree End of Life (EOL) and Support Matrix
 
-[https://github.com/de-bkg/deegree-workspace-dlm250-inspire](https://github.com/de-bkg/deegree-workspace-dlm250-inspire)
-
-[https://github.com/DirkThalheim/deegree-elf](https://github.com/DirkThalheim/deegree-elf)
-
-[https://github.com/eENVplus/deegree-workspace-eenvplus](https://github.com/eENVplus/deegree-workspace-eenvplus) 
+* [https://github.com/deegree/deegree3/wiki/End-of-Life-and-Support-Matrix](https://github.com/deegree/deegree3/wiki/End-of-Life-and-Support-Matrix)
 
 ## OGC CITE TEAM Engine
 
-[https://github.com/opengeospatial/teamengine](https://github.com/opengeospatial/teamengine)
+### TEAM Engine on Docker Image Testsuite
 
-[http://opengeospatial.github.io/teamengine/](http://opengeospatial.github.io/teamengine/)
+* [https://cite.opengeospatial.org/teamengine/](https://cite.opengeospatial.org/teamengine/)
 
-[http://cite.opengeospatial.org](http://cite.opengeospatial.org)
+### TEAM Engine Documentation and Info
 
-[http://cite.opengeospatial.org/teamengine/](http://cite.opengeospatial.org/teamengine/)
+* [https://github.com/opengeospatial/teamengine](https://github.com/opengeospatial/teamengine)
+* [https://opengeospatial.github.io/teamengine/](http://opengeospatial.github.io/teamengine/)
+* [https://github.com/opengeospatial/cite/wiki](https://github.com/opengeospatial/cite/wiki)
 
-[https://github.com/opengeospatial/teamengine-docker](https://github.com/opengeospatial/teamengine-docker)
+### TEAM Engine Docker Image
+
+* [https://github.com/opengeospatial/teamengine-docker](https://github.com/opengeospatial/teamengine-docker)
 
 ## INSPIRE resources
 
 ### General Information about INSPIRE
 
-[http://inspire.ec.europa.eu/](http://inspire.ec.europa.eu/)
+* [https://knowledge-base.inspire.ec.europa.eu/index_en](https://knowledge-base.inspire.ec.europa.eu/index_en)
 
-[http://www.slideshare.net/ChrisSchubert1/inspirehandsondatatransformation](http://www.slideshare.net/ChrisSchubert1/inspirehandsondatatransformation)
+### INSPIRE Reference Validator
 
-### Validation tools for INSPIRE
+[https://inspire.ec.europa.eu/validator/home/index.html](https://inspire.ec.europa.eu/validator/home/index.html)
 
-[http://inspire-geoportal.ec.europa.eu/validator2/](http://inspire-geoportal.ec.europa.eu/validator2/)
+#### Slides and Videos for the INSPIRE Reference Validator
 
-[http://inspire-sandbox.jrc.ec.europa.eu/validator/](http://inspire-sandbox.jrc.ec.europa.eu/validator/) 
-
-[https://github.com/interactive-instruments/etf-test-projects-elf](https://github.com/interactive-instruments/etf-test-projects-elf) 
-
-[https://github.com/Geonovum/etf-test-projects-inspire](https://github.com/Geonovum/etf-test-projects-inspire) 
+* [https://www.youtube.com/watch?v=BVWxWuo9X5g&list=PLtvJPnZpinhfv3HXkjAOEbTTCSSEE5d7E](https://www.youtube.com/watch?v=BVWxWuo9X5g&list=PLtvJPnZpinhfv3HXkjAOEbTTCSSEE5d7E)
+* [https://github.com/INSPIRE-MIF/helpdesk-validator/tree/master/training%20material/2024-05-31%20JRC%20Training](https://github.com/INSPIRE-MIF/helpdesk-validator/tree/master/training%20material/2024-05-31%20JRC%20Training)
 
 ### INSPIRE Data specifications
 
-[http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/](http://inspire-regadmin.jrc.ec.europa.eu/dataspecification/)
-[http://inspire.ec.europa.eu/Themes/Data-Specifications/2892](http://inspire.ec.europa.eu/Themes/Data-Specifications/2892)
-
-### INSPIRE Download Services
-
-[http://inspire.ec.europa.eu/events/conferences/inspire_2012/presentations/69.pdf](http://inspire.ec.europa.eu/events/conferences/inspire_2012/presentations/69.pdf)
+* [https://github.com/INSPIRE-MIF/technical-guidelines/tree/main/data/](https://github.com/INSPIRE-MIF/technical-guidelines/tree/main/data/)
+* [https://knowledge-base.inspire.ec.europa.eu/publications/inspire-data-specification-protected-sites-technical-guidelines_en](https://knowledge-base.inspire.ec.europa.eu/publications/inspire-data-specification-protected-sites-technical-guidelines_en)
 
 ### INSPIRE Data Transformation with HALE
 
-[http://inspire-extensions.wetransform.to/tutorial/tutorial.html](http://inspire-extensions.wetransform.to/tutorial/tutorial.html)
+[comment]: <> (ToDo)
 
-[http://grillmayer.eu/blog/#hale-projekt-inklusive-daten-protected-sites-austria](http://grillmayer.eu/blog/#hale-projekt-inklusive-daten-protected-sites-austria) 
+### INSPIRE in Practice (Geoportal)
 
-### INSPIRE in Practice
-
-[https://inspire-reference.jrc.ec.europa.eu/](https://inspire-reference.jrc.ec.europa.eu/)
+* [https://inspire-geoportal.ec.europa.eu/srv/eng/catalog.search#/home](https://inspire-geoportal.ec.europa.eu/srv/eng/catalog.search#/home)
 
 ## OSGeo resources
 
-[https://live.osgeo.org/en/index.html](https://live.osgeo.org/en/index.html)
-
-[http://live.osgeo.org/en/overview/deegree_overview.html](http://live.osgeo.org/en/overview/deegree_overview.html)
-
-[http://geocontainers.org/](http://geocontainers.org/)
-
-[https://wiki.osgeo.org/wiki/DockerImages](https://wiki.osgeo.org/wiki/DockerImages)
-
-[https://wiki.osgeo.org/wiki/INSPIRE](https://wiki.osgeo.org/wiki/INSPIRE)
-
-[https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory](https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory)
+* [https://www.osgeo.org/](https://www.osgeo.org/)
+* [https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/)
+* [https://wiki.osgeo.org/wiki/DockerImages](https://wiki.osgeo.org/wiki/DockerImages)
+* [https://wiki.osgeo.org/wiki/INSPIRE](https://wiki.osgeo.org/wiki/INSPIRE)
+* [https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory](https://wiki.osgeo.org/wiki/INSPIRE_tools_inventory)
 
 ### OpenStreet Map, Open Data and public spatial services
 
-WMS with OSM data
-
-[http://ows.terrestris.de/osm/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities](http://ows.terrestris.de/osm/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetCapabilities)
+[comment]: <> (ToDo)
 
 # License
 
