@@ -72,6 +72,7 @@ For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in
 | `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin4  | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
 | `.env` | Used to set the necessery environment variables | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
 
+### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
 ```
@@ -145,6 +146,31 @@ This network ensures that all services can communicate within the same isolated 
 allowing containers to reference each other by their service names.
 
 >**Info:** You can find an overview of basic Docker Compose commands at the end of this tutorial under: [Overview of basic Docker Compose commands](#overview-of-basic-docker-commands). 
+
+### Specifying version variables for services
+
+The `.env` file included in the provided `/deegree-workshop-bundle` defines specific version variables for 
+the services used in the Docker Compose setup. This file contains the following environment variables (breakdown):
+
+```
+DEEGREE_VERSION=3.5.8
+```
+This variable specifies the exact version of deegree to be used. The Docker Compose file references this 
+variable to pull the corresponding deegree Docker image.
+
+```
+POSTGRES_POSTGIS_VERSION=16-3.4
+```
+This variable defines the version of PostgreSQL along with its PostGIS extensions. The Docker Compose file references 
+this variable to pull the corresponding PostgreSQL/PostGIS Docker image.
+```
+PGADMIN_VERSION=8.9
+```
+This variable sets the version of pgAdmin4 to be used. The Docker Compose file references
+this variable to pull the corresponding pgAdmin4 Docker image.
+
+Using these version parameters in the `.env` file allows for easy updates and consistent configuration across 
+different setups.
 
 # Part 2 - configure WFS 2.0
 
