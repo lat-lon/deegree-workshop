@@ -34,7 +34,7 @@
 
 * [Linux](https://docs.docker.com/engine/install/) (advanced)
 
-### 1.2 Pull the desired Docker Image versions of deegree, PostgreSQL/PostGIS and pgAdmin4
+### 1.2 Pull the desired Docker Image versions of deegree, PostgreSQL/PostGIS and pgAdmin4 (optional)
 
 #### PostgreSQL/PostGIS Database
 ![image alt text](resources/postgresql-horizontal.svg) ![image alt text](resources/image_3.png)
@@ -59,11 +59,11 @@ Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deeg
 
     docker pull deegree/deegree3-docker:3.5.8
 
-## 1.3 Configure the Docker Compose file
+## 1.3 Setting up your Docker Environment for deegree
 
-For this tutorial, a ready-to-use Docker Compose file is provided. Additionally, all the needed configurations for setting up an INSPIRE deegree workspace are available for Download in form of a [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
+For this tutorial, all necessary configuration files and data required to set up and run an example INSPIRE ProtectedSites deegree workspace are available for download in as [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
 
-The contents of [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip) and in particular its containing folder `deegree-workshop-bundle` are as followed:
+For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in the downloaded ZIP-File are relevant. The folder contains the following items:
 
 | Directory       | Content     | Documentation |
 | :-------------- | :---------- | :------------ |   
@@ -72,11 +72,9 @@ The contents of [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/r
 | `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin4  | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
 | `.env` | Used to set the necessery environment variables | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
 
-The provided Docker Compose file contains the following configuration:
+The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
 ```
-version: '3.8'
-
 services:
   deegree:
     image: deegree/deegree3-docker:${DEEGREE_VERSION}
@@ -92,7 +90,15 @@ services:
         condition: service_started
     networks:
       - network
+```
+The first service declared in the Docker Compose file is deegree, which runs the deegree web services. 
+The specific version of deegree used is determined by the DEEGREE_VERSION variable defined in the .env file. 
+The service depends on the successful startup of the PostgreSQL service (referred to as postgres). 
+Once PostgreSQL is running, the deegree service is started. The deegree container also mounts a local 
+directory (./deegree-workspace) to /root/.deegree within the container, ensuring that the workspace 
+configuration is persistent and shared.
 
+```
   postgres:
     image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
     container_name: postgres_database
@@ -105,7 +111,12 @@ services:
       - ./sql:/docker-entrypoint-initdb.d/
     networks:
       - network
-
+```
+The second service is postgres, a PostgreSQL database with PostGIS extensions. 
+The exact version is specified by the POSTGRES_POSTGIS_VERSION variable from the .env file. 
+It exposes port 5432 and initializes the database using SQL scripts found in the ./sql directory, 
+which are automatically executed at container startup.
+```
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION}
     container_name: pgadmin_${PGADMIN_VERSION}
@@ -114,14 +125,24 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
       - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      postgres:
+        condition: service_started
     networks:
       - network
-
+```            
+The third service, pgadmin, is the pgAdmin4 web interface, used for managing the PostgreSQL database via a web browser. 
+This service also waits for PostgreSQL to start before initializing. 
+The version of pgAdmin is determined by the PGADMIN_VERSION variable in the .env file, 
+and it exposes port 5080 for access.
+```
 networks:
   network:
     name: deegree_workshop
 ```
-[comment]: <> (... Addmore info to configuration details!)
+At last, a custom Docker network named deegree_workshop is created. 
+This network ensures that all services can communicate within the same isolated network environment, 
+allowing containers to reference each other by their service names.
 
 >**Info:** You can find an overview of basic Docker Compose commands at the end of this tutorial under: [Overview of basic Docker Compose commands](#overview-of-basic-docker-commands). 
 

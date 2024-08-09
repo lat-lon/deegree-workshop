@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   deegree:
@@ -37,9 +36,12 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
       - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      postgres:
+        condition: service_started
     networks:
       - network
 
 networks:
   network:
-    name: deegree_workshop
+    name: deegree_workshop_network
