@@ -45,7 +45,7 @@ To download the Docker image from the docker registry hub.docker.com run:
 
     docker pull postgis/postgis:16-3.4
 
-#### pgAdmin4 Web Console
+#### pgAdmin 4 Web Interface
 
 Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
 
@@ -65,12 +65,12 @@ For this tutorial, all necessary configuration files and data required to set up
 
 For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in the downloaded ZIP-File are relevant. The folder contains the following items:
 
-| Directory       | Content     | Documentation |
-| :-------------- | :---------- | :------------ |   
+| Directory       | Content                                                                                                                                                                                   | Documentation |
+| :-------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------ |   
 | `/deegree-workspace/ps-sl`          | Complete deegree workspace with data and configuration files (WFS, WMS, layers, styles and database) for the INSPIRE Annex 1 data theme ProtectedSites from the federal state of Saarland | [What is a deegree workspace?](https://download.deegree.org/documentation/current/html/#_the_deegree_workspace) |
-| `/sql`      |  SQL scripts for setting up the PostgreSQL database | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
-| `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin4  | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
-| `.env` | Used to set the necessery environment variables | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
+| `/sql`      | SQL scripts for setting up the PostgreSQL database                                                                                                                                        | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
+| `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                       | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
+| `.env` | Used to set the necessery environment variables                                                                                                                                           | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
 
 ### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
@@ -132,7 +132,7 @@ which are automatically executed at container startup.
     networks:
       - network
 ```            
-The third service, pgadmin, is the pgAdmin4 web interface, used for managing the PostgreSQL database via a web browser. 
+The third service, pgadmin, is the pgAdmin 4 web interface, used for managing the PostgreSQL database via a web browser. 
 This service also waits for PostgreSQL to start before initializing. 
 The version of pgAdmin is determined by the PGADMIN_VERSION variable in the .env file, 
 and it exposes port 5080 for access.
@@ -166,89 +166,72 @@ this variable to pull the corresponding PostgreSQL/PostGIS Docker image.
 ```
 PGADMIN_VERSION=8.9
 ```
-This variable sets the version of pgAdmin4 to be used. The Docker Compose file references
-this variable to pull the corresponding pgAdmin4 Docker image.
+This variable sets the version of pgAdmin 4 to be used. The Docker Compose file references
+this variable to pull the corresponding pgAdmin 4 Docker image.
 
 Using these version parameters in the `.env` file allows for easy updates and consistent configuration across 
 different setups.
 
-# Part 2 - configure WFS 2.0
+# 2. Import ProtecedSites data into the PostgreSQL database 
 
-### X.X Use the pgAdmin Web Console 
-Open in browser: [http://localhost:5080/](http://localhost:5080/)
+## 2.1 Use the deegree GmlLoader
 
-Use the following credential to login into pgAdmin:
+In order to import GML data of the INSPIRE Annex 1 data theme ProtectedSites into the SqlFeatureStore of deegree, 
+the `GmlLoader` of the deegree GML tools CLI is used. Since we are working with the Docker image of deegree, the CLI is 
+already available under `/opt` in the deployed Docker container. Since the GML data is stored in the provided workspace and 
+therefore also available on the Docker container, we can execute the `GmlLoader` with the one following commands.
+Be sure to use the right container name, which can change depending on the configured `DEEGREE_VERSION` in the `.env`.
+
+**One dataset**, 1317 polygon geometries, ~25min duration (recommended):
+```
+docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToFile=/root/.deegree/ps-sl/data/gmlData/ProtectedSites_Naturschutz.gml -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
+```
+**Two datasets**, 7 polygon and 3340 point geometries, ~2hours duration:
+```
+docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToList=/root/.deegree/ps-sl/data/gmlData/gmldatalist.txt -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
+```
+
+>**Info**: Setting the Java parameter `-Xmx16g` (value dependant on the resources provided) is highly advisable, to avoid
+> a Java `OutOfMemoryError`. Further information regarding the parameters of the GmlLoader can be found in the 
+> [deegree documentation of the GML tools CLI](https://download.deegree.org/documentation/current/html/#deegree-gml-tools).
+
+Beware that the `GmlLoader` can only be executed when the used SqlFeatureStore in deegree was created using the
+`SqlFeatureStoreConfigCreator`, which is also a part of the deegree GML tools CLI. Since the configuration for this
+tutorial is provided, the usage of the `SqlFeatureStoreConfigCreator` is not necessary. 
+## 2.2 Use the pgAdmin 4 Web Interface 
+
+After the import of the GML data using the deegree `GmlLoader` is finished, we can verify the content of the PostgreSQL
+database using the pgAdmin 4 web interface. To do so, open [http://localhost:5080/](http://localhost:5080/) in 
+your browser and use the following credentials to login into pgAdmin 4:
 
 * **User**: pgadmin4@pgadmin.org
 * **Password**: admin
 
-##### Connection parameters for pgAdmin4 > Register > Server... > Connection
+Next, add your database server under:
+##### Object > Register > Server...
 
-* **Host name**: postgres
+After navigating to the said point through the toolbar, a pop-up window opens. Fill the tabs General and Connection with
+the given information below.
+
+**General**:
+* **Name**: inspire_ps_server
+
+**Connection**:
+* **Host name**: postgres_database
 * **Port**: 5432
 * **User**:	postgres
 * **Password**: postgres
 
->**Info**: The password is 'postgres', since the previously set docker environment variable for the container postgis is `POSTGRES_PASSWORD=postgres`!
+>**Info**: The password is `postgres`, since the set Docker environment variable for the service postgres in the Docker Compose file is `POSTGRES_PASSWORD=postgres`!
 
-## Start deegree docker container with local deegree workspace directory
+After connecting to the database server, you should see a database named `inspire` listed. If the GML data import was 
+successful, the tables within the `schutgeb` schema will be populated with data. To visualize this data, expand 
+the `inspire` database, then navigate to the `schutgeb` schema. Here, you'll find several tables that were created 
+by the setup scripts executed during the Docker Compose environment initialization. To view the data, right-click 
+on a table and select `View/Edit Data > All Rows`. This will run a predefined SQL query, displaying the data in 
+the pgAdmin 4 web interface.
 
-Download the deegree demo workspace bundle (as ZIP file) for the INSPIRE data theme protected sites:
-
-* Protected Sites:  	[deegree3-workspace-ps](https://github.com/lat-lon/deegree-workshop/tree/master/deegree3-workspace-ps)
-
-* Download the ZIP file from https://github.com/lat-lon/deegree-workshop
-
-* Unzip the file _deegree-workshop-X.zip_ to your local drive
-
-* Create a new directory `.deegree` in the user's home directory and move the sub-directory `workspace-ps/` into the `~/.deegree` directory. 
-
-Start now a **new** container with mounted user home directory `~/.deegree`:
-
-    docker run -d --name deegree -v ~/.deegree:/root/.deegree -p 8080:8080 --link postgis:db deegree/deegree3-docker
-
-Open the deegree services console: [http://localhost:8080/deegree-webservices](http://localhost:8080/deegree-webservices) 
-
-* Then select under "workspaces > available workspaces" the workspace _workspace_ps_ and start the workspace with "Start".
-
-## Start deegree WFS serving INSPIRE data theme Protected Sites
-
-To configure a INSPIRE direct-access download service based on deegree WFS 2.0 serving harmonized data the following steps are needed:
-
-1. Create the database and schema with the provided SQL scripts using pgAdmin or use the shell script `scripts/setupDB.sh`
-
-2. Select and reload the workspace for Protected Sites in the deegree service console (now all warnings should be gone!)
-
-Each workspace bundle (deegree3-workspace-cp and deegree3-workspace-ps) contains the following resources:
-
-| Directory       | Content     | Documentation |
-| :-------------- | :---------- | :------------ |   
-| `/ddl`          | SQL DDL scripts for canonical and blob mapping | [PostgreSQL](https://www.postgresql.org/docs/current/static/tutorial.html), [PostGIS](http://workshops.boundlessgeo.com/postgis-intro/) |
-| `/scripts`      | Shell scripts to execute all SQL scripts using psql CLI (Linux/Unix only) |  |
-| `/test`         | SoapUI project for testing | [Getting started with SoapUI](https://www.soapui.org/getting-started/your-first-soapui-project.html) | 
-| `/workspace-cp` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Cadastral Parcels including a configuration set for BLOB and canonical mapping | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
-| `/workspace-ps` | Complete deegree workspace with WFS and WMS configuration for INSPIRE Annex 1 data theme Protected Sites including a configuration set for BLOB and canonical mapping   | [Configuration basics with deegree](http://download.deegree.org/documentation/3.4.0/html/lightly.html#example-workspace-1-inspire-network-services) |
-
-### Detailed description for Protected Sites with manual database setup
-
-The shell script `setupDB.sh` creates both, the canonical and BLOB database schema! In case you can't run the shell script execute the following scripts in pgAdmin:
-
-1. Connect to the database server and open Query Tool in pgAdmin
-
-    1. As user postgres create user and database with:
-        
-        - `~/.deegree/ddl/01_create_deegree_user.sql`
-        - `~/.deegree/ddl/ps-canonical/02_create_ps_canonical_db.sql`
-        
-    2. As user deegree connect to _ps_canonical_ database and create the schema with 
-
-        - `~/.deegree/ddl/03_create_extension_postgis.sql`
-        - `~/.deegree/ddl/ps-canonical/04_create_ps_canonical_schema.sql`
-
-2. Now open the deegree service console and reload the workspace:
-
-    1. The WFS service configuration is located in `/services/wfs_ps_canonical.xml`
-
+## 3. Use QGIS to visualize the data
 #### Service Address
 
 WFS Endpoint: [http://localhost:8080/deegree-webservices/services/wfs_ps_canonical](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical)

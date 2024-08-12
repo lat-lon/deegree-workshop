@@ -1,0 +1,2 @@
+/root/.deegree/ps-sl/data/gmlData/ProtectedSites_Naturschutz.gml
+/root/.deegree/ps-sl/data/gmlData/ProtectedSites_Denkmale.gml
