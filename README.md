@@ -232,74 +232,54 @@ on a table and select `View/Edit Data > All Rows`. This will run a predefined SQ
 the pgAdmin 4 web interface.
 
 ## 3. Use QGIS to visualize the data
-#### Service Address
 
-WFS Endpoint: [http://localhost:8080/deegree-webservices/services/wfs_ps_canonical](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical)
+### 3.1 Retrieve the WFS and WMS endpoints 
 
-WFS Capabilities:
+To retrieve the Web Feature Service (WFS) and Web Map Service (WMS) endpoints of the deegree workspace for the 
+INSPIRE Annex 1 data theme ProtectedSites, navigate to the deegree web console with:
+* http://localhost:8080/deegree-webservices
 
-[http://localhost:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities)
+In the web console, go to the pre-configured web services under:
 
-### Database schema and deegree SQLFeatureStore configuration based on BLOB-mode GML application mapping
+##### web services > services
 
-1. Create the database using pgAdmin
+If everything is set up correctly, you should see a WFS named `inspirewfs_Schutzgebiete` and a WMS 
+named `inspirewms_Schutzgebiete`. By clicking the `Capabilities` button for each service, you can access 
+the corresponding capabilities document in form of an XML response. This document provides metadata about the 
+operations, services, and data offered by the service.
 
-    1. As user postgres create the database
+* WFS Capabilities: [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities)
+* WFS Capabilities: [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities)
 
-        - `~/.deegree/ddl/ps-blob/create_ps_blob_db.sql`
+Based on the capabilities address, the endpoint for each service can be identified:
 
-    2. As user deegree connect to ps_blob database and create the schema with 
+* WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
+* WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete)
 
-        - `~/.deegree/ddl/03_create_extension_postgis.sql`
-        - `~/.deegree/ddl/ps-blob/04_create_ps_blob_schema.sql`
+### 3.2 Start QGIS
+#### You can skip this step if you already have QGIS installed on your device!
 
-2. Reload the workspace to activate the changes!
-
-#### Service Address
-
-WFS Endpoint: [http://localhost:8080/deegree-webservices/services/wfs_ps_blob](http://localhost:8080/deegree-webservices/services/wfs_ps_blob)
-
-WFS Capabilities:
-
-[http://localhost:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities)
-
-# Part 3 - Import test data  ![image alt text](resources/image_7.png) 
-
-Dockerfile: -
-
-_**Hint**: Download SoapUI here: [https://www.soapui.org/downloads/soapui.html](https://www.soapui.org/downloads/soapui.html)_, and unzip the package. Then start SoapUI using the start scripts or the links created by the installer. For a short intro use the [Getting Starting Guide](https://www.soapui.org/getting-started/).
-
-## Setting custom properties
-
-Open the file `deegree3-workspace-ps/test/wfs200-soapui-project.xml` with SoapUI and select the project root node. 
-
-![image alt text](resources/image_8.png)
-
-Switch to "Custom Properties" tab and set for property “wfsEndpoint”:
-
-* To import data into the SQLFeatureStore in BLOB modus use:
-[http://deegree:8080/deegree-webservices/services/wfs_ps_blob](http://deegree:8080/deegree-webservices/services/wfs_ps_blob)
-
-* The WFS configured with the SQLFeatureStore in relational/canonical modus use:
-[http://deegree:8080/deegree-webservices/services/wfs_ps_canonical](http://deegree:8080/deegree-webservices/services/wfs_ps_canonical)
-
-## Import sample test data over WFS-T Insert operation
-
-To send a WFS-T Insert action submit the test step "INSPIRE ProtectedSite > Transaction > INSERT-POST-FeatureCollection":
-
-![image alt text](resources/image_9.png)
-
-Switch the "wfsEndpoint" property to the other endpoint and re-submit the WFS-T Insert request to insert the data also in the other database.
-
-# Part 4 - Retrieve data ![image alt text](resources/image_10.png)
+ToDo, possible?
 
 Docker hub: [https://hub.docker.com/r/qgis/qgis/](https://hub.docker.com/r/qgis/qgis/)
 
-Dockerfile: -
+**Latest version**
+```
+docker pull qgis/qgis-server:latest
+```
+**Specific version** (example, **l**ong **t**erm **r**elease)
+```
+docker pull qgis/qgis-server:ltr-bookworm
+```
 
-_**Hint**: Download QGIS for your operating system from [http://download.qgis.org](http://download.qgis.org) and install as documented._ 
+> **Info**: You can also download QGIS for your operating system 
+> from [https://qgis.org/download/](https://qgis.org/download/) and install as documented.
+
+
+### 3.3 Add the WFS and WMS Endpoints to QGIS 
 
 Create a new project and add the WMS 1.3.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wms_ps](http://localhost:8080/deegree-webservices/services/wms_ps) and the WFS 2.0.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wfs_ps_canonical](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical). 
+
 
 # Part 5 - Validate deegree Webservice ![image alt text](resources/image_11.png)
 
