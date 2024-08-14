@@ -256,32 +256,63 @@ Based on the capabilities address, the endpoint for each service can be identifi
 * WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
 * WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete)
 
-### 3.2 Start QGIS
-#### You can skip this step if you already have QGIS installed on your device!
+### 3.2 Launch QGIS
 
-ToDo, possible?
+Launch QGIS on the device where your Docker Compose environment is set up.
 
-Docker hub: [https://hub.docker.com/r/qgis/qgis/](https://hub.docker.com/r/qgis/qgis/)
+If QGIS is not already installed, you can download the appropriate version for your operating system 
+from [https://qgis.org/download/](https://qgis.org/download/) and follow the installation instructions.
 
-**Latest version**
-```
-docker pull qgis/qgis-server:latest
-```
-**Specific version** (example, **l**ong **t**erm **r**elease)
-```
-docker pull qgis/qgis-server:ltr-bookworm
-```
+> **Info**: You may also use other Geographic Information Systems (GIS) or similar software to visualize 
+> your data, if preferred.
 
-> **Info**: You can also download QGIS for your operating system 
-> from [https://qgis.org/download/](https://qgis.org/download/) and install as documented.
-
+Once QGIS launched, create a new QGIS project with the Name `INSPIRE_PS`.
 
 ### 3.3 Add the WFS and WMS Endpoints to QGIS 
 
-Create a new project and add the WMS 1.3.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wms_ps](http://localhost:8080/deegree-webservices/services/wms_ps) and the WFS 2.0.0 Endpoint with URL [http://localhost:8080/deegree-webservices/services/wfs_ps_canonical](http://localhost:8080/deegree-webservices/services/wfs_ps_canonical). 
+#### 3.3.1 Add the WFS Endpoint
 
+Add a new WFS / OGC API - Features layer to your QGIS project under:
 
-# Part 5 - Validate deegree Webservice ![image alt text](resources/image_11.png)
+##### Layer > Add Layer > Add WFS / OGC API - Features Layer...
+
+The following window should open:
+
+![dms_wfs.png](resources/dms_wfs.png)
+
+Click on the button `New` to add the WFS endpoint of deegree to your QGIS project, another window should open:
+
+![config_wfs.png](resources/config_wfs.png)
+
+In this window, set a name and the WFS Endpoint with the URL:
+* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete) 
+
+To complete the configuration, click the `OK` button. The current window will close, revealing the previous one. 
+In that window, click the `Connect` button. A table displaying the available layers should then appear.
+
+#### 3.3.1 Add the WMS Endpoint
+
+Add a new WMS/WMTS layer to your QGIS project under:
+
+##### Layer > Add Layer > Add WMS/WMTS Layer...
+
+The following window should open:
+
+![dms_wms.png](resources/dms_wms.png)
+
+Click on the button `New` to add the WMS endpoint of deegree to your QGIS project, another window should open:
+
+![config_wms.png](resources/config_wms.png)
+
+In this window, set a name and the WMS Endpoint with the URL:
+* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
+
+To complete the configuration, click the `OK` button. The current window will close, revealing the previous one.
+In that window, click the `Connect` button. A table displaying the available layers should then appear.
+
+## 3.4 Load the layers in the QGIS workspace
+
+# 4. Validate deegree Webservice
 
 Docker hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
 
@@ -304,7 +335,7 @@ to run the validation against.
 
 ### deegree WFS 2.0 Reference Implementation online:
 
-[http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities](http://cite.deegree.org/deegree-webservices-3.4.12/services/wfs200?service=WFS&request=GetCapabilities)
+[https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities](https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities)
 
 ## Further testing with the INSPIRE Reference Validator
 
