@@ -39,25 +39,30 @@
 #### PostgreSQL/PostGIS Database
 ![image alt text](resources/postgresql-horizontal.svg) ![image alt text](resources/image_3.png)
 
-Docker Hub: [https://hub.docker.com/r/postgis/postgis/](https://hub.docker.com/r/postgis/postgis/)
+* Docker Hub: [https://hub.docker.com/r/postgis/postgis/](https://hub.docker.com/r/postgis/postgis/)
 
-To download the Docker image from the docker registry hub.docker.com run:
+To download the Docker image from the Docker registry run:
 
     docker pull postgis/postgis:16-3.4
 
 #### pgAdmin 4 Web Interface
 
-Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
+* Docker Hub: [https://hub.docker.com/r/dpage/pgadmin4/](https://hub.docker.com/r/dpage/pgadmin4/)
+
+To download the Docker image from the Docker registry run:
 
     docker pull dpage/pgadmin4:8.9
 
 #### deegree Webservices
 ![image alt text](resources/deegree_logo.svg)
 
-Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
-Dockerfile: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
+* Docker Hub: [https://hub.docker.com/r/deegree/deegree3-docker/](https://hub.docker.com/r/deegree/deegree3-docker/)
+
+To download the Docker image from the Docker registry run:
 
     docker pull deegree/deegree3-docker:3.5.8
+
+* Dockerfile available under: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
 
 ## 1.3 Setting up your Docker Environment for deegree
 
@@ -312,24 +317,40 @@ In that window, click the `Connect` button. A table displaying the available lay
 
 ## 3.4 Load the layers in the QGIS workspace
 
+ToDo
+
 # 4. Validate deegree Webservice
 
-Docker hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
+## 4.1 TEAM Engine 5.x:
 
-Dockerfile: https://github.com/opengeospatial/teamengine-docker/
+* Docker Hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
 
-## TEAM Engine 5.x with WFS ETS 1.x:
+To download the Docker image from the Docker registry run:
 
-    docker pull ogccite/teamengine-production
-    docker run -d --name teamengine -p 8088:8080 --link deegree:deegree ogccite/teamengine-production
+    docker pull ogccite/teamengine-production:latest
 
-Open in browser: [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
+* Dockerfile available under: [https://github.com/opengeospatial/teamengine-docker/](https://github.com/opengeospatial/teamengine-docker/)
+
+
+Run the TEAM Engine with the following command:
+    
+    docker run -d --name teamengine -p 8088:8080 --network="deegree_workshop_network" ogccite/teamengine-production
+
+Next, open the Team Engine in your browser with: 
+
+* [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
+
+Log in with the following credentials:
+
+* **User**:	
+* **Password**: 
+
+> **Info**:	You can also create a new account, with the credentials stored locally, which are automatically deleted 
+> when the Docker container is removed.
 
 Use either
 
 * [http://deegree:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities](http://deegree:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities)
-
-* [http://deegree:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities](http://deegree:8080/deegree-webservices/services/wfs_ps_blob?service=WFS&request=GetCapabilities)
 
 to run the validation against.
 
