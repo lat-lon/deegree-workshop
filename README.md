@@ -108,6 +108,10 @@ configuration is persistent and shared.
   postgres:
     image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
     container_name: postgres_database
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres -d inspire" ]
+      interval: 5s
+      retries: 3
     ports:
       - 5432:5432
     environment:

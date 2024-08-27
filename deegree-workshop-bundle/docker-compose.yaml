@@ -11,13 +11,17 @@ services:
       - ./deegree-workspace:/root/.deegree:rw
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
     networks:
       - network
 
   postgres:
     image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
     container_name: postgres_database
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres -d inspire" ]
+      interval: 5s
+      retries: 3
     ports:
       - 5432:5432
     environment:
