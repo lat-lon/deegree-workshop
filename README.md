@@ -340,29 +340,31 @@ Run the TEAM Engine with the following command:
     
     docker run -d --name teamengine -p 8088:8080 --network="deegree_workshop_network" ogccite/teamengine-production
 
-Next, open the Team Engine in your browser with: 
+Next, open the TEAM Engine in your browser with: 
 
 * [http://localhost:8088/teamengine](http://localhost:8088/teamengine)
 
 Log in with the following credentials:
 
-* **User**:	
-* **Password**: 
+* **User**:	ogctest
+* **Password**: ogctest 
 
 > **Info**:	You can also create a new account, with the credentials stored locally, which are automatically deleted 
 > when the Docker container is removed.
 
-Use either
+Use either the WFS or WMS to run the validation against:
 
-* [http://deegree:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities](http://deegree:8080/deegree-webservices/services/wfs_ps_canonical?service=WFS&request=GetCapabilities)
+* [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete)
+* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
 
-to run the validation against.
+For reference, the current deegree WFS 2.0 OGC Reference Implementation can be found online under:
 
-### deegree WFS 2.0 Reference Implementation online:
+* [https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities](https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities)
 
-[https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities](https://cite.deegree.org/deegree-webservices-3.5.6/services/wfs200?service=WFS&request=GetCapabilities)
+Further information about the TEAM Engine can be obtained under: 
+* https://github.com/opengeospatial/teamengine
 
-## Further testing with the INSPIRE Reference Validator
+## 4.2 Further testing with the INSPIRE Reference Validator:
 
 Docker hub: [https://hub.docker.com/r/iide/etf-webapp/](https://hub.docker.com/r/iide/etf-webapp/)
 
