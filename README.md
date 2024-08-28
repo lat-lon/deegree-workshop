@@ -323,7 +323,7 @@ In that window, click the `Connect` button. A table displaying the available lay
 
 ToDo
 
-# 4. Validate deegree Webservice
+# 4. Validate the deegree Webservices
 
 ## 4.1 TEAM Engine 5.x:
 
@@ -366,152 +366,184 @@ Further information about the TEAM Engine can be obtained under:
 
 ## 4.2 Further testing with the INSPIRE Reference Validator:
 
-Docker hub: [https://hub.docker.com/r/iide/etf-webapp/](https://hub.docker.com/r/iide/etf-webapp/)
+GitHub: [https://github.com/INSPIRE-MIF/helpdesk-validator](https://github.com/INSPIRE-MIF/helpdesk-validator)
 
-Dockerfile: [https://github.com/interactive-instruments/etf-webapp](https://github.com/interactive-instruments/etf-webapp) 
+> **Info**: For this step, an existing GitHub account is required!
 
-    docker pull iide/etf-webapp
-    docker run --name etf -d -p 8188:8080 -v ~/etf:/etf --link deegree:deegree iide/etf-webapp:latest
+Run it using the following docker commands:
 
-Open in browser: [http://localhost:8188/etf-webapp](http://localhost:8088/etf-webapp)
+    docker login docker.pkg.github.com
+    docker run --name inspire-validator --network="deegree_workshop_network" -d -p 8090:8090 -v ~/etf:/etf docker.pkg.github.com/inspire-mif/helpdesk-validator/inspire-validator:2024.2
 
-To allow access to the local Docker Container running deegree you need to change the configuration file `~/etf/config/etf-config.properties` and set the property:
+The first command prompts you to log into GitHub using your GitHub-Account credentials. The second command launches a 
+Docker container with the image of the INSPIRE Reference Validator, exposing the UI in port 8090 through the same port 
+in the host machine. It uses a volume in the local file system, on the directory `~/etf`, which will create an `~/etf` 
+folder inside the users home folder.
 
-    etf.testobject.allow.privatenet.access = true
+Once the Docker container is started, you can open the UI in your browser under: 
+* [http://localhost:8090/validator/home/index.html](http://localhost:8090/validator/home/index.html)
 
-More information how to configure the etf-web application under [http://docs.etf-validator.net/](http://docs.etf-validator.net/) and [https://github.com/inspire-eu-validation/ets-repository](https://github.com/inspire-eu-validation/ets-repository). 
+---
 
-# Troubleshooting
+# Troubleshooting Guide
 
-* Can’t access docker from the command line - 
+### Docker Command Line Issues
 
-    * check if the docker daemon is running and use `sudo`
+- **Can't access Docker from the command line:**
+    - Ensure the Docker daemon is running and use `sudo` if necessary.
 
-* Can't pull docker image in case no Internet connection is available you can import a Docker image from a tar archive:
+### Docker Image Handling
 
-    * `docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar`
+- **Can't pull Docker image due to no Internet connection:**
+    - Import a Docker image from a tar archive using:
+      ```bash
+      docker load -i <PATH_TO_USB_DRIVE>/Docker/postgis.tar
+      ```
 
-* Error while starting docker container - 
+### Container Management
 
-    * check system resources if memory is still available
-    * `docker stats deegree` 	- This will present the CPU utilization for the container, the memory used and total memory available to the container.
-    * Stop and remove the container with `docker stop deegree && docker rm deegree` and re-run the container
+- **Error while starting Docker container:**
+    - Verify system resources, especially available memory.
+    - Monitor container stats with:
+      ```bash
+      docker stats <CONTAINER_NAME_OR_ID>
+      ```
+      This will display CPU usage, memory utilization, and total memory available to the container.
+    - Stop and remove the container, then restart:
+      ```bash
+      docker stop <CONTAINER_NAME_OR_ID> && docker rm <CONTAINER_NAME_OR_ID>
+      ```
 
-* Check the deegree console output in case of errors -
+- **Checking Docker container logs for errors:**
+    - Use the following command to view real-time logs:
+      ```bash
+      docker logs -f <CONTAINER_NAME_OR_ID>
+      ```
 
-    * `docker logs -f deegree`
+### Container Interaction
 
-* Attach to the deegree container when starting the container to execute commands inside of the container -
- 
-    * `docker attach deegree`
-    * You can detach from the container and leave it running with `CTRL-p CTRL-q`. Requires to pass the `-it` option to the docker run command!
-    * You can stop the container with `CTRL+c`.	
+- **Attach to the Docker container to execute commands:**
+    - Attach with:
+      ```bash
+      docker attach <CONTAINER_NAME_OR_ID>
+      ```
+    - To detach while keeping the container running, use `CTRL-p CTRL-q` (ensure `-it` option is used with `docker run`).
+    - Stop the container with `CTRL-c`.
 
-* To run commands inside of the container open a shell in the running deegree container - 
-    
-    * `docker exec -it deegree '/bin/bash'`
-    * Use command `exit` to disconnect from the container.
+- **Running commands inside the Docker container:**
+    - Open a shell inside the running container:
+      ```bash
+      docker exec -it <CONTAINER_NAME_OR_ID> '/bin/bash'
+      ```
+    - Exit the shell with the `exit` command.
 
-* For more hints and tips check [https://docs.docker.com/toolbox/faqs/troubleshoot/](https://docs.docker.com/toolbox/faqs/troubleshoot/)
+### Network Troubleshooting
 
-    * For Mac OS : [https://docs.docker.com/docker-for-mac/troubleshoot/](https://docs.docker.com/docker-for-mac/troubleshoot/)
+- **Can't access Docker container within the Docker network:**
+    - List container IPs:
+      ```bash
+      docker network inspect bridge
+      ```
+    - Create and connect containers to a custom network:
+      ```bash
+      docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 inspire_network
+      docker network connect inspire_network <CONTAINER_NAME_OR_ID>
 
-    * For Windows:  [https://docs.docker.com/docker-for-windows/troubleshoot/](https://docs.docker.com/docker-for-windows/troubleshoot/)
+      ```
+    - Retry accessing the Docker container.
 
-* Can’t access the Docker container within Docker network then try the following
+### Database Interaction
 
-    * `docker network inspect bridge` 	- lists the IP for each container.
+- **Can't insert data into the database:**
+    - Ensure the `inspire` user has all necessary privileges.
+    - Grant privileges using:
+      ```sql
+      GRANT ALL ON SCHEMA public TO inspire;
+      GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO inspire;
+      GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO inspire;
+      ```
 
-    * `docker network create -d bridge --subnet 192.168.0.0/24 --gateway 192.168.0.1 inspirenet`
+### Additional Resources
 
-    * `docker network connect inspirenet deegree`
+- **General Docker Troubleshooting:** [Docker FAQs](https://docs.docker.com/toolbox/faqs/troubleshoot/)
+    - **For Mac OS:** [Mac Troubleshooting](https://docs.docker.com/docker-for-mac/troubleshoot/)
+    - **For Windows:** [Windows Troubleshooting](https://docs.docker.com/docker-for-windows/troubleshoot/)
 
-    * `docker network connect inspirenet etf`
+---
 
-    * `docker network connect inspirenet postgis`
+# Overview of Basic Docker Commands
 
-    * `docker network connect inspirenet teamengine`
+### General Structure of the Docker CLI
 
-    * And retry to access the Docker container
+```bash
+docker <command> [options] [arguments]
+```
 
-* Can’t insert data into the database
+### Display Help for Docker Commands
 
-    * Check if the user deegree has all needed privileges
+- **Show help per Docker command:**
+  ```bash
+  docker <command> --help
+  ```
 
-    * Grant user deegree all privileges with:
+### Common Commands and Options
 
-        * `GRANT ALL ON SCHEMA public TO deegree;`
+- **`docker info`:**
+    - Display system-wide information.
 
-        * `GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO deegree;`
+- **`docker images`:**
+    - List Docker images.
 
-        * `GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to deegree;`
-        
-# Overview of basic docker commands
- 
- General structure of the docker CLI:
- 
-     docker <command> [options] [arguments]
- 
- Display help per docker command:
- 
- * `docker <command> --help` 	- Show help per docker command
- 
- Commands and options used within this tutorial:
- 
- * `docker info` 		- Display system-wide information
- 
- * `docker images`		- List images
- 
- * `docker pull`		- Pull an image or a repository from a registry (e.g. [hub.docker.com](https://hub.docker.com/))
- 
- * `docker ps`		    - List containers
- 
-     * -a 		        - Show all containers, incl. **stopped** containers
- 
- * `docker network ls`	- List all networks
- 
- * `docker run`		    - Run a command in a **new** container
- 
-     * -d, --detach      	Run container in background and print container ID
- 
-     * -e, --env value           	Set environment variables (default [])
- 
-     * -i, --interactive           	Keep STDIN open even if not attached
-  
-     * --link value                  Add link to another container (default [] / )
- 
-     * -m, --memory string  	Memory limit (format: <number><unit>, where unit = b, k, m or g)
- 
-     * --name string            	Assign a name to the container
- 
-     * --network string      	Connect a container to a network (default "default" / [host, bridge]
- 
-     * -p, --publish value      	Publish a container's port(s) to the host (default [] / host:container)
- 
-     * --rm                          	Automatically remove the container when it exits
- 
-     * -t, --tty                 	Allocate a pseudo-TTY
- 
-     * -v, --volume value   	Bind mount a volume (default [] / host_dir:container_dir)
- 
- * `docker exec`		- Run a command in a **running** container
- 
- * `docker logs`		- Fetch the logs of a container
- 
-     * -f, --follow    	- Follow log output
- 
- * `docker start`		- Start one or more stopped containers
- 
- * `docker stop`		- Stop one or more running containers
- 
- * `docker load`		- Load a docker image from a tar archive file
- 
- * `docker save`		- Save a docker image into a tar archive file
- 
- * `docker rm` 		    - Remove one or more containers
- 
- * `docker rmi`		    - Remove one or more images
-        
+- **`docker pull`:**
+    - Pull an image or a repository from a registry (e.g., [hub.docker.com](https://hub.docker.com/)).
+
+- **`docker ps`:**
+    - List containers.
+        - `-a`: Show all containers, including **stopped** ones.
+
+- **`docker network ls`:**
+    - List all Docker networks.
+
+- **`docker run`:**
+    - Run a command in a **new** container.
+        - `-d, --detach`: Run container in background and print container ID.
+        - `-e, --env`: Set environment variables (default: `[]`).
+        - `-i, --interactive`: Keep STDIN open even if not attached.
+        - `-m, --memory`: Set memory limit (format: `<number><unit>`, where unit = b, k, m, or g).
+        - `--name`: Assign a name to the container.
+        - `--network`: Connect a container to a network (default: `"default"`, options: `[host, bridge]`).
+        - `-p, --publish`: Publish a container's port(s) to the host (default: `[]`, format: `host:container`).
+        - `--rm`: Automatically remove the container when it exits.
+        - `-t, --tty`: Allocate a pseudo-TTY.
+        - `-v, --volume`: Bind mount a volume (default: `[]`, format: `host_dir:container_dir`).
+
+- **`docker exec`:**
+    - Run a command in a **running** container.
+
+- **`docker logs`:**
+    - Fetch the logs of a container.
+        - `-f, --follow`: Follow log output in real-time.
+
+- **`docker start`:**
+    - Start one or more stopped containers.
+
+- **`docker stop`:**
+    - Stop one or more running containers.
+
+- **`docker load`:**
+    - Load a Docker image from a tar archive file.
+
+- **`docker save`:**
+    - Save a Docker image into a tar archive file.
+
+- **`docker rm`:**
+    - Remove one or more containers.
+
+- **`docker rmi`:**
+    - Remove one or more images.
+
+---
+
 # Links for further reading and resources
 
 ## Tutorial resources and slides 
@@ -546,7 +578,7 @@ Video (german) - [FOSS4G 2016 - Docker Images for Geospatial](https://ftp.gwdg.d
 * [https://www.osgeo.org/projects/deegree/](https://www.osgeo.org/projects/deegree/)
 * [https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/](https://www.fossgis.de/aktivit%c3%a4ten/langzeitf%c3%b6rderungen/deegree/)
 
-### Documentation 3.5.x (current))
+### Documentation 3.5.x (current)
 
 * [https://download.deegree.org/documentation/current/html/](https://download.deegree.org/documentation/current/html/) 
 
