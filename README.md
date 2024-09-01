@@ -200,7 +200,7 @@ docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-too
 docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToList=/root/.deegree/ps-sl/data/gmlData/gmldatalist.txt -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
 ```
 
->**Info**: Setting the Java parameter `-Xmx16g` (value dependant on the resources provided) is highly advisable, to avoid
+>**Info**: Setting the Java parameter `-Xmx16g` (value dependent on the resources provided) is highly advisable, to avoid
 > a Java `OutOfMemoryError`. Further information regarding the parameters of the GmlLoader can be found in the 
 > [deegree documentation of the GML tools CLI](https://download.deegree.org/documentation/current/html/#deegree-gml-tools).
 
@@ -321,8 +321,13 @@ In that window, click the `Connect` button. A table displaying the available lay
 
 ## 3.4 Load the layers in the QGIS workspace
 
-ToDo
+After the two endpoints are added into QGIS, the data can be visualized.
 
+Here is an example of all the layers provided by the WMS (one dataset):
+![WMS.png](resources/WMS.png)
+
+> **Info:** Depending on the used QGIS-Version, the WFS can or can not be visualized. This issue persists, as the INSPIRE
+> GML structure is quite complex to process.
 # 4. Validate the deegree Webservices
 
 ## 4.1 TEAM Engine 5.x:
