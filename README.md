@@ -227,11 +227,11 @@ already available under `/opt` in the deployed Docker container. Since the GML d
 therefore also available on the Docker container, we can execute the `GmlLoader` with the one following commands.
 Be sure to use the right container name, which can change depending on the configured `DEEGREE_VERSION` in the `.env`.
 
-**One dataset**, 1317 polygon geometries, ~25min duration (recommended):
+**One dataset**, 1317 polygon geometries, ~6 min duration (recommended):
 ```
 docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToFile=/root/.deegree/ps-sl/data/gmlData/ProtectedSites_Naturschutz.gml -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
 ```
-**Two datasets**, 7 polygon and 3340 point geometries, ~2hours duration:
+**Two datasets**, 7 polygon and 3340 point geometries, ~20 min duration:
 ```
 docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToList=/root/.deegree/ps-sl/data/gmlData/gmldatalist.txt -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
 ```
