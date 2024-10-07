@@ -4,9 +4,7 @@ services:
     image: deegree/deegree3-docker:${DEEGREE_VERSION}
     container_name: deegree_${DEEGREE_VERSION}
     ports:
-      - 8080:8080
-    links:
-      - postgres
+      - 8181:8080
     volumes:
       - ./deegree-workspace:/root/.deegree:rw
     depends_on:

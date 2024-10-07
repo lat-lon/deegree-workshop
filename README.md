@@ -64,7 +64,7 @@ To download the Docker image from the Docker registry run:
 
 * Dockerfile available under: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
 
-## 1.3 Setting up your Docker Environment for deegree
+## 1.3 Setting up your Docker environment for deegree
 
 For this tutorial, all necessary configuration files and data required to set up and run an example INSPIRE ProtectedSites deegree workspace are available for download in as [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
 
@@ -76,7 +76,6 @@ For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in
 | `/sql`      | SQL scripts for setting up the PostgreSQL database                                                                                                                                        | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
 | `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                       | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
 | `.env` | Used to set the necessery environment variables                                                                                                                                           | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
-
 ### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
@@ -86,9 +85,7 @@ services:
     image: deegree/deegree3-docker:${DEEGREE_VERSION}
     container_name: deegree_${DEEGREE_VERSION}
     ports:
-      - 8080:8080
-    links:
-      - postgres
+      - 8181:8080
     volumes:
       - ./deegree-workspace:/root/.deegree:rw
     depends_on:
@@ -112,13 +109,6 @@ configuration is persistent and shared.
       test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres -d inspire" ]
       interval: 5s
       retries: 3
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d/
     networks:
       - network
 ```
@@ -178,8 +168,53 @@ PGADMIN_VERSION=8.9
 This variable sets the version of pgAdmin 4 to be used. The Docker Compose file references
 this variable to pull the corresponding pgAdmin 4 Docker image.
 
-Using these version parameters in the `.env` file allows for easy updates and consistent configuration across 
-different setups.
+Using these version parameters in the `.env` file allows for easy updates and consistent configuration across different setups.
+
+
+## 1.4 Start the Docker compose environment
+
+The Compose file, or `compose.yaml` file, follows the rules provided by the Compose Specification in how to define multi-container applications.
+
+The default path for a Compose file is `compose.yaml` which is the prefered syntax. There are also other options such as the `compose.yml`, which is placed in the working directory.
+
+With Compose there are also **still** supported options like the `docker-compose.yaml` and docker-compose.yml for backwards compatibility of earlier versions. If both files exist, Compose prefers the canonical `compose.yaml.`
+
+#### Key commands
+
+To start all the services defined in your `compose.yaml`file:
+
+
+   docker compose up
+
+This version however opens all the logs, which can be confusing.
+>**Info** With a slight change in the command the logs can be observed easily. If any chances are made, look up the updated tutorials on https://docs.docker.com/compose/compose-application-model/
+
+The **prefered** command would be:
+
+  docker compose up -d
+
+
+To stop and remove the running services:
+
+  docker compose down
+
+If you want to monitor the output of your running containers and debug issues, you can view the logs with:
+
+  docker compose logs
+
+To lists all the services along with their current status:
+
+  docker compose ps
+
+#### Available endpoints
+After you have succesfully started the Docker compose environment, the following endpoints are available:
+
+**deegree Webservices**
+*  http://localhost:8181/deegree-webservices
+
+**pgAdmin Web Interface**
+*  http://localhost:5080/
+
 
 # 2. Import ProtecedSites data into the PostgreSQL database 
 
@@ -191,11 +226,11 @@ already available under `/opt` in the deployed Docker container. Since the GML d
 therefore also available on the Docker container, we can execute the `GmlLoader` with the one following commands.
 Be sure to use the right container name, which can change depending on the configured `DEEGREE_VERSION` in the `.env`.
 
-**One dataset**, 1317 polygon geometries, ~25min duration (recommended):
+**One dataset**, 1317 polygon geometries, ~6 min duration (recommended):
 ```
 docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToFile=/root/.deegree/ps-sl/data/gmlData/ProtectedSites_Naturschutz.gml -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
 ```
-**Two datasets**, 7 polygon and 3340 point geometries, ~2hours duration:
+**Two datasets**, 7 polygon and 3340 point geometries, ~20 min duration:
 ```
 docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-tools-gml.jar GmlLoader -pathToList=/root/.deegree/ps-sl/data/gmlData/gmldatalist.txt -workspaceName=ps-sl -sqlFeatureStoreId=INSPIRE_ProtectedSites_WFS
 ```
@@ -246,7 +281,7 @@ the pgAdmin 4 web interface.
 
 To retrieve the Web Feature Service (WFS) and Web Map Service (WMS) endpoints of the deegree workspace for the 
 INSPIRE Annex 1 data theme ProtectedSites, navigate to the deegree web console with:
-* http://localhost:8080/deegree-webservices
+* http://localhost:8181/deegree-webservices
 
 In the web console, go to the pre-configured web services under:
 
@@ -257,13 +292,13 @@ named `inspirewms_Schutzgebiete`. By clicking the `Capabilities` button for each
 the corresponding capabilities document in form of an XML response. This document provides metadata about the 
 operations, services, and data offered by the service.
 
-* WFS Capabilities: [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities)
-* WFS Capabilities: [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities)
+* WFS Capabilities: [http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities](http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete?service=WFS&request=GetCapabilities)
+* WMS Capabilities: [http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities](http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete?service=WMS&request=GetCapabilities)
 
 Based on the capabilities address, the endpoint for each service can be identified:
 
-* WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
-* WFS Endpoint: [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete)
+* WFS Endpoint: [http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete)
+* WMS Endpoint: [http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete)
 
 ### 3.2 Launch QGIS
 
@@ -294,7 +329,7 @@ Click on the button `New` to add the WFS endpoint of deegree to your QGIS projec
 ![config_wfs.png](resources/config_wfs.png)
 
 In this window, set a name and the WFS Endpoint with the URL:
-* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete) 
+* [http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete) 
 
 To complete the configuration, click the `OK` button. The current window will close, revealing the previous one. 
 In that window, click the `Connect` button. A table displaying the available layers should then appear.
@@ -314,7 +349,7 @@ Click on the button `New` to add the WMS endpoint of deegree to your QGIS projec
 ![config_wms.png](resources/config_wms.png)
 
 In this window, set a name and the WMS Endpoint with the URL:
-* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
+* [http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete)
 
 To complete the configuration, click the `OK` button. The current window will close, revealing the previous one.
 In that window, click the `Connect` button. A table displaying the available layers should then appear.
@@ -331,7 +366,6 @@ Here is an example of all the layers provided by the WMS (one dataset):
 # 4. Validate the deegree Webservices
 
 ## 4.1 TEAM Engine 5.x:
-
 * Docker Hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
 
 To download the Docker image from the Docker registry run:
@@ -359,8 +393,8 @@ Log in with the following credentials:
 
 Use either the WFS or WMS to run the validation against:
 
-* [http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewms_Schutzgebiete)
-* [http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8080/deegree-webservices/services/inspirewfs_Schutzgebiete)
+* [http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewms_Schutzgebiete)
+* [http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete](http://localhost:8181/deegree-webservices/services/inspirewfs_Schutzgebiete)
 
 For reference, the current deegree WFS 2.0 OGC Reference Implementation can be found online under:
 
