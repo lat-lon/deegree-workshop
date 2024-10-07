@@ -75,8 +75,7 @@ For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in
 | `/deegree-workspace/ps-sl`          | Complete deegree workspace with data and configuration files (WFS, WMS, layers, styles and database) for the INSPIRE Annex 1 data theme ProtectedSites from the federal state of Saarland | [What is a deegree workspace?](https://download.deegree.org/documentation/current/html/#_the_deegree_workspace) |
 | `/sql`      | SQL scripts for setting up the PostgreSQL database                                                                                                                                        | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
 | `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                       | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
-| `.env` | Used to set the necessery environment variables                                                                                                                                           | [How to use the `.env`?](https://docsriables/) |
-
+| `.env` | Used to set the necessery environment variables                                                                                                                                           | [How to use the `.env`?]https://docs.docker.com/compose/environment-variables/set-environment-variables/.
 ### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
@@ -185,27 +184,27 @@ With Compose there are also **still** supported options like the `docker-compose
 To start all the services defined in your `compose.yaml`file:
 
 
-    $ docker compose up
+   docker compose up
 
-  This version however opens all the logs, which can be confusing.
-  >**Info** With a slight chance in the command the logs can be observed easily. If any chances are made, look up the updated tutorials on https://docs.docker.com/compose/compose-application-model/
+This version however opens all the logs, which can be confusing.
+>**Info** With a slight change in the command the logs can be observed easily. If any chances are made, look up the updated tutorials on https://docs.docker.com/compose/compose-application-model/
 
-  The **prefered** command would be:
+The **prefered** command would be:
 
-    $ docker compose up -d
+  docker compose up -d
 
 
 To stop and remove the running services:
 
-    $ docker compose down
+  docker compose down
 
 If you want to monitor the output of your running containers and debug issues, you can view the logs with:
 
-    $ docker compose logs
+  docker compose logs
 
 To lists all the services along with their current status:
 
-    $ docker compose ps
+  docker compose ps
 
 #### Available endpoints
 After you have succesfully started the Docker compose environment, the following endpoints are available:
@@ -366,8 +365,7 @@ Here is an example of all the layers provided by the WMS (one dataset):
 > GML structure is quite complex to process.
 # 4. Validate the deegree Webservices
 
-## 4.1 TEAM Engine 5.x: http://localhost:8181/deegree-webservices
-
+## 4.1 TEAM Engine 5.x:
 * Docker Hub: [https://hub.docker.com/r/ogccite/teamengine-production/](https://hub.docker.com/r/ogccite/teamengine-production/)
 
 To download the Docker image from the Docker registry run:
