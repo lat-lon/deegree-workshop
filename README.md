@@ -70,12 +70,13 @@ For this tutorial, all necessary configuration files and data required to set up
 
 For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in the downloaded ZIP-File are relevant. The folder contains the following items:
 
-| Directory       | Content                                                                                                                                                                                   | Documentation |
-| :-------------- |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------ |   
-| `/deegree-workspace/ps-sl`          | Complete deegree workspace with data and configuration files (WFS, WMS, layers, styles and database) for the INSPIRE Annex 1 data theme ProtectedSites from the federal state of Saarland | [What is a deegree workspace?](https://download.deegree.org/documentation/current/html/#_the_deegree_workspace) |
-| `/sql`      | SQL scripts for setting up the PostgreSQL database                                                                                                                                        | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
-| `docker-compose.yaml`         | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                       | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) | 
-| `.env` | Used to set the necessery environment variables                                                                                                                                           | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
+| Directory                  | Content                                                                                                                                                                                      | Documentation |
+|:---------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :------------ |
+| `/deegree-workspace/ps-sl` | Complete deegree workspace with data and configuration files (WFS, WMS, layers, styles and database) for the INSPIRE Annex 1 data theme ProtectedSites from the federal state of Saarland    | [What is a deegree workspace?](https://download.deegree.org/documentation/current/html/#_the_deegree_workspace) |
+| `/sql`                     | SQL scripts for configuring the PostgreSQL database                                                                                                                                          | [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/) |
+| `/sql-dump`                | SQL scripts for configuring the PostgreSQL database and populating it with data                                                                                                              |  [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/)  |
+| `docker-compose.yaml`      | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                          | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) |
+| `.env`                     | Used to set the necessery environment variables                                                                                                                                              | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
 ### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
@@ -90,15 +91,15 @@ services:
       - ./deegree-workspace:/root/.deegree:rw
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
     networks:
       - network
 ```
-The first service declared in the Docker Compose file is deegree, which runs the deegree web services. 
-The specific version of deegree used is determined by the DEEGREE_VERSION variable defined in the .env file. 
-The service depends on the successful startup of the PostgreSQL service (referred to as postgres). 
-Once PostgreSQL is running, the deegree service is started. The deegree container also mounts a local 
-directory (./deegree-workspace) to /root/.deegree within the container, ensuring that the workspace 
+The first service declared in the Docker Compose file is deegree, which runs the deegree web services.
+The specific version of deegree used is determined by the DEEGREE_VERSION variable defined in the .env file.
+The service depends on the successful startup and health of the PostgreSQL service (referred to as postgres).
+Once PostgreSQL is running, the deegree service is started. The deegree container also mounts a local
+directory (./deegree-workspace) to /root/.deegree within the container, ensuring that the workspace
 configuration is persistent and shared.
 
 ```
@@ -109,13 +110,23 @@ configuration is persistent and shared.
       test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres -d inspire" ]
       interval: 5s
       retries: 3
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d/
+      #- ./sql-dump:/docker-entrypoint-initdb.d/
     networks:
       - network
 ```
 The second service is postgres, a PostgreSQL database with PostGIS extensions. 
 The exact version is specified by the POSTGRES_POSTGIS_VERSION variable from the .env file. 
 It exposes port 5432 and initializes the database using SQL scripts found in the ./sql directory, 
-which are automatically executed at container startup.
+which are automatically executed at container startup. Optionally, the SQL database dump can be utilized,
+although it is typically commented out.
+
 ```
   pgadmin:
     image: dpage/pgadmin4:${PGADMIN_VERSION}
@@ -127,7 +138,7 @@ which are automatically executed at container startup.
       - PGADMIN_DEFAULT_PASSWORD=admin
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
     networks:
       - network
 ```            
@@ -138,9 +149,9 @@ and it exposes port 5080 for access.
 ```
 networks:
   network:
-    name: deegree_workshop
+    name: deegree_workshop_network
 ```
-At last, a custom Docker network named deegree_workshop is created. 
+At last, a custom Docker network named `deegree_workshop_network` is created.
 This network ensures that all services can communicate within the same isolated network environment, 
 allowing containers to reference each other by their service names.
 
@@ -241,7 +252,35 @@ docker exec -w /opt deegree_[YOUR_DEEGREE_VERSION] java -Xmx16g -jar deegree-too
 
 Beware that the `GmlLoader` can only be executed when the used SqlFeatureStore in deegree was created using the
 `SqlFeatureStoreConfigCreator`, which is also a part of the deegree GML tools CLI. Since the configuration for this
-tutorial is provided, the usage of the `SqlFeatureStoreConfigCreator` is not necessary. 
+tutorial is provided, the usage of the `SqlFeatureStoreConfigCreator` is not necessary.
+
+### Optional:
+If you can not use the `GmlLoader` due to errors or missing time resources, just uncomment the `./sql-dump` volume of the
+`postgres` service in the `compose.yaml`:
+
+```
+  postgres:
+    image: postgis/postgis:${POSTGRES_POSTGIS_VERSION}
+    container_name: postgres_database
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -h localhost -p 5432 -U postgres -d inspire" ]
+      interval: 5s
+      retries: 3
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      #- ./sql:/docker-entrypoint-initdb.d/
+      - ./sql-dump:/docker-entrypoint-initdb.d/
+    networks:
+      - network
+```
+While using the SQL dump you can simply start the Docker environment and directly start using the deegree webservices
+([section 3](#3-use-qgis-to-visualize-the-data))!
+
+> Info: Remember to comment out the `./sql` volume!
 ## 2.2 Use the pgAdmin 4 Web Interface 
 
 After the import of the GML data using the deegree `GmlLoader` is finished, we can verify the content of the PostgreSQL

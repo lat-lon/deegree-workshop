@@ -27,6 +27,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./sql:/docker-entrypoint-initdb.d/
+      #- ./sql-dump:/docker-entrypoint-initdb.d/
     networks:
       - network
 
@@ -40,7 +41,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
     depends_on:
       postgres:
-        condition: service_started
+        condition: service_healthy
     networks:
       - network
 
