@@ -4,21 +4,25 @@
 
 ## Agenda   
 
-1. [Setup the Docker Compose infrastructure](#setlink)
+1. [Set up the Docker Compose infrastructure](#1-set-up-the-docker-infrastructure)
 
-2. [Configure INSPIRE Direct Access Download Services based on deegree WFS 2.0](#setlink)
+2. [Import ProtecedSites data into the PostgreSQL database ](#2-import-protecedsites-data-into-the-postgresql-database-)
 
-3. [Import test data using deegree WFS-T interface](#setlink)
+3. [Use QGIS to visualize the data](#3-use-qgis-to-visualize-the-data)
 
-4. [Retrieve data with different clients](#setlink)
+4. [Validate the deegree webservices](#4-validate-the-deegree-webservices)
 
-5. [Validate service and data](#setlink)
+    [Troubleshooting guide](#troubleshooting-guide)
+
+    [Overview of Basic Docker Commands](#overview-of-basic-docker-commands)
+
+    [Links for further reading and resources](#links-for-further-reading-and-resources)
 
 ---
 
-## 1. Setup the Docker infrastructure
+## 1. Set up the Docker infrastructure
 
-![image alt text](resources/docker-logo-blue.svg)
+<img alt="image alt text" height="90" src="resources/docker-logo-blue.svg" width="350"/>
 
 ### 1.1 Install Docker
 
@@ -66,7 +70,7 @@ To download the Docker image from the Docker registry run:
 
 ## 1.3 Setting up your Docker environment for deegree
 
-For this tutorial, all necessary configuration files and data required to set up and run an example INSPIRE ProtectedSites deegree workspace are available for download in as [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
+All necessary configuration files and data required to set up and run an example INSPIRE ProtectedSites deegree workspace are available for download as a [ZIP-File](https://github.com/lat-lon/deegree-workshop/archive/refs/heads/main.zip).
 
 For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in the downloaded ZIP-File are relevant. The folder contains the following items:
 
@@ -77,6 +81,7 @@ For this tutorial, only the contents of the `/deegree-workshop-bundle` folder in
 | `/sql-dump`                | SQL scripts for configuring the PostgreSQL database and populating it with data                                                                                                              |  [PostgreSQL](https://www.postgresql.org/docs/current/tutorial.html), [PostGIS](https://postgis.net/workshops/postgis-intro/)  |
 | `docker-compose.yaml`      | Docker Compose file for defining and running multi-container applications, in this case including deegree, PostgreSQL and pgAdmin 4                                                          | [How does Docker Compose work?](https://docs.docker.com/compose/compose-application-model/) |
 | `.env`                     | Used to set the necessery environment variables                                                                                                                                              | [How to use the `.env`?](https://docs.docker.com/compose/environment-variables/set-environment-variables/) |
+
 ### Overview of the Docker compose file
 The provided, ready-to-use, Docker Compose file contains the following configuration (break down):
 
@@ -95,6 +100,7 @@ services:
     networks:
       - network
 ```
+
 The first service declared in the Docker Compose file is deegree, which runs the deegree web services.
 The specific version of deegree used is determined by the DEEGREE_VERSION variable defined in the .env file.
 The service depends on the successful startup and health of the PostgreSQL service (referred to as postgres).
@@ -121,6 +127,7 @@ configuration is persistent and shared.
     networks:
       - network
 ```
+
 The second service is postgres, a PostgreSQL database with PostGIS extensions. 
 The exact version is specified by the POSTGRES_POSTGIS_VERSION variable from the .env file. 
 It exposes port 5432 and initializes the database using SQL scripts found in the ./sql directory, 
@@ -141,16 +148,19 @@ although it is typically commented out.
         condition: service_healthy
     networks:
       - network
-```            
+```
+
 The third service, pgadmin, is the pgAdmin 4 web interface, used for managing the PostgreSQL database via a web browser. 
 This service also waits for PostgreSQL to start before initializing. 
 The version of pgAdmin is determined by the PGADMIN_VERSION variable in the .env file, 
 and it exposes port 5080 for access.
+
 ```
 networks:
   network:
     name: deegree_workshop_network
 ```
+
 At last, a custom Docker network named `deegree_workshop_network` is created.
 This network ensures that all services can communicate within the same isolated network environment, 
 allowing containers to reference each other by their service names.
@@ -171,61 +181,56 @@ variable to pull the corresponding deegree Docker image.
 ```
 POSTGRES_POSTGIS_VERSION=16-3.4
 ```
+
 This variable defines the version of PostgreSQL along with its PostGIS extensions. The Docker Compose file references 
 this variable to pull the corresponding PostgreSQL/PostGIS Docker image.
+
 ```
 PGADMIN_VERSION=8.9
 ```
+
 This variable sets the version of pgAdmin 4 to be used. The Docker Compose file references
 this variable to pull the corresponding pgAdmin 4 Docker image.
 
 Using these version parameters in the `.env` file allows for easy updates and consistent configuration across different setups.
 
-
 ## 1.4 Start the Docker compose environment
 
-The Compose file, or `compose.yaml` file, follows the rules provided by the Compose Specification in how to define multi-container applications.
+The Compose file, typically named `compose.yaml`, adheres to the rules outlined in the Compose Specification for
+defining multi-container applications. The preferred file name and format is `compose.yaml`. However, for backward
+compatibility with earlier versions, Compose also supports `docker-compose.yaml` and `docker-compose.yml`
+If multiple Compose files are present, `compose.yaml` is given priority.
 
-The default path for a Compose file is `compose.yaml` which is the prefered syntax. There are also other options such as the `compose.yml`, which is placed in the working directory.
+### Key commands
 
-With Compose there are also **still** supported options like the `docker-compose.yaml` and docker-compose.yml for backwards compatibility of earlier versions. If both files exist, Compose prefers the canonical `compose.yaml.`
+To start all the services defined in your compose.yaml file, use:
 
-#### Key commands
+    docker compose up
 
-To start all the services defined in your `compose.yaml`file:
+However, this command displays all logs, which can be overwhelming. A better approach is to run the services in detached mode:
 
+    docker compose up -d
 
-   docker compose up
+To stop and remove the running services, use:
 
-This version however opens all the logs, which can be confusing.
->**Info** With a slight change in the command the logs can be observed easily. If any chances are made, look up the updated tutorials on https://docs.docker.com/compose/compose-application-model/
+    docker compose down
 
-The **prefered** command would be:
+If you need to monitor container output for troubleshooting, you can view the logs with:
 
-  docker compose up -d
+    docker compose logs
 
+To list all services along with their current status, use:
 
-To stop and remove the running services:
+    docker compose ps
 
-  docker compose down
-
-If you want to monitor the output of your running containers and debug issues, you can view the logs with:
-
-  docker compose logs
-
-To lists all the services along with their current status:
-
-  docker compose ps
-
-#### Available endpoints
-After you have succesfully started the Docker compose environment, the following endpoints are available:
+### Available endpoints
+After you have successfully started the Docker compose environment, the following endpoints are available:
 
 **deegree Webservices**
 *  http://localhost:8181/deegree-webservices
 
 **pgAdmin Web Interface**
 *  http://localhost:5080/
-
 
 # 2. Import ProtecedSites data into the PostgreSQL database 
 
@@ -277,6 +282,7 @@ If you can not use the `GmlLoader` due to errors or missing time resources, just
     networks:
       - network
 ```
+
 While using the SQL dump you can simply start the Docker environment and directly start using the deegree webservices
 ([section 3](#3-use-qgis-to-visualize-the-data))!
 
