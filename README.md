@@ -47,7 +47,7 @@
 
 To download the Docker image from the Docker registry run:
 
-    docker pull postgis/postgis:16-3.4
+    docker pull postgis/postgis:18-3.6
 
 #### pgAdmin 4 Web Interface
 
@@ -55,7 +55,7 @@ To download the Docker image from the Docker registry run:
 
 To download the Docker image from the Docker registry run:
 
-    docker pull dpage/pgadmin4:8.9
+    docker pull dpage/pgadmin4:9.13
 
 #### deegree Webservices
 ![image alt text](resources/deegree_logo.svg)
@@ -64,7 +64,7 @@ To download the Docker image from the Docker registry run:
 
 To download the Docker image from the Docker registry run:
 
-    docker pull deegree/deegree3-docker:3.5.8
+    docker pull deegree/deegree3-docker:3.6.7
 
 * Dockerfile available under: [https://github.com/deegree/deegree3-docker](https://github.com/deegree/deegree3-docker)
 
@@ -173,13 +173,13 @@ The `.env` file included in the provided `/deegree-workshop-bundle` defines spec
 the services used in the Docker Compose setup. This file contains the following environment variables (breakdown):
 
 ```
-DEEGREE_VERSION=3.5.8
+DEEGREE_VERSION=3.6.7
 ```
 This variable specifies the exact version of deegree to be used. The Docker Compose file references this 
 variable to pull the corresponding deegree Docker image.
 
 ```
-POSTGRES_POSTGIS_VERSION=16-3.4
+POSTGRES_POSTGIS_VERSION=18-3.6
 ```
 
 This variable defines the version of PostgreSQL along with its PostGIS extensions. The Docker Compose file references 
