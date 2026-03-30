@@ -21,7 +21,7 @@ services:
       interval: 5s
       retries: 3
     ports:
-      - 5432:5432
+      - 5436:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

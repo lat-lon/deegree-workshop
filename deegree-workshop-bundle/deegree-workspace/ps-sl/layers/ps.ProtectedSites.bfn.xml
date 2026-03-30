@@ -5,7 +5,7 @@
   xmlns:d="http://www.deegree.org/metadata/description"
   xmlns:ps="http://inspire.ec.europa.eu/schemas/ps/4.0"
   xmlns:ogc="http://www.opengis.net/ogc"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.5/layers/feature/feature.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.6/layers/feature/feature.xsd">
   <FeatureStoreId>INSPIRE_ProtectedSites_WMS</FeatureStoreId>
   <FeatureLayer>
     <FeatureType>ps:ProtectedSite</FeatureType>

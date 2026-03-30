@@ -1,5 +1,5 @@
 <deegreeServicesMetadata xmlns="http://www.deegree.org/services/metadata"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/metadata https://schemas.deegree.org/core/3.5/services/metadata/metadata.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/services/metadata https://schemas.deegree.org/core/3.6/services/metadata/metadata.xsd">
   <ServiceIdentification>
     <Title>INSPIRE-WFS SL Schutzgebiete</Title>
     <Abstract>Dieser Dienst stellt für das INSPIRE-Thema Schutzgebiete aus dem Geofachdaten umgesetzte Daten bereit.</Abstract>

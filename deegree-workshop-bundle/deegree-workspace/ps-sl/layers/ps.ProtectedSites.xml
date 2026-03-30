@@ -3,7 +3,7 @@
   xmlns:s="http://www.deegree.org/metadata/spatial"
   xmlns:l="http://www.deegree.org/layers/base"
   xmlns:d="http://www.deegree.org/metadata/description"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.5/layers/feature/feature.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.deegree.org/layers/feature https://schemas.deegree.org/core/3.6/layers/feature/feature.xsd">
   <FeatureStoreId>INSPIRE_ProtectedSites_WMS</FeatureStoreId>
   <FeatureLayer>    <!--ProtectedSites-->
     <l:Name>ps.ProtectedSites</l:Name>
